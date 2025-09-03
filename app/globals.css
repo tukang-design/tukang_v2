@@ -1,0 +1,66 @@
+/* app/globals.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Martian+Mono:wght@700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #2d3a2e; /* dark olive green */
+  --foreground: #ededed;
+  --accent: #39ff14; /* neon green */
+  --secondary: #a78b6f; /* earthy muted brown */
+  --font-headline: "Martian Mono", monospace;
+  --font-body: "Lato", Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-headline);
+  color: var(--accent);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.secondary {
+  color: var(--secondary);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #32e60f;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
