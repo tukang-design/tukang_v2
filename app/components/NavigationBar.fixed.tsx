@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -240,6 +241,11 @@ function MobileMenu({
               </Link>
             </div>
           </nav>
+        </div>
+      </div>
+    </>
+  );
+}
 
 // Main Navigation Bar Component
 export default function NavigationBar() {

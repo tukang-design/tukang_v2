@@ -27,6 +27,7 @@ type ServiceCategory = {
 
 type ProjectConfiguration = {
   domain: "existing" | "new" | "";
+  paymentPlan?: string;
 };
 
 type ProjectBrief = {
@@ -47,6 +48,7 @@ type BookingStep =
   | "configurator"
   | "brief"
   | "contact"
+  | "checkout"
   | "thankyou"
   | "discovery";
 
@@ -152,7 +154,7 @@ const addons = [
   },
 ];
 
-export default function BookingPage() {
+function BookingPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const preselectedPackage = searchParams.get("package");
@@ -199,8 +201,9 @@ export default function BookingPage() {
       configurator: 2,
       brief: 3,
       contact: 4,
-      thankyou: 5,
-      discovery: 6,
+      checkout: 5,
+      thankyou: 6,
+      discovery: 7,
     };
 
     analytics.trackStep(currentStep, stepNumbers[currentStep], {
@@ -634,7 +637,7 @@ export default function BookingPage() {
                 </>
               )}
 
-              {currentStep === "checkout" && (
+              {currentStep === "checkout" && selectedService && (
                 <>
                   <div className="bg-accent/10 border border-accent/20 rounded-lg p-6 max-w-lg mx-auto">
                     <div className="flex items-center justify-between mb-4">
@@ -1387,5 +1390,13 @@ export default function BookingPage() {
         </section>
       </div>
     </>
+  );
+}
+
+export default function BookingPage() {
+  return (
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <BookingPageContent />
+    </React.Suspense>
   );
 }

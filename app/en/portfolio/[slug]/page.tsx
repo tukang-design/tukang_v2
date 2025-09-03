@@ -2,6 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { sanityClient } from "../../../../lib/sanity";
 import { PortableText } from "@portabletext/react";
+import { portableTextComponents } from "../../../../lib/portable-text-components";
 import Image from "next/image";
 import Link from "next/link";
 import ContactSection from "../../../components/ContactSection";
@@ -83,75 +84,13 @@ async function getProject(slug: string): Promise<PortfolioProject | null> {
   }
 }
 
-// Safe text extraction from PortableText
-const extractTextFromPortableText = (
-  portableText: PortableTextBlock[]
-): string => {
-  if (!Array.isArray(portableText)) return "";
-
-  return portableText
-    .filter((block) => block._type === "block")
-    .map(
-      (block) =>
-        block.children
-          ?.filter((child) => child._type === "span")
-          ?.map((span) => span.text)
-          ?.join("") || ""
-    )
-    .join(" ")
-    .trim();
-};
-
-// PortableText components for rich content rendering
-const portableTextComponents = {
-  types: {
-    image: ({
-      value,
-    }: {
-      value: { asset?: { url: string }; alt?: string; caption?: string };
-    }) => (
-      <div className="my-8">
-        {value?.asset?.url && (
-          <Image
-            src={value.asset.url}
-            alt={value.alt || ""}
-            width={800}
-            height={400}
-            className="rounded-lg"
-          />
-        )}
-        {value.caption && (
-          <p className="text-sm text-gray-400 mt-2 text-center italic">
-            {value.caption}
-          </p>
-        )}
-      </div>
-    ),
-  },
-  block: {
-    h4: ({ children }: { children: React.ReactNode }) => (
-      <h4 className="text-xl font-semibold mb-4 text-accent">{children}</h4>
-    ),
-    normal: ({ children }: { children: React.ReactNode }) => (
-      <p className="mb-4">{children}</p>
-    ),
-  },
-  marks: {
-    strong: ({ children }: { children: React.ReactNode }) => (
-      <strong className="font-semibold">{children}</strong>
-    ),
-    em: ({ children }: { children: React.ReactNode }) => (
-      <em className="italic">{children}</em>
-    ),
-  },
-};
-
 export default async function ProjectDetail({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = await getProject(params.slug);
+  const { slug } = await params;
+  const project = await getProject(slug);
 
   if (!project) {
     notFound();

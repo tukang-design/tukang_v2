@@ -10,7 +10,6 @@
     "lint:fix": "eslint --fix",
     "type-check": "tsc --noEmit",
     "build:analyze": "ANALYZE=true npm run build",
-    "postbuild": "next-sitemap",
     "test": "echo \"Add tests here\" && exit 0"
   },
   "dependencies": {
@@ -19,13 +18,10 @@
     "@portabletext/types": "^2.0.15",
     "@sanity/client": "^7.10.0",
     "@sanity/image-url": "^1.2.0",
-    "@types/nodemailer": "^7.0.1",
     "next": "15.5.2",
-    "next-auth": "^4.24.11",
-    "nodemailer": "^7.0.6",
+    "nodemailer": "^6.9.15",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "resend": "^6.0.2"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -33,6 +29,7 @@
     "@eslint/json": "^0.13.2",
     "@eslint/markdown": "^7.2.0",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.19",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.4.21",
@@ -41,8 +38,6 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.3.0",
     "postcss": "^8.5.6",
-    "puppeteer": "^24.18.0",
-    "puppeteer-screen-recorder": "^3.0.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5",
     "typescript-eslint": "^8.41.0"

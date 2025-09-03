@@ -7,7 +7,14 @@ import Link from "next/link";
 function ScheduleDiscoveryContent() {
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("booking_id");
-  const [bookingDetails, setBookingDetails] = useState(null);
+  
+  type BookingDetails = {
+    id: string;
+    businessName: string;
+    service: string;
+  };
+  
+  const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
