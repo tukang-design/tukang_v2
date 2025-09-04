@@ -105,7 +105,7 @@ function MobileMenu({
 
       {/* Mobile Menu Panel */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-olive-dark border-l border-accent/20 z-50 transform transition-transform duration-300 lg:hidden ${
+        className={`fixed top-0 right-0 h-full w-80 bg-olive-dark/95 backdrop-blur-lg border-l border-accent/20 z-50 transform transition-transform duration-300 lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
