@@ -10,10 +10,10 @@ export const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
 }) => {
   return (
     <>
-      {/* Google Tag Manager Script */}
+      {/* Google Tag Manager */}
       <Script
         id="gtm-script"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -24,6 +24,7 @@ export const GoogleTagManager: React.FC<GoogleTagManagerProps> = ({
           `,
         }}
       />
+      {/* End Google Tag Manager */}
     </>
   );
 };
@@ -32,13 +33,17 @@ export const GoogleTagManagerNoScript: React.FC<GoogleTagManagerProps> = ({
   gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-PVX9R926",
 }) => {
   return (
-    <noscript>
-      <iframe
-        src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-        height="0"
-        width="0"
-        style={{ display: "none", visibility: "hidden" }}
-      />
-    </noscript>
+    <>
+      {/* Google Tag Manager (noscript) */}
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          height="0"
+          width="0"
+          style={{ display: "none", visibility: "hidden" }}
+        />
+      </noscript>
+      {/* End Google Tag Manager (noscript) */}
+    </>
   );
 };
