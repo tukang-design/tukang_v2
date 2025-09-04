@@ -63,81 +63,70 @@ interface WebsiteStructuredData {
   };
 }
 
-export const createBusinessStructuredData = (): BusinessStructuredData => ({
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Tukang - Professional Website Development",
-  description:
-    "Professional website development services in Malaysia and Singapore. Custom web design, e-commerce solutions, and digital marketing services.",
-  url: "https://tukang.my",
-  logo: "https://tukang.my/logo.png",
-  image: ["https://tukang.my/og-image.jpg", "https://tukang.my/hero-image.jpg"],
-  telephone: "+60-123-456-789",
-  email: "hello@tukang.my",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "123 Tech Street",
-    addressLocality: "Kuala Lumpur",
-    addressRegion: "Federal Territory of Kuala Lumpur",
-    postalCode: "50450",
-    addressCountry: "MY",
-  },
-  areaServed: ["Malaysia", "Singapore"],
-  serviceType: [
-    "Website Development",
-    "Web Design",
-    "E-commerce Development",
-    "Mobile App Development",
-    "Digital Marketing",
-    "SEO Services",
-  ],
-  priceRange: "$$",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    reviewCount: "127",
-  },
-});
-
-export const createServiceStructuredData = (
-  serviceName: string,
-  price: string
-): ServiceStructuredData => ({
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: serviceName,
-  description: `Professional ${serviceName.toLowerCase()} services in Malaysia and Singapore`,
-  provider: {
+export function createBusinessStructuredData() {
+  return {
+    "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Tukang",
-    url: "https://tukang.my",
-  },
-  areaServed: ["Malaysia", "Singapore"],
-  serviceType: serviceName,
-  offers: {
-    "@type": "Offer",
-    priceCurrency: "MYR",
-    price: price,
-    priceSpecification: {
-      "@type": "PriceSpecification",
-      minPrice: "1500",
-      maxPrice: "50000",
-      priceCurrency: "MYR",
+    name: "Tukang Design - Professional Website Development",
+    description:
+      "Professional website development services in Malaysia. Custom web design, e-commerce solutions, and digital marketing services.",
+    url: "https://tukang.design",
+    logo: "https://tukang.design/logo.png",
+    image: ["https://tukang.design/og-image.jpg", "https://tukang.design/hero-image.jpg"],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "studio@tukang.design",
+      contactType: "customer service",
+      availableLanguage: ["English"],
     },
-  },
-});
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "MY",
+      addressLocality: "Shah Alam",
+      addressRegion: "Selangor",
+    },
+    areaServed: ["Malaysia"],
+    founder: {
+      "@type": "Person",
+      name: "Syazwan Shariff",
+    },
+    foundingDate: "2025",
+    sameAs: [
+      "https://www.threads.com/@tukangdesign.my",
+      "https://www.instagram.com/tukangdesign.my",
+    ],
+  };
+}
 
-export const createWebsiteStructuredData = (): WebsiteStructuredData => ({
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Tukang",
-  url: "https://tukang.my",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://tukang.my/search?q={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
-});
+export function createServiceStructuredData(serviceName: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: serviceName,
+    description: `Professional ${serviceName.toLowerCase()} services in Malaysia`,
+    provider: {
+      "@type": "Organization",
+      name: "Tukang Design",
+      url: "https://tukang.design",
+    },
+    areaServed: ["Malaysia"],
+    serviceType: "Digital Services",
+  };
+}
+
+export function createWebsiteStructuredData() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Tukang Design",
+    url: "https://tukang.design",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://tukang.design/search?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
 
 export const createBreadcrumbStructuredData = (
   items: Array<{ name: string; url: string }>

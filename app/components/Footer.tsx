@@ -178,7 +178,7 @@ export default function Footer() {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                Malaysia • Singapore
+                Shah Alam, Malaysia
               </li>
               <li className="flex items-center">
                 <div className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></div>

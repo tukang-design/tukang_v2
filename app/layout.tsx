@@ -15,24 +15,39 @@ import {
 
 export const metadata = {
   title:
-    "Tukang - Professional Website Development Services in Malaysia & Singapore",
+    "Tukang Design - Professional Website Development Services in Malaysia",
   description:
-    "Get professional website development services in Malaysia & Singapore. Custom web design, e-commerce solutions, and digital marketing. Fast delivery, competitive pricing. Get your quote today!",
+    "Get professional website development services in Malaysia. Tukang Design offers custom web design, e-commerce solutions, and digital marketing from Shah Alam. Fast delivery, competitive pricing. Get your quote today!",
   keywords:
-    "website development malaysia, web design singapore, ecommerce website, professional web development, responsive design, SEO optimization, digital marketing, web application development",
+    "website development malaysia, web design shah alam, ecommerce website malaysia, professional web development, responsive design, SEO optimization, digital marketing malaysia, web application development",
   robots: "index, follow",
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
+  manifest: '/manifest.json',
   openGraph: {
-    title: "Tukang - Professional Website Development Services",
+    title: "Tukang Design - Professional Website Development Services",
     description:
-      "Get professional website development services in Malaysia & Singapore. Custom web design, e-commerce solutions, and digital marketing.",
-    url: "https://tukang.my",
-    siteName: "Tukang",
+      "Get professional website development services in Malaysia. Tukang Design offers custom web design, e-commerce solutions, and digital marketing from Shah Alam.",
+    url: "https://tukang.design",
+    siteName: "Tukang Design",
     images: [
       {
-        url: "https://tukang.my/og-image.jpg",
+        url: "https://tukang.design/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Tukang - Professional Website Development Services",
+        alt: "Tukang Design - Professional Website Development Services",
       },
     ],
     locale: "en_US",
@@ -40,14 +55,14 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tukang - Professional Website Development Services",
+    title: "Tukang Design - Professional Website Development Services",
     description:
-      "Get professional website development services in Malaysia & Singapore. Custom web design, e-commerce solutions, and digital marketing.",
-    images: ["https://tukang.my/og-image.jpg"],
-    site: "@tukang",
+      "Get professional website development services in Malaysia. Tukang Design offers custom web design, e-commerce solutions, and digital marketing from Shah Alam.",
+    images: ["https://tukang.design/og-image.jpg"],
+    site: "@tukangdesign",
   },
   alternates: {
-    canonical: "https://tukang.my",
+    canonical: "https://tukang.design",
   },
   verification: {
     google: "YOUR_GOOGLE_VERIFICATION_CODE",

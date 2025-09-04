@@ -21,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin/", "/private/", "/studio/", "/sanity/"],
       },
     ],
-    sitemap: "https://tukang.my/sitemap.xml",
-    host: "https://tukang.my",
+    sitemap: "https://tukang.design/sitemap.xml",
+    host: "https://tukang.design",
   };
 }

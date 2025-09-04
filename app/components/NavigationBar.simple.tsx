@@ -3,22 +3,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import ScrollProgress from "./ScrollProgress";
 
 export default function NavigationBar() {
-  const pathname = usePathname();
-  const isEnglish = pathname.startsWith("/en");
-  const isMalay = pathname.startsWith("/ms");
-  const currentLang = isEnglish ? "en" : isMalay ? "ms" : "en";
-  const otherLang = currentLang === "en" ? "ms" : "en";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Get current page path without language prefix
-  const currentPage = pathname.replace(/^\/(en|ms)/, "") || "";
-
-  const getNavLink = (path: string) => `/${currentLang}${path}`;
-  const getLangSwitchLink = () => `/${otherLang}${currentPage}`;
+  const getNavLink = (path: string) => `/en${path}`;
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-olive/70 border-b border-accent/10 shadow-lg shadow-olive/20">
@@ -53,13 +43,13 @@ export default function NavigationBar() {
               href={getNavLink("")}
               className="px-2 py-4 rounded-lg font-semibold text-gray-300 hover:text-accent transition-all duration-300"
             >
-              {currentLang === "en" ? "Home" : "Utama"}
+              Home
             </Link>
             <Link
               href={getNavLink("/services")}
               className="px-2 py-4 rounded-lg font-semibold text-gray-300 hover:text-accent transition-all duration-300"
             >
-              {currentLang === "en" ? "Services" : "Perkhidmatan"}
+              Services
             </Link>
             <Link
               href={getNavLink("/portfolio")}
@@ -71,7 +61,7 @@ export default function NavigationBar() {
               href={getNavLink("/about")}
               className="px-2 py-4 rounded-lg font-semibold text-gray-300 hover:text-accent transition-all duration-300"
             >
-              {currentLang === "en" ? "About" : "Tentang"}
+              About
             </Link>
             <Link
               href={getNavLink("/blog")}
@@ -80,42 +70,16 @@ export default function NavigationBar() {
               Blog
             </Link>
 
-            {/* Language Switcher */}
-            <Link
-              href={getLangSwitchLink()}
-              className="px-2 py-2 rounded-lg font-medium text-sm text-gray-300 hover:text-accent border border-accent/20 hover:border-accent/40 transition-all duration-300"
-              title={
-                currentLang === "en"
-                  ? "Switch to Bahasa Melayu"
-                  : "Switch to English"
-              }
-            >
-              {currentLang === "en" ? "BM" : "EN"}
-            </Link>
-
             <Link
               href={getNavLink("/booking")}
               className="px-6 py-3 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold text-base transition-all duration-300"
             >
-              {currentLang === "en" ? "Book Project" : "Tempah Projek"}
+              Book Project
             </Link>
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center space-x-2">
-            {/* Mobile Language Switcher */}
-            <Link
-              href={getLangSwitchLink()}
-              className="px-2 py-2 rounded-lg font-medium text-sm text-gray-300 hover:text-accent border border-accent/20 hover:border-accent/40 transition-all duration-300"
-              title={
-                currentLang === "en"
-                  ? "Switch to Bahasa Melayu"
-                  : "Switch to English"
-              }
-            >
-              {currentLang === "en" ? "BM" : "EN"}
-            </Link>
-
+          <div className="lg:hidden flex items-center">
             <button
               className="p-3 rounded-lg bg-olive-dark/50 border border-accent/20 text-accent hover:bg-olive-dark hover:border-accent/40 transition-all duration-300"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -149,20 +113,20 @@ export default function NavigationBar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Fixed Full Height Overlay */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop */}
+          {/* Full Screen Backdrop */}
           <div
-            className="fixed inset-0 bg-olive/80 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
-          {/* Mobile Menu Panel */}
-          <div className="fixed top-0 right-0 h-full w-80 bg-olive-dark border-l border-accent/20 z-50 lg:hidden shadow-2xl">
-            <div className="p-6 bg-olive-dark h-full">
+          {/* Mobile Menu Panel - Full Height */}
+          <div className="fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-olive-dark border-l border-accent/20 z-50 lg:hidden shadow-2xl transform transition-transform duration-300 ease-in-out">
+            <div className="flex flex-col h-full">
               {/* Mobile Menu Header */}
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between p-6 border-b border-accent/20">
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center">
                     <span className="text-olive font-mono font-bold">T</span>
@@ -190,13 +154,13 @@ export default function NavigationBar() {
               </div>
 
               {/* Mobile Navigation Links */}
-              <nav className="space-y-2">
+              <nav className="flex-1 px-6 py-6 space-y-2">
                 <Link
                   href={getNavLink("")}
                   className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {currentLang === "en" ? "Home" : "Utama"}
+                  Home
                 </Link>
                 <Link
                   href={getNavLink("/portfolio")}
@@ -210,7 +174,7 @@ export default function NavigationBar() {
                   className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {currentLang === "en" ? "Services" : "Perkhidmatan"}
+                  Services
                 </Link>
                 <Link
                   href={getNavLink("/blog")}
@@ -224,18 +188,18 @@ export default function NavigationBar() {
                   className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {currentLang === "en" ? "About" : "Tentang"}
+                  About
                 </Link>
               </nav>
 
-              {/* Mobile CTA */}
-              <div className="mt-8 pt-6 border-t border-accent/20">
+              {/* Mobile CTA - Sticky at bottom */}
+              <div className="p-6 border-t border-accent/20">
                 <Link
                   href={getNavLink("/booking")}
                   className="block w-full text-center px-6 py-4 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-accent/30"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {currentLang === "en" ? "Book Project" : "Tempah Projek"}
+                  Book Project
                 </Link>
               </div>
             </div>

@@ -12,18 +12,16 @@ interface SEOProps {
 }
 
 export const SEO: React.FC<SEOProps> = ({
-  title = "Tukang - Professional Website Development Services in Malaysia & Singapore",
-  description = "Get professional website development services in Malaysia & Singapore. Custom web design, e-commerce solutions, and digital marketing. Fast delivery, competitive pricing. Get your quote today!",
-  keywords = "website development malaysia, web design singapore, ecommerce website, professional web development, responsive design, SEO optimization, digital marketing, web application development",
+  title = "Tukang Design - Professional Website Development Services in Malaysia",
+  description = "Get professional website development services in Malaysia. Tukang Design offers custom web design, e-commerce solutions, and digital marketing from Shah Alam. Fast delivery, competitive pricing. Get your quote today!",
+  keywords = "website development malaysia, web design shah alam, ecommerce website malaysia, professional web development, responsive design, SEO optimization, digital marketing malaysia, web application development",
   ogImage = "/og-image.jpg",
   ogUrl,
   canonical,
   structuredData,
 }) => {
-  const defaultOgUrl =
-    typeof window !== "undefined" ? window.location.href : "https://tukang.my";
-  const defaultCanonical =
-    typeof window !== "undefined" ? window.location.href : "https://tukang.my";
+  const defaultCanonical = canonical || "https://tukang.design";
+  const defaultOgUrl = ogUrl || "https://tukang.design";
 
   return (
     <Head>
@@ -33,18 +31,18 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="keywords" content={keywords} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="robots" content="index, follow" />
-      <meta name="author" content="Tukang" />
+      <meta name="author" content="Tukang Design" />
 
       {/* Canonical URL */}
-      <link rel="canonical" href={canonical || defaultCanonical} />
+      <link rel="canonical" href={defaultCanonical} />
 
       {/* Open Graph Meta Tags */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:url" content={ogUrl || defaultOgUrl} />
+      <meta property="og:url" content={defaultOgUrl} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Tukang" />
+      <meta property="og:site_name" content="Tukang Design" />
       <meta property="og:locale" content="en_US" />
 
       {/* Twitter Card Meta Tags */}
@@ -52,12 +50,12 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
-      <meta name="twitter:site" content="@tukang" />
+      <meta name="twitter:site" content="@tukangdesign" />
 
       {/* Additional Meta Tags */}
       <meta name="theme-color" content="#000000" />
       <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="application-name" content="Tukang" />
+      <meta name="application-name" content="Tukang Design" />
 
       {/* Favicons */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />

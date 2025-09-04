@@ -463,8 +463,8 @@ function BookingPageContent() {
 
   // Prepare SEO data
   const breadcrumbData = createBreadcrumbStructuredData([
-    { name: "Home", url: "https://tukang.my" },
-    { name: "Booking", url: "https://tukang.my/en/booking" },
+    { name: "Home", url: "https://tukang.design" },
+    { name: "Booking", url: "https://tukang.design/en/booking" },
   ]);
 
   const serviceData = selectedService
@@ -479,14 +479,14 @@ function BookingPageContent() {
       <SEO
         title={`Book ${
           selectedService?.name || "Website Development"
-        } - Professional Service Quote | Tukang`}
+        } - Professional Service Quote | Tukang Design`}
         description={`Get a professional quote for ${
           selectedService?.name || "website development services"
-        } in Malaysia & Singapore. Custom solutions, competitive pricing, fast delivery.`}
+        } in Malaysia. Custom solutions, competitive pricing, fast delivery.`}
         keywords={`book ${
           selectedService?.name || "website development"
-        }, quote, pricing, professional web services, malaysia, singapore`}
-        canonical="https://tukang.my/en/booking"
+        }, quote, pricing, professional web services, malaysia`}
+        canonical="https://tukang.design/en/booking"
         structuredData={
           serviceData ? [breadcrumbData, serviceData] : [breadcrumbData]
         }
@@ -534,12 +534,11 @@ function BookingPageContent() {
                 <select
                   value={region}
                   onChange={(e) =>
-                    setRegion(e.target.value as "MY" | "SG" | "INT")
+                    setRegion(e.target.value as "MY" | "INT")
                   }
                   className="bg-olive-dark border border-accent/20 rounded-lg px-3 py-1 text-accent text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
                 >
                   <option value="MY">🇲🇾 Malaysia (RM)</option>
-                  <option value="SG">🇸🇬 Singapore (SGD)</option>
                   <option value="INT">🌍 International (€)</option>
                 </select>
               </div>

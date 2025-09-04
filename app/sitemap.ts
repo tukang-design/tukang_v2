@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://tukang.my";
+  const baseUrl = "https://tukang.design";
 
   // Static pages
   const staticPages = [
