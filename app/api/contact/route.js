@@ -1,7 +1,10 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
-export async function POST(request) {
-  const { name, email, message, region } = await request.json();
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+  const { name, email, message, region } = req.body;
 
   // Create transporter
   const transporter = nodemailer.createTransport({
@@ -23,15 +26,9 @@ export async function POST(request) {
 
   try {
     await transporter.sendMail(mailOptions);
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return res.status(200).json({ success: true });
   } catch (error) {
-    console.error('Email send error:', error);
-    return new Response(JSON.stringify({ error: 'Failed to send email' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    console.error("Email send error:", error);
+    return res.status(500).json({ error: "Failed to send email" });
   }
 }
