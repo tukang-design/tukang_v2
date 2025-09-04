@@ -99,6 +99,7 @@ function formatDate(dateString: string): string {
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
+  console.log("Blog posts fetched:", posts.length, posts);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-olive via-olive-dark to-olive">
