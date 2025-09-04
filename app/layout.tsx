@@ -66,6 +66,18 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <GoogleTagManager />
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-13JMFQR6YB"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-13JMFQR6YB');
+            `,
+          }}
+        />
         <SEO structuredData={[businessData, websiteData]} />
       </head>
       <body className="bg-olive text-foreground font-lato antialiased">
