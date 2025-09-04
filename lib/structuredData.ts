@@ -72,7 +72,10 @@ export function createBusinessStructuredData() {
       "End-to-end design & development services in Malaysia & Singapore. Full-stack design solutions, custom web development, and complete digital experiences.",
     url: "https://tukang.design",
     logo: "https://tukang.design/logo.png",
-    image: ["https://tukang.design/og-image.jpg", "https://tukang.design/hero-image.jpg"],
+    image: [
+      "https://tukang.design/og-image.jpg",
+      "https://tukang.design/hero-image.jpg",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       email: "studio@tukang.design",
