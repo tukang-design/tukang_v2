@@ -1,6 +1,6 @@
 import React from "react";
 import "./globals.css";
-import NavigationBar from "./components/NavigationBar.fixed";
+import NavigationBar from "./components/NavigationBar.simple";
 import Footer from "./components/Footer";
 import RegionIndicator from "./components/RegionIndicator";
 import {

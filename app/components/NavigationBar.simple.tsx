@@ -159,7 +159,7 @@ export default function NavigationBar() {
           />
 
           {/* Mobile Menu Panel */}
-          <div className="fixed top-0 right-0 h-full w-80 bg-olive-dark border-l border-accent/20 z-50 lg:hidden">
+          <div className="fixed top-0 right-0 h-full w-80 bg-olive-dark/95 backdrop-blur-lg border-l border-accent/20 z-50 lg:hidden">
             <div className="p-6">
               {/* Mobile Menu Header */}
               <div className="flex items-center justify-between mb-8">
