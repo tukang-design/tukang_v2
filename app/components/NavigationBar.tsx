@@ -224,15 +224,8 @@ function MobileMenu({
           <div className="mt-8 pt-6 border-t border-accent/20">
             <div className="flex items-center justify-between mb-6">
               <span className="text-sm font-medium text-gray-400">
-                Language
+                Currently in English
               </span>
-              <Link
-                href="/ms"
-                className="px-3 py-1 rounded-lg border border-brown text-brown hover:bg-brown hover:text-olive transition-all duration-200 text-sm font-medium"
-                onClick={onClose}
-              >
-                🇲🇾 BM
-              </Link>
             </div>
             <PrimaryCTA
               href="/en/contact"
@@ -340,17 +333,6 @@ export default function NavigationBar() {
                   />
                 </svg>
               </button>
-
-              {/* Language Separator */}
-              <div className="h-6 w-px bg-brown/30 mx-4"></div>
-
-              {/* Enhanced Language Switcher */}
-              <Link
-                href="/ms"
-                className="group px-4 py-3 rounded-lg border border-brown/40 text-brown hover:bg-brown hover:text-olive transition-all duration-300 text-base font-medium hover:shadow-md"
-              >
-                <span className="flex items-center">🇲🇾 BM</span>
-              </Link>
 
               {/* Enhanced CTA Button */}
               <div className="ml-8">
