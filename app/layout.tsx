@@ -15,11 +15,11 @@ import {
 
 export const metadata = {
   title:
-    "Tukang Design - Professional Website Development Services in Malaysia",
+    "Tukang Design - End-to-End Design & Development | Full-stack Designer Malaysia",
   description:
-    "Get professional website development services in Malaysia. Tukang Design offers custom web design, e-commerce solutions, and digital marketing from Shah Alam. Fast delivery, competitive pricing. Get your quote today!",
+    "Get end-to-end design & development services in Malaysia & Singapore. Tukang Design offers full-stack design solutions, custom web development, and complete digital experiences from Shah Alam. Fast delivery, competitive pricing. Get your quote today!",
   keywords:
-    "website development malaysia, web design shah alam, ecommerce website malaysia, professional web development, responsive design, SEO optimization, digital marketing malaysia, web application development",
+    "end-to-end design development, full-stack designer malaysia, web design shah alam, complete digital solutions, custom web development, full-stack development malaysia, design to development services",
   robots: "index, follow",
   icons: {
     icon: [
@@ -37,9 +37,9 @@ export const metadata = {
   },
   manifest: '/manifest.json',
   openGraph: {
-    title: "Tukang Design - Professional Website Development Services",
+    title: "Tukang Design - End-to-End Design & Development",
     description:
-      "Get professional website development services in Malaysia. Tukang Design offers custom web design, e-commerce solutions, and digital marketing from Shah Alam.",
+      "Get end-to-end design & development services in Malaysia & Singapore. Tukang Design offers full-stack design solutions and complete digital experiences from Shah Alam.",
     url: "https://tukang.design",
     siteName: "Tukang Design",
     images: [
@@ -47,7 +47,7 @@ export const metadata = {
         url: "https://tukang.design/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Tukang Design - Professional Website Development Services",
+        alt: "Tukang Design - End-to-End Design & Development",
       },
     ],
     locale: "en_US",
@@ -55,9 +55,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tukang Design - Professional Website Development Services",
+    title: "Tukang Design - End-to-End Design & Development",
     description:
-      "Get professional website development services in Malaysia. Tukang Design offers custom web design, e-commerce solutions, and digital marketing from Shah Alam.",
+      "Get end-to-end design & development services in Malaysia & Singapore. Tukang Design offers full-stack design solutions and complete digital experiences from Shah Alam.",
     images: ["https://tukang.design/og-image.jpg"],
     site: "@tukangdesign",
   },

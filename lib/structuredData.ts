@@ -67,9 +67,9 @@ export function createBusinessStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Tukang Design - Professional Website Development",
+    name: "Tukang Design - End-to-End Design & Development",
     description:
-      "Professional website development services in Malaysia. Custom web design, e-commerce solutions, and digital marketing services.",
+      "End-to-end design & development services in Malaysia & Singapore. Full-stack design solutions, custom web development, and complete digital experiences.",
     url: "https://tukang.design",
     logo: "https://tukang.design/logo.png",
     image: ["https://tukang.design/og-image.jpg", "https://tukang.design/hero-image.jpg"],
@@ -85,7 +85,7 @@ export function createBusinessStructuredData() {
       addressLocality: "Shah Alam",
       addressRegion: "Selangor",
     },
-    areaServed: ["Malaysia"],
+    areaServed: ["Malaysia", "Singapore"],
     founder: {
       "@type": "Person",
       name: "Syazwan Shariff",
@@ -103,13 +103,13 @@ export function createServiceStructuredData(serviceName: string) {
     "@context": "https://schema.org",
     "@type": "Service",
     name: serviceName,
-    description: `Professional ${serviceName.toLowerCase()} services in Malaysia`,
+    description: `Professional ${serviceName.toLowerCase()} services in Malaysia & Singapore`,
     provider: {
       "@type": "Organization",
       name: "Tukang Design",
       url: "https://tukang.design",
     },
-    areaServed: ["Malaysia"],
+    areaServed: ["Malaysia", "Singapore"],
     serviceType: "Digital Services",
   };
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { sanityReadClient } from "../../../lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Web Design Blog | Tips for Malaysian SMEs | Tukang Design",
+  title: "Design & Development Blog | Full-stack Design Tips | Tukang Design",
   description:
     "Expert insights on web design, digital marketing, and online business growth for Malaysian SMEs. Get practical tips to improve your online presence.",
   keywords: [

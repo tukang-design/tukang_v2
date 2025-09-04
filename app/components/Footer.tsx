@@ -24,14 +24,14 @@ export default function Footer() {
                   Tukang Design
                 </span>
                 <p className="text-xs text-gray-400">
-                  Your Vision, Perfectly Built.
+                  End-to-End Design & Development
                 </p>
               </div>
             </div>
             <p className="text-gray-300 mb-8 max-w-md text-lg leading-relaxed">
-              A single, dedicated expert for your entire website project. From
-              first sketch to final launch, we eliminate the handoff and deliver
-              a flawless final product.
+              A full-stack designer for your entire digital project. From
+              initial concept to final deployment, we handle design and
+              development seamlessly to deliver exceptional digital experiences.
             </p>
             <div className="flex space-x-4">
               <a

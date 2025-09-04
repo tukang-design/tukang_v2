@@ -481,11 +481,11 @@ function BookingPageContent() {
           selectedService?.name || "Website Development"
         } - Professional Service Quote | Tukang Design`}
         description={`Get a professional quote for ${
-          selectedService?.name || "website development services"
-        } in Malaysia. Custom solutions, competitive pricing, fast delivery.`}
+          selectedService?.name || "end-to-end design & development services"
+        } in Malaysia & Singapore. Full-stack design solutions, competitive pricing, fast delivery.`}
         keywords={`book ${
-          selectedService?.name || "website development"
-        }, quote, pricing, professional web services, malaysia`}
+          selectedService?.name || "end-to-end design development"
+        }, quote, pricing, full-stack design services, malaysia, singapore`}
         canonical="https://tukang.design/en/booking"
         structuredData={
           serviceData ? [breadcrumbData, serviceData] : [breadcrumbData]
@@ -534,11 +534,12 @@ function BookingPageContent() {
                 <select
                   value={region}
                   onChange={(e) =>
-                    setRegion(e.target.value as "MY" | "INT")
+                    setRegion(e.target.value as "MY" | "SG" | "INT")
                   }
                   className="bg-olive-dark border border-accent/20 rounded-lg px-3 py-1 text-accent text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
                 >
                   <option value="MY">🇲🇾 Malaysia (RM)</option>
+                  <option value="SG">🇸🇬 Singapore (SGD)</option>
                   <option value="INT">🌍 International (€)</option>
                 </select>
               </div>
