@@ -55,7 +55,7 @@ interface BlogPost {
 async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const posts = await sanityReadClient.fetch(`
-      *[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+      *[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc) {
         _id,
         title,
         slug,
