@@ -66,7 +66,7 @@ Submitted: ${new Date().toLocaleString()}
       secure: false,
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
       },
     });
 
@@ -76,6 +76,13 @@ Submitted: ${new Date().toLocaleString()}
       port: process.env.SMTP_PORT,
       user: process.env.SMTP_USER,
     });
+
+    try {
+      await transporter.verify();
+      console.log("SMTP transporter verified for send-notification");
+    } catch (verifyError) {
+      console.error("SMTP transporter verification failed for send-notification:", verifyError);
+    }
 
     // Send email
     const emailResult = await transporter.sendMail({
