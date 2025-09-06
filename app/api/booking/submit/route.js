@@ -14,11 +14,11 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
   // Configure nodemailer (you'll need to set up these environment variables)
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: process.env.SMTP_PORT || 587,
+    port: parseInt(process.env.SMTP_PORT || "587", 10),
     secure: false,
     auth: {
       user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
     },
   });
 
@@ -114,13 +114,22 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
   `;
 
   const mailOptions = {
-    from: process.env.SMTP_FROM || bookingData.contactInfo.email,
+    // Use configured SMTP_FROM (or authenticated user) as the sender to avoid provider rejections.
+    from: process.env.SMTP_FROM || process.env.SMTP_USER,
+    replyTo: bookingData.contactInfo.email,
     to: "studio@tukang.design",
     subject: `New ${websiteType} Booking - ${submissionId}`,
     html: emailContent,
   };
 
   try {
+    // Helpful verification when diagnosing production issues
+    try {
+      await transporter.verify();
+      console.log("SMTP transporter verified for booking notifications");
+    } catch (verifyError) {
+      console.error("SMTP transporter verification failed for booking notifications:", verifyError);
+    }
     await transporter.sendMail(mailOptions);
     console.log("Email notification sent successfully to studio@tukang.design");
     return true;
