@@ -286,7 +286,7 @@ export default async function BlogPage() {
                 </h2>
 
                 <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                  We&apos;re working on creating valuable content about web design,
+                  We're working on creating valuable content about web design,
                   digital marketing, and business growth strategies specifically
                   for Malaysian SMEs. Stay tuned for expert insights and
                   practical tips!

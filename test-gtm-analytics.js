@@ -5,7 +5,7 @@ console.log("Testing Analytics Implementation...\n");
 
 // Mock window and dataLayer for testing
 global.window = {
-  location: { pathname: "/booking", href: "https://tukang.design/booking" },
+  location: { pathname: "/booking", href: "https://tukang.my/booking" },
   dataLayer: [],
 };
 

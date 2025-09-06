@@ -1,6 +1,5 @@
 // Enhanced Contact Page with Modern Design
 "use client";
-import React from "react";
 import Link from "next/link";
 import RegionSelector, {
   getRegionDetails,
@@ -11,7 +10,6 @@ import { PrimaryCTA, SecondaryCTA } from "../components/CTAButton";
 export default function ContactPage() {
   const [region, setRegion] = useState<"MY" | "SG" | "INT">("INT");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const regionDetails = getRegionDetails(region);
 
   type ContactForm = {
@@ -39,20 +37,15 @@ export default function ContactPage() {
     };
 
     try {
-      const response = await fetch("/api/contact", {
+      await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      
-      if (response.ok) {
-        setShowSuccessModal(true);
-        // Reset form
-        (e.target as HTMLFormElement).reset();
-      } else {
-        alert("Failed to send message. Please try again.");
-      }
-    } catch {
+      alert("Message sent successfully!");
+      // Reset form
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
       alert("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -72,7 +65,7 @@ export default function ContactPage() {
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Ready to start your project? Have questions about our services?
-              We&apos;d love to hear from you.
+              We'd love to hear from you.
             </p>
             <div className="mt-6 text-center text-lg font-semibold text-accent">
               You see rates in {regionDetails.symbol}. For custom quotes, see
@@ -92,7 +85,7 @@ export default function ContactPage() {
                 Send us a Message
               </h2>
               <p className="text-gray-300 mb-8">
-                Fill out the form below and we&apos;ll get back to you within 24
+                Fill out the form below and we'll get back to you within 24
                 hours.
               </p>
 
@@ -322,13 +315,13 @@ export default function ContactPage() {
                     </h4>
                     <p className="text-gray-300 text-sm">
                       Yes! All packages include 2 rounds of revisions to ensure
-                      you&apos;re 100% satisfied.
+                      you're 100% satisfied.
                     </p>
                   </div>
 
                   <div>
                     <h4 className="text-white font-semibold mb-2">
-                      What&apos;s included in support?
+                      What's included in support?
                     </h4>
                     <p className="text-gray-300 text-sm">
                       30 days of free post-launch support for bug fixes and
@@ -341,31 +334,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* Success Modal */}
-      {showSuccessModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-olive-dark rounded-2xl p-8 max-w-md w-full mx-4 border border-accent/20">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-accent mb-4">Message Sent!</h3>
-              <p className="text-gray-300 mb-6">
-                Thank you for reaching out! We&apos;ve received your message and will get back to you within 24 hours.
-              </p>
-              <button
-                onClick={() => setShowSuccessModal(false)}
-                className="w-full bg-accent text-olive font-semibold py-3 px-6 rounded-lg hover:bg-accent/90 transition-colors duration-300"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
