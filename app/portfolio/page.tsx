@@ -1,22 +1,8 @@
 import React from "react";
-import { Metadata } from "next";
 import { sanityClient } from "../../lib/sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { PrimaryCTA, SecondaryCTA } from "../components/CTAButton";
-import ContactSection from "../components/ContactSection";
-
-export const metadata: Metadata = {
-  title: "Portfolio - Tukang Design | Web Design & Development Projects",
-  description:
-    "View our portfolio of web design and development projects. From e-commerce sites to business websites, see how we help Malaysian SMEs succeed online.",
-  keywords: [
-    "portfolio web design Malaysia",
-    "website examples",
-    "SME website projects",
-    "custom web development portfolio",
-  ],
-};
 
 interface PortfolioProject {
   _id: string;
@@ -190,9 +176,6 @@ export default async function PortfolioPage() {
             </div>
           </section>
         )}
-
-        {/* Call to Action */}
-        <ContactSection variant="compact" className="mt-20" />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import "./globals.css";
 import NavigationBar from "./components/NavigationBar.simple";
 import Footer from "./components/Footer";
+import GlobalBookingSteps from "./components/GlobalBookingSteps";
 import RegionIndicator from "./components/RegionIndicator";
 import {
   GoogleTagManager,
@@ -112,6 +113,9 @@ export default function RootLayout({
 
         {/* Main Content */}
         <main className="min-h-screen">{children}</main>
+
+        {/* Global Booking Steps (hidden on booking/admin) */}
+        <GlobalBookingSteps />
 
         <Footer />
 

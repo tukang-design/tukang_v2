@@ -52,12 +52,7 @@ const nextConfig = {
     ];
   },
 
-  // Redirects for SEO
-  async redirects() {
-    return [
-      // Remove the circular booking redirect
-    ];
-  },
+  // No locale redirects needed
 };
 
 module.exports = nextConfig;

@@ -370,6 +370,79 @@ export default function BookingPage() {
     return total;
   };
 
+  // Simple outline icons for each goal (toned-down, no neon fills)
+  const GoalIcon = ({ id }: { id: string }) => {
+    const common = "w-6 h-6 stroke-current text-accent/80";
+    switch (id) {
+      case "lead-generation":
+        return (
+          <svg className={common} fill="none" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 17l6-6 4 4 8-8" />
+          </svg>
+        );
+      case "portfolio-showcase":
+        return (
+          <svg className={common} fill="none" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2" ry="2" strokeWidth={2} />
+            <path strokeWidth={2} d="M3 15l5-4 4 3 3-2 6 5" />
+          </svg>
+        );
+      case "business-presence":
+        return (
+          <svg className={common} fill="none" viewBox="0 0 24 24">
+            <path strokeWidth={2} d="M3 9h18M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M9 9V7a2 2 0 012-2h2a2 2 0 012 2v2" />
+          </svg>
+        );
+      case "online-sales":
+        return (
+          <svg className={common} fill="none" viewBox="0 0 24 24">
+            <path strokeWidth={2} d="M3 5h2l2 12a2 2 0 002 2h8a2 2 0 002-2l1-7H7" />
+            <circle cx="10" cy="21" r="1" strokeWidth={2} />
+            <circle cx="17" cy="21" r="1" strokeWidth={2} />
+          </svg>
+        );
+      default:
+        return (
+          <svg className={common} fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" strokeWidth={2} />
+          </svg>
+        );
+    }
+  };
+
+  // Outline icon for additional features based on complexity
+  const AddonIcon = ({ complexity }: { complexity: AdditionalFeature["complexity"] }) => {
+    const common = "w-6 h-6 stroke-current text-accent/80";
+    if (complexity === "Basic") {
+      return (
+        <svg className={common} fill="none" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      );
+    }
+    if (complexity === "Intermediate") {
+      return (
+        <svg className={common} fill="none" viewBox="0 0 24 24">
+          <path strokeWidth={2} d="M12 3l2.5 4.5L19 9l-3.5 3 1 5-4.5-2.5L7.5 17l1-5L5 9l4.5-1.5L12 3z" />
+        </svg>
+      );
+    }
+    // Advanced
+    return (
+      <svg className={common} fill="none" viewBox="0 0 24 24">
+        <path strokeWidth={2} d="M12 2l2 6h6l-5 3.5L17 18l-5-3-5 3 2-6.5L2 8h6l2-6z" />
+      </svg>
+    );
+  };
+
+  const complexityLabel = (
+    c: AdditionalFeature["complexity"]
+  ): "Low Complexity" | "Medium Complexity" | "High Complexity" => {
+    if (c === "Basic") return "Low Complexity";
+    if (c === "Intermediate") return "Medium Complexity";
+    return "High Complexity";
+  };
+
   // Determine website type based on selected goals
   const getWebsiteType = () => {
     if (selectedGoals.length === 0) return "";
@@ -562,74 +635,76 @@ export default function BookingPage() {
               </p>
             </div>
 
-            {/* Display goals as vertical list cards */}
-            <div className="space-y-6">
-              {projectGoals.map((goal) => (
-                <div
-                  key={goal.id}
-                  className={`p-8 rounded-2xl border cursor-pointer transition-all duration-300 ${
-                    selectedGoals.includes(goal.id)
-                      ? "bg-accent/10 border-accent text-accent"
-                      : "bg-olive-dark/50 border-accent/20 text-gray-300 hover:bg-accent/5 hover:border-accent/40"
-                  }`}
-                  onClick={() => handleGoalToggle(goal.id)}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center mb-4">
-                        <span className="text-3xl mr-4">{goal.icon}</span>
-                        <div>
-                          <h3 className="text-xl font-semibold mb-2">
-                            {goal.title}
-                            {goal.popular && (
-                              <span className="ml-2 px-2 py-1 text-xs bg-accent text-olive rounded-full">
-                                Most Popular
-                              </span>
-                            )}
-                          </h3>
-                          <p className="text-sm opacity-80 mb-4">
-                            {goal.description}
-                          </p>
-                        </div>
+            {/* Display goals as a compact list inside a single container */}
+            <div className="rounded-xl border border-accent/20 bg-olive-dark/30 divide-y divide-accent/10 overflow-hidden">
+              {projectGoals.map((goal, idx) => {
+                const isSelected = selectedGoals.includes(goal.id);
+                return (
+                  <div
+                    key={goal.id}
+                    className={`group flex items-start justify-between p-4 sm:p-5 cursor-pointer transition-colors ${
+                      isSelected
+                        ? "bg-olive-dark/50 ring-1 ring-inset ring-accent/30"
+                        : "hover:bg-olive-dark/40"
+                    }`}
+                    onClick={() => handleGoalToggle(goal.id)}
+                  >
+                    {/* Left: Icon */}
+                    <div className="mr-3 pt-0.5 shrink-0">
+                      <div className="p-2 rounded-lg border border-accent/20 bg-transparent">
+                        <GoalIcon id={goal.id} />
                       </div>
                     </div>
 
-                    <div className="ml-6 text-right flex flex-col items-end">
-                      <div className="text-lg font-bold">
-                        {formatPrice(goal.basePrice[selectedRegion])}
-                      </div>
-                      <div className="text-xs opacity-60 mb-4">
-                        avg estimate
-                      </div>
-                      <div
-                        className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                          selectedGoals.includes(goal.id)
-                            ? "bg-accent border-accent"
-                            : "border-gray-400"
-                        }`}
-                      >
-                        {selectedGoals.includes(goal.id) && (
-                          <svg
-                            className="w-3 h-3 text-olive"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                    {/* Middle: Title, description, avg price */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-base sm:text-lg font-semibold truncate text-foreground">
+                          {goal.title}
+                        </h3>
+                        {goal.popular && (
+                          <span className="px-2 py-0.5 text-[10px] sm:text-xs border border-accent/30 text-accent/80 rounded-full whitespace-nowrap">
+                            Popular
+                          </span>
                         )}
                       </div>
+                      <p className="mt-1 text-sm text-gray-300 line-clamp-2">
+                        {goal.description}
+                      </p>
+                      <div className="mt-1 text-xs text-gray-400">
+                        Avg est: <span className="text-gray-200 font-semibold">{formatPrice(goal.basePrice[selectedRegion])}</span>
+                      </div>
+                    </div>
+
+                    {/* Right: Native checkbox */}
+                    <div className="pl-3 shrink-0 pt-0.5">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => handleGoalToggle(goal.id)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="h-5 w-5"
+                        aria-label={`Select goal: ${goal.title}`}
+                      />
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Advanced Project Option */}
-            <div className="mt-8 p-6 bg-olive-dark/30 border border-accent/20 rounded-xl text-center">
+            {/* Navigation */}
+            <div className="flex justify-end mt-8">
+              <button
+                onClick={nextStep}
+                disabled={selectedGoals.length === 0}
+                className="px-4 py-2 border rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Continue to Additional Features
+              </button>
+            </div>
+
+            {/* Advanced Project Option - moved below the continue CTA */}
+            <div className="mt-6 p-6 bg-olive-dark/30 border border-accent/20 rounded-xl text-center">
               <h3 className="text-lg font-semibold mb-2">
                 Need something more complex?
               </h3>
@@ -641,17 +716,6 @@ export default function BookingPage() {
                 className="px-6 py-2 bg-accent/20 text-accent border border-accent rounded-lg hover:bg-accent/30 transition-all"
               >
                 Schedule Discovery Call
-              </button>
-            </div>
-
-            {/* Navigation */}
-            <div className="flex justify-end mt-8">
-              <button
-                onClick={nextStep}
-                disabled={selectedGoals.length === 0}
-                className="px-8 py-3 bg-accent text-olive font-semibold rounded-lg hover:bg-accent/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Continue to Additional Features
               </button>
             </div>
           </div>
@@ -667,14 +731,16 @@ export default function BookingPage() {
               </p>
             </div>
 
-            {/* Project Outcome Summary */}
+            {/* Project Outcome Summary */
+            // Icon above title, larger size; toned-down background
+            }
             {selectedGoals.length > 0 && (
               <div className="mb-8 p-6 bg-olive-dark/50 border border-accent/20 rounded-xl">
                 <h3 className="text-xl font-semibold mb-2">Project Outcome</h3>
-                <div className="mb-4 p-4 bg-accent/10 border border-accent/30 rounded-lg">
-                  <div className="flex items-center mb-2">
-                    <span className="text-2xl mr-3">🚀</span>
-                    <h4 className="text-lg font-semibold text-accent">
+                <div className="mb-4 p-4 bg-olive-dark/60 border border-accent/30 rounded-lg text-center">
+                  <div className="flex flex-col items-center">
+                    <span className="text-6xl mb-2">🚀</span>
+                    <h4 className="text-xl font-semibold text-accent">
                       {getWebsiteType()}
                     </h4>
                   </div>
@@ -701,12 +767,9 @@ export default function BookingPage() {
                         key={goal.id}
                         className="border-l-4 border-accent pl-4"
                       >
-                        <div className="flex items-center mb-2">
-                          <span className="text-2xl mr-3">{goal.icon}</span>
-                          <h4 className="text-lg font-semibold">
-                            {goal.title}
-                          </h4>
-                        </div>
+                        <h4 className="text-lg font-semibold mb-2">
+                          {goal.title}
+                        </h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ml-2">
                           {goal.features.map((feature) => (
                             <div key={feature.id} className="flex items-center">
@@ -733,85 +796,64 @@ export default function BookingPage() {
               </div>
             )}
 
-            {/* Simplified add-ons layout */}
-            <div className="space-y-4">
-              {additionalFeatures.map((feature) => (
-                <div
-                  key={feature.id}
-                  className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${
-                    selectedFeatures.includes(feature.id)
-                      ? "bg-accent/10 border-accent"
-                      : "bg-olive-dark/50 border-accent/20 hover:bg-accent/5 hover:border-accent/40"
-                  }`}
-                >
-                  {/* Title, Description, and Complexity Badge */}
-                  <div className="flex-1">
-                    <div className="flex items-center mb-1">
-                      <h3 className="text-lg font-semibold mr-3">
+            {/* Additional features as a compact list in a single container */}
+            <div className="rounded-xl border border-accent/20 bg-olive-dark/30 divide-y divide-accent/10 overflow-hidden">
+              {additionalFeatures.map((feature) => {
+                const isSelected = selectedFeatures.includes(feature.id);
+                return (
+                  <div
+                    key={feature.id}
+                    className={`group flex items-start justify-between p-4 sm:p-5 cursor-pointer transition-colors ${
+                      isSelected
+                        ? "bg-olive-dark/50 ring-1 ring-inset ring-accent/30"
+                        : "hover:bg-olive-dark/40"
+                    }`}
+                    onClick={() => handleFeatureToggle(feature.id)}
+                  >
+                    {/* Middle: Title, description, price + complexity */}
+                    <div className="flex-1 min-w-0 pr-3">
+                      <h3 className="text-base sm:text-lg font-semibold truncate text-foreground">
                         {feature.name}
                       </h3>
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          feature.complexity === "Basic"
-                            ? "bg-green-500/20 text-green-400"
-                            : feature.complexity === "Intermediate"
-                            ? "bg-yellow-500/20 text-yellow-400"
-                            : "bg-red-500/20 text-red-400"
-                        }`}
-                      >
-                        {feature.complexity === "Basic"
-                          ? "Low"
-                          : feature.complexity === "Intermediate"
-                          ? "Med"
-                          : "High"}{" "}
-                        Complexity
-                      </span>
+                      <p className="mt-1 text-sm text-gray-300 line-clamp-2">
+                        {feature.description}
+                      </p>
+                      <div className="mt-2 text-xs text-gray-400 flex items-center gap-3">
+                        <span>
+                          Price: <span className="text-gray-200 font-semibold">{formatPrice(feature.price[selectedRegion])}</span>
+                        </span>
+                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-300">{complexityLabel(feature.complexity)}</span>
+                      </div>
                     </div>
-                    <p className="text-sm text-gray-300">
-                      {feature.description}
-                    </p>
-                  </div>
 
-                  {/* Checkbox aligned to the top */}
-                  <div className="ml-4 flex items-start pt-1">
-                    <button
-                      onClick={() => handleFeatureToggle(feature.id)}
-                      className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                        selectedFeatures.includes(feature.id)
-                          ? "bg-accent border-accent"
-                          : "border-gray-400 hover:border-accent"
-                      }`}
-                    >
-                      {selectedFeatures.includes(feature.id) && (
-                        <svg
-                          className="w-3 h-3 text-olive"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
-                    </button>
+                    {/* Right: Native checkbox */}
+                    <div className="shrink-0 pt-0.5">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => handleFeatureToggle(feature.id)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="h-5 w-5"
+                        aria-label={`Select feature: ${feature.name}`}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Navigation */}
             <div className="flex justify-between mt-8">
               <button
                 onClick={prevStep}
-                className="px-8 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-500 transition-all"
+                className="px-4 py-2 border rounded-md"
               >
                 Back
               </button>
               <button
                 onClick={nextStep}
-                className="px-8 py-3 bg-accent text-olive font-semibold rounded-lg hover:bg-accent/90 transition-all"
+                className="px-4 py-2 border rounded-md"
               >
                 Continue to Contact
               </button>
@@ -832,10 +874,10 @@ export default function BookingPage() {
                   <h3 className="text-lg font-semibold mb-3">
                     Project Outcome:
                   </h3>
-                  <div className="mb-4 p-3 bg-accent/10 border border-accent/30 rounded-lg">
-                    <div className="flex items-center">
-                      <span className="text-xl mr-3">🚀</span>
-                      <h4 className="text-md font-semibold text-accent">
+                  <div className="mb-4 p-3 bg-olive-dark/60 border border-accent/30 rounded-lg text-center">
+                    <div className="flex flex-col items-center">
+                      <span className="text-5xl mb-1">🚀</span>
+                      <h4 className="text-lg font-semibold text-accent">
                         {getWebsiteType()}
                       </h4>
                     </div>
@@ -1041,7 +1083,7 @@ export default function BookingPage() {
             <div className="flex justify-between mt-8">
               <button
                 onClick={prevStep}
-                className="px-8 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-500 transition-all"
+                className="px-4 py-2 border rounded-md"
               >
                 Back
               </button>
@@ -1054,7 +1096,7 @@ export default function BookingPage() {
                   !projectBrief.businessName ||
                   !projectBrief.businessDescription
                 }
-                className="px-8 py-3 bg-accent text-olive font-semibold rounded-lg hover:bg-accent/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                className="px-4 py-2 border rounded-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
                 {isSubmitting ? (
                   <>

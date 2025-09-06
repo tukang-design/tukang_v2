@@ -141,7 +141,7 @@ function MobileMenu({
           {/* Mobile Navigation */}
           <nav className="space-y-2">
             <Link
-              href=""
+              href="/"
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
               onClick={onClose}
             >
@@ -300,7 +300,7 @@ export default function NavigationBar() {
 
             {/* Enhanced Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-4">
-              <NavLink href="" label="Home" />
+              <NavLink href="/" label="Home" />
               <NavLink href="/portfolio" label="Portfolio" />
               <NavLink
                 href="/services"

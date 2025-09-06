@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * Hook that automatically scrolls to top when pathname changes
@@ -17,7 +17,7 @@ export function useScrollToTop() {
 
   // Manual scroll function
   const scrollToTopManual = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return { scrollToTopManual };

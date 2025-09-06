@@ -8,11 +8,11 @@ import ScrollProgress from "./ScrollProgress";
 export default function NavigationBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const getNavLink = (path: string) => path || "/";
+  const getNavLink = (path: string) => (path && path.length > 0 ? path : "/");
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-olive/70 border-b border-accent/10 shadow-lg shadow-olive/20">
-      <div className="w-full mx-auto px-4 sm:px-4 lg:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-6">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">

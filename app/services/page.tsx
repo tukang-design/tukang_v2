@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { PrimaryCTA } from "../components/CTAButton";
-import ContactSection from "../components/ContactSection";
 
 // Note: Since this is a client component, metadata should be handled in layout.tsx or parent server component
 // For analytics tracking, the page title is "Services - Web Design & Development"
@@ -14,24 +13,16 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-olive-dark via-olive to-olive-light opacity-90"></div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
           <div className="text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-8 text-accent font-mono leading-tight">
+            <h2 className="text-3xl lg:text-5xl font-bold mb-8 text-accent font-mono leading-tight">
               End-to-End
               <br />
               <span className="text-white">Design & Development.</span>
-            </h1>
-
-            <h2 className="text-lg lg:text-xl mb-8 text-brown max-w-5xl mx-auto leading-relaxed">
-              A seamless, unified process for building websites that are as
-              technically sound as they are beautiful.
             </h2>
 
-            <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              We handle your entire website project from the first strategic
-              sketch to the final, flawless launch. This integrated approach
-              eliminates the costly handoff between separate designers and
-              developers, ensuring your vision is perfectly built. Explore our
-              core capabilities below.
-            </p>
+            <h4 className="text-lg lg:text-xl mb-8 text-brown max-w-5xl mx-auto leading-relaxed">
+              A seamless, unified process for building websites that are as
+              technically sound as they are beautiful.
+            </h4>
           </div>
         </div>
 
@@ -235,90 +226,6 @@ export default function ServicesPage() {
                 content and build a loyal audience.
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* Final CTA Section */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Device Mockups */}
-          <div className="relative">
-            {/* Laptop Mockup */}
-            <div className="relative justify-self-center mb-8 w-80">
-              <div className="bg-gray-800 rounded-t-2xl p-2">
-                <div className="bg-olive rounded-lg h-48 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-olive-light via-olive to-olive-dark opacity-90"></div>
-                  <div className="absolute top-4 left-4 right-4">
-                    <div className="bg-accent/20 rounded h-2 w-full mb-2"></div>
-                    <div className="bg-accent/10 rounded h-2 w-3/4 mb-2"></div>
-                    <div className="bg-accent/10 rounded h-2 w-1/2"></div>
-                  </div>
-                  <div className="absolute bottom-4 right-4">
-                    <div className="bg-accent rounded px-3 py-1 text-xs text-olive font-bold">
-                      CTA Button →
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-800 rounded-b-2xl h-8 flex items-center justify-center">
-                <div className="w-16 h-1 bg-gray-600 rounded"></div>
-              </div>
-            </div>
-
-            {/* Tablet Mockup */}
-            <div className="absolute top-12 left-0 md:left-32 lg:left-12 xl:right-12 w-32">
-              <div className="bg-gray-800 rounded-2xl p-2">
-                <div className="bg-olive rounded-xl h-40 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-olive-light via-olive to-olive-dark opacity-90"></div>
-                  <div className="absolute top-3 left-3 right-3">
-                    <div className="bg-accent/20 rounded h-1.5 w-full mb-1.5"></div>
-                    <div className="bg-accent/10 rounded h-1.5 w-2/3 mb-1.5"></div>
-                    <div className="bg-accent/10 rounded h-1.5 w-1/2"></div>
-                  </div>
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="bg-accent rounded px-2 py-1 text-xs text-olive font-bold text-center">
-                      CTA →
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Mockup */}
-            <div className="absolute top-16 right-0 md:right-40 lg:right-8 xl:right-20 w-20">
-              <div className="bg-gray-800 rounded-3xl p-2">
-                <div className="bg-olive rounded-2xl h-36 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-olive-light via-olive to-olive-dark opacity-90"></div>
-                  <div className="absolute top-2 left-2 right-2">
-                    <div className="bg-accent/20 rounded h-1 w-full mb-1"></div>
-                    <div className="bg-accent/10 rounded h-1 w-3/4 mb-1"></div>
-                    <div className="bg-accent/10 rounded h-1 w-1/2"></div>
-                  </div>
-                  <div className="absolute bottom-2 left-2 right-2">
-                    <div className="bg-accent rounded px-1 py-0.5 text-xs text-olive font-bold text-center">
-                      CTA →
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Text Content */}
-          <div className="text-left lg:text-left">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-accent font-mono">
-              Ready to Build Your Custom Solution?
-            </h2>
-
-            <p className="text-lg text-gray-300 leading-relaxed mb-8">
-              Our Guided Project Builder is the best way to get started. In just
-              a few minutes, you can outline your goals, select the features you
-              need, and receive a detailed, transparent quote directly in your
-              inbox. It&apos;s the first step to bringing your vision to life.
-            </p>
-
-            <PrimaryCTA href="/booking" className="text-lg px-10 py-4">
-              Get Free Project Quote →
-            </PrimaryCTA>
           </div>
         </div>
       </section>

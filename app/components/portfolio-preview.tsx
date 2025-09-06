@@ -121,7 +121,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
     <div className="relative">
       {/* Portfolio Card */}
       <div
-        className="relative aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer"
+        className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >

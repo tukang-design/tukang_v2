@@ -1,5 +1,5 @@
 import React from "react";
-import BookingPageClient from "./BookingPageClient";
+import LeadCaptureForm from "./LeadCaptureForm";
 
 export const metadata = {
   title: "Get Quote - Tukang Design | Custom Web Design Pricing",
@@ -11,5 +11,5 @@ export const metadata = {
 };
 
 export default function BookingPage() {
-  return <BookingPageClient />;
+  return <LeadCaptureForm />;
 }

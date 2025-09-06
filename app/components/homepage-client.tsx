@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import RegionSelector from "./region-selector";
 import {
   PrimaryCTA,
+  SecondaryCTA,
   TertiaryCTA,
   ArrowDownIcon,
   ArrowRightIcon,
@@ -17,13 +18,18 @@ interface HomePageClientProps {
 export default function HomePageClient({ children }: HomePageClientProps) {
   const [region, setRegion] = useState("INT"); // Default to international while detecting
   const [animationStarted, setAnimationStarted] = useState(false);
+  const [marqueeRunning, setMarqueeRunning] = useState(false);
 
   useEffect(() => {
     // Start animation after component mounts
     const timer = setTimeout(() => {
       setAnimationStarted(true);
     }, 100);
-    return () => clearTimeout(timer);
+    const runTimer = setTimeout(() => setMarqueeRunning(true), 900);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(runTimer);
+    };
   }, []);
 
   // Animation words for the homepage headline
@@ -56,7 +62,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
           }
         }
         .animate-bounce-custom {
-          animation: bounceCustom 2s infinite;
+          animation: bounceCustom 4s infinite;
         }
         @keyframes slideUpFadeIn {
           0% {
@@ -79,11 +85,79 @@ export default function HomePageClient({ children }: HomePageClientProps) {
           transform: translateY(20px);
           animation: slideUpFadeIn 0.8s ease-out 1s forwards;
         }
+        /* Marquee banners */
+        @keyframes marqueeLeft {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        @keyframes marqueeRight {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+        .marquee-container {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+        }
+        .marquee-track {
+          display: flex;
+          width: 200%; /* two copies side-by-side */
+        }
+        /* Initial slide-in wrappers */
+        @keyframes slideInLeft {
+          0% {
+            opacity: 0;
+            transform: translateX(-100%);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        @keyframes slideInRight {
+          0% {
+            opacity: 0;
+            transform: translateX(100%);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        .marquee-slide-left.is-in {
+          animation: slideInLeft 700ms ease-out both;
+        }
+        .marquee-slide-right.is-in {
+          animation: slideInRight 700ms ease-out both;
+        }
+        .marquee-left .marquee-track.running {
+          animation: marqueeLeft 40s linear infinite;
+        }
+        .marquee-right .marquee-track.running {
+          animation: marqueeRight 40s linear infinite;
+        }
+        .banner-segment {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          white-space: nowrap;
+          width: 50%;
+          justify-content: space-around;
+          padding: 0.6rem 0;
+        }
       `}</style>
       {/* HERO SECTION - AWARENESS */}
       <section className="relative overflow-hidden pb-24">
         <div className="absolute inset-0 bg-gradient-to-br from-olive-dark via-olive to-olive-light opacity-90"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
+        <div className="relative w-full mx-auto py-12 lg:py-24">
           <div className="text-center">
             {/* Status Badge */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8">
@@ -94,7 +168,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
             </div>
 
             {/* Main Headline with Animated Text Reveal */}
-            <h1 className="text-5xl lg:text-7xl font-bold mb-6 font-mono leading-tight">
+            <h1 className="max-w-7xl mx-auto text-5xl lg:text-7xl font-bold mb-6 font-mono leading-tight">
               {homepageHeadlineWords.map((word, index) => (
                 <span
                   key={index}
@@ -111,21 +185,83 @@ export default function HomePageClient({ children }: HomePageClientProps) {
               ))}
             </h1>
 
-            {/* Supporting Headline with animation */}
-            <h2
-              className={`text-xl lg:text-2xl mb-8 text-brown max-w-3xl mx-auto leading-relaxed ${
+            {/* Animated Banners */}
+            <div
+              className={`space-y-4 ${
                 animationStarted ? "animate-subtitle" : "opacity-0"
               }`}
             >
-              From pixel-perfect mockups to clean, efficient code, we manage the
-              entire process.
-            </h2>
+              {/* Top banner - END-TO-END moving left, slanted */}
+              <div className="marquee-container w-screen relative left-1/2 -translate-x-1/2 transform rotate-[-5deg]">
+                <div
+                  className={`marquee-slide-left ${
+                    animationStarted ? "is-in" : ""
+                  }`}
+                >
+                  <div className="marquee-left">
+                    <div
+                      className={`marquee-track ${
+                        marqueeRunning ? "running" : ""
+                      }`}
+                    >
+                      <div className="banner-segment bg-olive-dark text-accent font-mono text-xl md:text-3xl">
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                      </div>
+                      <div className="banner-segment bg-olive-dark text-accent font-mono text-xl md:text-3xl">
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                        <span>END-TO-END</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Bottom banner - DESIGN & DEVELOPMENT moving right, slanted opposite */}
+              <div className="marquee-container w-screen relative left-1/2 -translate-x-1/2 transform rotate-[5deg]">
+                <div
+                  className={`marquee-slide-right ${
+                    animationStarted ? "is-in" : ""
+                  }`}
+                >
+                  <div className="marquee-right">
+                    <div
+                      className={`marquee-track ${
+                        marqueeRunning ? "running" : ""
+                      }`}
+                    >
+                      <div className="banner-segment bg-olive-dark text-brown font-mono text-xl md:text-3xl">
+                        <span>DESIGN & DEVELOPMENT</span>
+                        <span>DESIGN & DEVELOPMENT</span>
+                        <span>DESIGN & DEVELOPMENT</span>
+                        <span>DESIGN & DEVELOPMENT</span>
+                      </div>
+                      <div className="banner-segment bg-olive-dark text-brown font-mono text-xl md:text-3xl">
+                        <span>DESIGN & DEVELOPMENT</span>
+                        <span>DESIGN & DEVELOPMENT</span>
+                        <span>DESIGN & DEVELOPMENT</span>
+                        <span>DESIGN & DEVELOPMENT</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Animated CTA at bottom of section with 2rem margin */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 mb-8">
-          <TertiaryCTA
+          <SecondaryCTA
             href="#services"
             icon={
               <ArrowDownIcon className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-200" />
@@ -133,7 +269,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
             className="animate-bounce-custom"
           >
             View Our Services
-          </TertiaryCTA>
+          </SecondaryCTA>
         </div>
       </section>
 
@@ -154,7 +290,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {/* Lead Generation Landing Page */}
-            <div className="group bg-olive-dark/30 rounded-2xl p-8 border border-brown/30 hover:border-brown/50 transition-all duration-300 relative z-20">
+            <div className="group bg-olive-dark/30 rounded-2xl p-8 border border-brown/30 hover:border-brown/50 transition-all duration-300 relative justify-items-center z-20 text-center">
               <div className="w-16 h-16 bg-brown/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brown/20 transition-colors duration-300">
                 <svg
                   className="w-8 h-8 text-brown"
@@ -180,7 +316,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
             </div>
 
             {/* Professional Business Website */}
-            <div className="group bg-olive-dark/30 rounded-2xl p-8 border border-brown/30 hover:border-brown/50 transition-all duration-300 relative z-20">
+            <div className="group bg-olive-dark/30 rounded-2xl p-8 border border-brown/30 hover:border-brown/50 transition-all duration-300 relative justify-items-center z-20 text-center">
               <div className="w-16 h-16 bg-brown/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brown/20 transition-colors duration-300">
                 <svg
                   className="w-8 h-8 text-brown"
@@ -206,7 +342,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
             </div>
 
             {/* Custom Web Platforms */}
-            <div className="group bg-olive-dark/30 rounded-2xl p-8 border border-brown/30 hover:border-brown/50 transition-all duration-300 relative z-20">
+            <div className="group bg-olive-dark/30 rounded-2xl p-8 border border-brown/30 hover:border-brown/50 transition-all duration-300 relative z-20 justify-items-center text-center">
               <div className="w-16 h-16 bg-brown/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brown/20 transition-colors duration-300">
                 <svg
                   className="w-8 h-8 text-brown"
@@ -234,7 +370,10 @@ export default function HomePageClient({ children }: HomePageClientProps) {
 
           {/* Single CTA to Services Page */}
           <div className="text-center">
-            <PrimaryCTA href="/services" className="text-lg px-10 py-4">
+            <PrimaryCTA
+              href="/services"
+              className="text-lg px-10 py-4 w-full sm:w-auto"
+            >
               Learn More About Our Services →
             </PrimaryCTA>
           </div>
@@ -248,21 +387,24 @@ export default function HomePageClient({ children }: HomePageClientProps) {
             {/* Left Column - Title and Copy (1/3 width) */}
             <div className="lg:col-span-4 lg:pr-8">
               <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-accent font-mono leading-tight">
-                See How We&apos;ve Helped <br />
-                Businesses Like Yours.
+                Our Work
               </h2>
               <p className="text-xl text-gray-300 leading-relaxed mb-8">
                 Explore these case studies to see how our integrated process
                 delivers websites that not only look stunning but also achieve
                 real business goals.
               </p>
-              <PrimaryCTA
-                href="/portfolio"
-                icon={<ArrowRightIcon />}
-                size="lg"
-              >
-                View All Our Work
-              </PrimaryCTA>
+              {/* CTA moved after portfolio cards for better mobile order */}
+              <div className="mt-10 sm:text-center lg:text-left">
+                <PrimaryCTA
+                  href="/portfolio"
+                  icon={<ArrowRightIcon />}
+                  size="lg"
+                  className="w-full sm:w-auto"
+                >
+                  View All Our Work
+                </PrimaryCTA>
+              </div>
             </div>
 
             {/* Right Column - Portfolio Showcase (2/3 width) */}
@@ -374,9 +516,6 @@ export default function HomePageClient({ children }: HomePageClientProps) {
           </div>
         </div>
       </section>
-
-      {/* CONTACT SECTION */}
-      <ContactSection />
     </div>
   );
 }
