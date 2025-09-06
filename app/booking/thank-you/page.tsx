@@ -217,7 +217,7 @@ export default function ThankYouPage() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
-              href=""
+              href="/"
               className="px-8 py-4 bg-olive-dark border border-accent/20 text-accent rounded-xl font-medium transition-all duration-300 hover:border-accent/40 text-center"
             >
               Back to Home

@@ -138,7 +138,7 @@ export default async function BlogPostPage({
           {/* Breadcrumb */}
           <nav className="mb-8">
             <div className="flex items-center space-x-2 text-sm text-gray-400">
-              <Link href="" className="hover:text-accent transition-colors">
+              <Link href="/" className="hover:text-accent transition-colors">
                 Home
               </Link>
               <span>/</span>

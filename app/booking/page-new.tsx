@@ -226,7 +226,7 @@ export default function BookingPage() {
           <nav className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-2 text-sm">
               <Link
-                href=""
+                href="/"
                 className="text-gray-400 hover:text-accent transition-colors duration-200"
               >
                 Home

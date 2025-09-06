@@ -101,7 +101,7 @@ export default function BlogPage() {
               <ol className="inline-flex items-center space-x-2 text-sm">
                 <li className="flex items-center">
                   <Link
-                    href=""
+                    href="/"
                     className="text-gray-400 hover:text-accent transition-colors duration-200"
                   >
                     Home

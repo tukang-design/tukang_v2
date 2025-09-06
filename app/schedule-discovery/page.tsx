@@ -242,7 +242,7 @@ function ScheduleDiscoveryContent() {
         {/* Navigation */}
         <div className="text-center mt-8">
           <Link
-            href=""
+            href="/"
             className="inline-block text-gray-300 hover:text-accent transition-colors"
           >
             ← Back to Homepage
