@@ -8,13 +8,23 @@ export async function POST(request: Request) {
     // Create transporter (you'll need to configure with your email service)
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port: 587,
+      port: parseInt(process.env.SMTP_PORT || "587", 10),
       secure: false,
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
+        // accept either SMTP_PASS or SMTP_PASSWORD for deployment parity
+        pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
       },
     });
+
+    // Helpful verification when diagnosing production issues
+    try {
+      await transporter.verify();
+      console.log("SMTP transporter verified and ready to send");
+    } catch (verifyError) {
+      console.error("SMTP transporter verification failed:", verifyError);
+      // continue - sendMail will fail with the same error and be caught below
+    }
 
     // Email content
     const mailOptions = {
