@@ -53,7 +53,7 @@ export default function ContactSection({
         >
           {/* Primary CTA - Custom Project */}
           <PrimaryCTA
-            href="/en/booking"
+            href="/booking"
             icon={
               <svg
                 className="w-5 h-5"
@@ -77,7 +77,7 @@ export default function ContactSection({
 
           {/* Secondary CTA - Get in Touch/Services */}
           <SecondaryCTA
-            href={isCompact ? "/en/contact" : "/en/services"}
+            href={isCompact ? "/contact" : "/services"}
             icon={
               isCompact ? undefined : (
                 <svg
@@ -106,7 +106,7 @@ export default function ContactSection({
         {!isCompact && (
           <div className="text-center">
             <TertiaryCTA
-              href="https://wa.me/60123456789"
+              href="https://wa.me/60174062788"
               external
               className="underline underline-offset-4"
             >

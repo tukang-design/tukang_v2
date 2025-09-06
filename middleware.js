@@ -1,23 +1,10 @@
-import { NextResponse } from 'next/server';
-
-const locales = ['en'];
-const defaultLocale = 'en';
+import { NextResponse } from "next/server";
 
 export function middleware(request) {
-  const { pathname } = request.nextUrl;
-    // Only redirect if path is exactly '/' and not already at a locale
-    if (pathname === '/') {
-    return NextResponse.redirect(new URL(`/${defaultLocale}`, request.url));
-  }
-  
-    // If already at /en, do not redirect
-    if (locales.some(loc => pathname.startsWith(`/${loc}`))) {
-      return NextResponse.next();
-    }
-
-    return NextResponse.next();
+  // No redirects needed - all content is now at root level
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/'],
+  matcher: ["/"],
 };

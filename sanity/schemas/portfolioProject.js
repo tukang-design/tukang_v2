@@ -4,18 +4,6 @@ export default {
   type: 'document',
   fields: [
     {
-      name: 'language',
-      title: 'Language',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'English', value: 'en'},
-          {title: 'Bahasa Melayu', value: 'ms'},
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    },
-    {
       name: 'title',
       title: 'Project Title',
       type: 'string',
@@ -75,7 +63,10 @@ export default {
         {
           type: 'image',
           options: {hotspot: true},
-          fields: [{name: 'alt', title: 'Alt Text', type: 'string'}],
+          fields: [
+            {name: 'alt', title: 'Alt Text', type: 'string'},
+            {name: 'caption', title: 'Caption', type: 'string'},
+          ],
         },
       ],
       validation: (Rule) => Rule.required(),
@@ -101,7 +92,10 @@ export default {
         {
           type: 'image',
           options: {hotspot: true},
-          fields: [{name: 'alt', title: 'Alt Text', type: 'string'}],
+          fields: [
+            {name: 'alt', title: 'Alt Text', type: 'string'},
+            {name: 'caption', title: 'Caption', type: 'string'},
+          ],
         },
       ],
     },
@@ -126,7 +120,10 @@ export default {
         {
           type: 'image',
           options: {hotspot: true},
-          fields: [{name: 'alt', title: 'Alt Text', type: 'string'}],
+          fields: [
+            {name: 'alt', title: 'Alt Text', type: 'string'},
+            {name: 'caption', title: 'Caption', type: 'string'},
+          ],
         },
       ],
     },
@@ -151,7 +148,10 @@ export default {
         {
           type: 'image',
           options: {hotspot: true},
-          fields: [{name: 'alt', title: 'Alt Text', type: 'string'}],
+          fields: [
+            {name: 'alt', title: 'Alt Text', type: 'string'},
+            {name: 'caption', title: 'Caption', type: 'string'},
+          ],
         },
       ],
     },
@@ -221,14 +221,13 @@ export default {
       title: 'title',
       media: 'mainImage',
       category: 'category',
-      language: 'language',
     },
     prepare(selection) {
-      const {title, media, category, language} = selection
+      const {title, media, category} = selection
       const categoryText = Array.isArray(category) ? category.join(', ') : category || 'No category'
       return {
         title,
-        subtitle: `${categoryText} (${language?.toUpperCase()})`,
+        subtitle: categoryText,
         media,
       }
     },

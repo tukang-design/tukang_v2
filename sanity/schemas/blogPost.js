@@ -4,18 +4,6 @@ export default {
   type: 'document',
   fields: [
     {
-      name: 'language',
-      title: 'Language',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'English', value: 'en'},
-          {title: 'Bahasa Melayu', value: 'ms'},
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    },
-    {
       name: 'title',
       title: 'Title',
       type: 'string',

@@ -141,14 +141,14 @@ function MobileMenu({
           {/* Mobile Navigation */}
           <nav className="space-y-2">
             <Link
-              href="/en"
+              href=""
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
               onClick={onClose}
             >
               Home
             </Link>
             <Link
-              href="/en/portfolio"
+              href="/portfolio"
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
               onClick={onClose}
             >
@@ -158,7 +158,7 @@ function MobileMenu({
             {/* Services Submenu */}
             <div className="space-y-1">
               <Link
-                href="/en/services"
+                href="/services"
                 className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                 onClick={onClose}
               >
@@ -166,28 +166,28 @@ function MobileMenu({
               </Link>
               <div className="ml-4 space-y-1">
                 <Link
-                  href="/en/services/design"
+                  href="/services/design"
                   className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
                   onClick={onClose}
                 >
                   UI/UX Design
                 </Link>
                 <Link
-                  href="/en/services/development"
+                  href="/services/development"
                   className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
                   onClick={onClose}
                 >
                   Development
                 </Link>
                 <Link
-                  href="/en/services/consulting"
+                  href="/services/consulting"
                   className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
                   onClick={onClose}
                 >
                   Consulting
                 </Link>
                 <Link
-                  href="/en/services/branding"
+                  href="/services/branding"
                   className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
                   onClick={onClose}
                 >
@@ -197,21 +197,21 @@ function MobileMenu({
             </div>
 
             <Link
-              href="/en/blog"
+              href="/blog"
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
               onClick={onClose}
             >
               Blog
             </Link>
             <Link
-              href="/en/about"
+              href="/about"
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
               onClick={onClose}
             >
               About
             </Link>
             <Link
-              href="/en/contact"
+              href="/contact"
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
               onClick={onClose}
             >
@@ -226,7 +226,7 @@ function MobileMenu({
                 </span>
               </div>
               <Link
-                href="/en/contact"
+                href="/contact"
                 className="block w-full text-center px-6 py-4 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-accent/30"
                 onClick={onClose}
               >
@@ -247,22 +247,22 @@ export default function NavigationBar() {
 
   const servicesSubmenu = [
     {
-      href: "/en/services/design",
+      href: "/services/design",
       label: "UI/UX Design",
       description: "User interface and experience design",
     },
     {
-      href: "/en/services/development",
+      href: "/services/development",
       label: "Development",
       description: "Full-stack web development",
     },
     {
-      href: "/en/services/consulting",
+      href: "/services/consulting",
       label: "Consulting",
       description: "Technical strategy and advice",
     },
     {
-      href: "/en/services/branding",
+      href: "/services/branding",
       label: "Branding",
       description: "Brand identity and visual systems",
     },
@@ -275,7 +275,7 @@ export default function NavigationBar() {
           <div className="flex justify-between items-center h-24">
             {/* Enhanced Logo */}
             <div className="flex items-center">
-              <Link href="/en" className="group flex items-center space-x-3">
+              <Link href="/" className="group flex items-center space-x-3">
                 <div className="relative">
                   <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-accent/25">
                     <span className="text-olive font-mono font-bold text-lg">
@@ -300,16 +300,16 @@ export default function NavigationBar() {
 
             {/* Enhanced Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-4">
-              <NavLink href="/en" label="Home" />
-              <NavLink href="/en/portfolio" label="Portfolio" />
+              <NavLink href="" label="Home" />
+              <NavLink href="/portfolio" label="Portfolio" />
               <NavLink
-                href="/en/services"
+                href="/services"
                 label="Services"
                 hasSubmenu={true}
                 submenuItems={servicesSubmenu}
               />
-              <NavLink href="/en/blog" label="Blog" />
-              <NavLink href="/en/about" label="About" />
+              <NavLink href="/blog" label="Blog" />
+              <NavLink href="/about" label="About" />
 
               {/* Search Button */}
               <button
@@ -335,7 +335,7 @@ export default function NavigationBar() {
               {/* Enhanced CTA Button */}
               <div className="ml-8">
                 <Link
-                  href="/en/contact"
+                  href="/contact"
                   className="group relative px-8 py-4 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold text-base transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 hover:scale-105 overflow-hidden border border-accent/20"
                 >
                   <span className="relative z-10 flex items-center">

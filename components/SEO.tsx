@@ -13,7 +13,7 @@ interface SEOProps {
 
 export const SEO: React.FC<SEOProps> = ({
   title = "Tukang Design - End-to-End Design & Development | Full-stack Designer Malaysia",
-  description = "Get end-to-end design & development services in Malaysia & Singapore. Tukang Design offers full-stack design solutions, custom web development, and complete digital experiences from Shah Alam. Fast delivery, competitive pricing. Get your quote today!",
+  description = "Get end-to-end design & development services in Malaysia. Tukang Design offers full-stack design solutions, custom web development, and complete digital experiences from Shah Alam. Fast delivery, competitive pricing. Get your quote today!",
   keywords = "end-to-end design development, full-stack designer malaysia, web design shah alam, complete digital solutions, custom web development, full-stack development malaysia, design to development services",
   ogImage = "/og-image.jpg",
   ogUrl,

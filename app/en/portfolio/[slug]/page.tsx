@@ -98,8 +98,8 @@ export default async function ProjectDetail({
 
   return (
     <div className="min-h-screen bg-olive">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Back Button */}
+      {/* Back Button - Constrained width */}
+      <div className="max-w-7xl mx-auto px-4 pt-12">
         <Link
           href="/en/portfolio"
           className="inline-flex items-center gap-2 text-white hover:text-accent transition-colors mb-8"
@@ -119,9 +119,11 @@ export default async function ProjectDetail({
           </svg>
           Back to Portfolio
         </Link>
+      </div>
 
-        {/* Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+      {/* Hero Section - Full width */}
+      <div className="w-full px-4 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <div className="mb-6">
               {project.category && project.category.length > 0 ? (
@@ -242,7 +244,10 @@ export default async function ProjectDetail({
             </div>
           </div>
         </div>
+      </div>
 
+      {/* Main Image and Content - Constrained width */}
+      <div className="max-w-7xl mx-auto px-4">
         {/* Main Image */}
         {project.mainImage?.asset?.url && (
           <div className="aspect-video relative rounded-2xl overflow-hidden mb-16">
@@ -311,62 +316,39 @@ export default async function ProjectDetail({
               )}
           </div>
         </div>
+      </div>
 
-        {/* Project Gallery */}
-        {project.gallery && project.gallery.length > 0 && (
-          <section className="mt-20">
-            <h2 className="text-3xl font-mono font-bold text-white mb-12 text-center">
-              Project Gallery
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {project.gallery.map((image, index) => (
-                <div
-                  key={index}
-                  className="group relative aspect-video rounded-xl overflow-hidden"
-                >
-                  <Image
-                    src={image.asset.url}
-                    alt={image.alt || `Gallery image ${index + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  {image.caption && (
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                      <p className="text-white text-sm">{image.caption}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Call to Action */}
-        <section className="mt-20 bg-gradient-to-r from-brown/20 to-accent/10 rounded-2xl p-12 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Have a Similar Project?
+      {/* Project Gallery - Full width */}
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="w-full px-4 mt-20">
+          <h2 className="text-3xl font-mono font-bold text-white mb-12 text-center">
+            Project Gallery
           </h2>
-          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Let&apos;s discuss how we can help bring your vision to life with
-            our expertise and proven process.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/en/booking"
-              className="bg-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-accent/90 transition-colors"
-            >
-              Start a Project
-            </Link>
-            <Link
-              href="/en/portfolio"
-              className="border border-gray-600 text-white px-8 py-3 rounded-lg font-semibold hover:border-accent hover:text-accent transition-colors"
-            >
-              View More Work
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {project.gallery.map((image, index) => (
+              <div
+                key={index}
+                className="group relative aspect-video rounded-xl overflow-hidden"
+              >
+                <Image
+                  src={image.asset.url}
+                  alt={image.alt || `Gallery image ${index + 1}`}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                {image.caption && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                    <p className="text-white text-sm">{image.caption}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </section>
+      )}
 
-        {/* CONTACT SECTION */}
+      {/* Contact Section - Constrained width */}
+      <div className="max-w-7xl mx-auto px-4">
         <ContactSection variant="compact" />
       </div>
     </div>

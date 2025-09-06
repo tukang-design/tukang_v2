@@ -6,7 +6,8 @@ export default {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./lib/**/*.{js,ts,jsx,tsx}",
-    "./sanity/**/*.{js,ts,jsx,tsx}",
+    "./sanity/lib/**/*.{js,ts}",
+    "./sanity/schemas/**/*.{js,ts}",
   ],
   theme: {
     extend: {

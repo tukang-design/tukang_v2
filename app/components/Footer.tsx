@@ -90,7 +90,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/en"
+                  href=""
                   className="text-gray-300 hover:text-accent transition-colors duration-200 flex items-center group"
                 >
                   <span className="w-2 h-2 bg-accent/40 rounded-full mr-3 group-hover:bg-accent transition-colors duration-200"></span>
@@ -99,7 +99,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/en/about"
+                  href="/about"
                   className="text-gray-300 hover:text-accent transition-colors duration-200 flex items-center group"
                 >
                   <span className="w-2 h-2 bg-accent/40 rounded-full mr-3 group-hover:bg-accent transition-colors duration-200"></span>
@@ -108,7 +108,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/en/services"
+                  href="/services"
                   className="text-gray-300 hover:text-accent transition-colors duration-200 flex items-center group"
                 >
                   <span className="w-2 h-2 bg-accent/40 rounded-full mr-3 group-hover:bg-accent transition-colors duration-200"></span>
@@ -117,7 +117,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/en/portfolio"
+                  href="/portfolio"
                   className="text-gray-300 hover:text-accent transition-colors duration-200 flex items-center group"
                 >
                   <span className="w-2 h-2 bg-accent/40 rounded-full mr-3 group-hover:bg-accent transition-colors duration-200"></span>
@@ -126,7 +126,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/en/blog"
+                  href="/blog"
                   className="text-gray-300 hover:text-accent transition-colors duration-200 flex items-center group"
                 >
                   <span className="w-2 h-2 bg-accent/40 rounded-full mr-3 group-hover:bg-accent transition-colors duration-200"></span>

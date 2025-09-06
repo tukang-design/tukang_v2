@@ -35,8 +35,161 @@ export default {
       initialValue: 'new',
     },
     {
+      name: 'bookingType',
+      title: 'Booking Type',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Goal-Based', value: 'goal-based'},
+          {title: 'Service-Based (Legacy)', value: 'service-based'},
+        ],
+      },
+      description: 'Type of booking structure used',
+    },
+    // Goal-based booking fields
+    {
+      name: 'websiteType',
+      title: 'Website Type',
+      type: 'string',
+      description: 'Determined website type based on selected goals',
+      hidden: ({document}) => document?.bookingType !== 'goal-based',
+    },
+    {
+      name: 'selectedGoals',
+      title: 'Selected Goals',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'id',
+              title: 'Goal ID',
+              type: 'string',
+            },
+            {
+              name: 'title',
+              title: 'Goal Title',
+              type: 'string',
+            },
+            {
+              name: 'description',
+              title: 'Goal Description',
+              type: 'text',
+            },
+            {
+              name: 'price',
+              title: 'Goal Price',
+              type: 'number',
+            },
+          ],
+        },
+      ],
+      hidden: ({document}) => document?.bookingType !== 'goal-based',
+    },
+    {
+      name: 'selectedFeatures',
+      title: 'Selected Additional Features',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'id',
+              title: 'Feature ID',
+              type: 'string',
+            },
+            {
+              name: 'title',
+              title: 'Feature Title',
+              type: 'string',
+            },
+            {
+              name: 'description',
+              title: 'Feature Description',
+              type: 'text',
+            },
+            {
+              name: 'price',
+              title: 'Feature Price',
+              type: 'number',
+            },
+          ],
+        },
+      ],
+      hidden: ({document}) => document?.bookingType !== 'goal-based',
+    },
+    {
+      name: 'projectBrief',
+      title: 'Project Brief',
+      type: 'object',
+      fields: [
+        {
+          name: 'businessDescription',
+          title: 'Business Description',
+          type: 'text',
+        },
+        {
+          name: 'targetAudience',
+          title: 'Target Audience',
+          type: 'text',
+        },
+        {
+          name: 'keyGoals',
+          title: 'Key Goals',
+          type: 'text',
+        },
+        {
+          name: 'timeline',
+          title: 'Timeline',
+          type: 'string',
+        },
+        {
+          name: 'budget',
+          title: 'Budget',
+          type: 'string',
+        },
+        {
+          name: 'inspiration',
+          title: 'Inspiration/Examples',
+          type: 'text',
+        },
+        {
+          name: 'additionalRequirements',
+          title: 'Additional Requirements',
+          type: 'text',
+        },
+      ],
+      hidden: ({document}) => document?.bookingType !== 'goal-based',
+    },
+    {
+      name: 'pricing',
+      title: 'Goal-Based Pricing',
+      type: 'object',
+      fields: [
+        {
+          name: 'totalAmount',
+          title: 'Total Amount',
+          type: 'number',
+        },
+        {
+          name: 'currency',
+          title: 'Currency',
+          type: 'string',
+        },
+        {
+          name: 'region',
+          title: 'Pricing Region',
+          type: 'string',
+        },
+      ],
+      hidden: ({document}) => document?.bookingType !== 'goal-based',
+    },
+    // Legacy service-based booking fields
+    {
       name: 'service',
-      title: 'Selected Service',
+      title: 'Selected Service (Legacy)',
       type: 'object',
       fields: [
         {
@@ -55,10 +208,11 @@ export default {
           type: 'number',
         },
       ],
+      hidden: ({document}) => document?.bookingType !== 'service-based',
     },
     {
       name: 'addOns',
-      title: 'Selected Add-ons',
+      title: 'Selected Add-ons (Legacy)',
       type: 'array',
       of: [
         {
@@ -82,10 +236,11 @@ export default {
           ],
         },
       ],
+      hidden: ({document}) => document?.bookingType !== 'service-based',
     },
     {
       name: 'projectDetails',
-      title: 'Project Details',
+      title: 'Project Details (Legacy)',
       type: 'object',
       fields: [
         {
@@ -110,7 +265,32 @@ export default {
           of: [{type: 'string'}],
         },
       ],
+      hidden: ({document}) => document?.bookingType !== 'service-based',
     },
+    {
+      name: 'estimatedPrice',
+      title: 'Estimated Price (Legacy)',
+      type: 'object',
+      fields: [
+        {
+          name: 'amount',
+          title: 'Amount',
+          type: 'number',
+        },
+        {
+          name: 'currency',
+          title: 'Currency',
+          type: 'string',
+        },
+        {
+          name: 'originalAmount',
+          title: 'Original Amount (MYR)',
+          type: 'number',
+        },
+      ],
+      hidden: ({document}) => document?.bookingType !== 'service-based',
+    },
+    // Common fields for both booking types
     {
       name: 'contactInfo',
       title: 'Contact Information',
@@ -151,28 +331,6 @@ export default {
       },
     },
     {
-      name: 'estimatedPrice',
-      title: 'Estimated Price',
-      type: 'object',
-      fields: [
-        {
-          name: 'amount',
-          title: 'Amount',
-          type: 'number',
-        },
-        {
-          name: 'currency',
-          title: 'Currency',
-          type: 'string',
-        },
-        {
-          name: 'originalAmount',
-          title: 'Original Amount (MYR)',
-          type: 'number',
-        },
-      ],
-    },
-    {
       name: 'language',
       title: 'Language',
       type: 'string',
@@ -206,13 +364,16 @@ export default {
     select: {
       title: 'contactInfo.name',
       subtitle: 'service.name',
-      media: 'status',
+      websiteType: 'websiteType',
+      bookingType: 'bookingType',
+      status: 'status',
     },
     prepare(selection) {
-      const {title, subtitle, media} = selection
+      const {title, subtitle, websiteType, bookingType, status} = selection
+      const projectType = bookingType === 'goal-based' ? websiteType : subtitle
       return {
         title: title || 'Unknown Contact',
-        subtitle: `${subtitle || 'Unknown Service'} - Status: ${media || 'new'}`,
+        subtitle: `${projectType || 'Unknown Project'} - Status: ${status || 'new'}`,
       }
     },
   },
@@ -226,6 +387,11 @@ export default {
       title: 'Status',
       name: 'statusAsc',
       by: [{field: 'status', direction: 'asc'}],
+    },
+    {
+      title: 'Booking Type',
+      name: 'bookingTypeAsc',
+      by: [{field: 'bookingType', direction: 'asc'}],
     },
   ],
 }

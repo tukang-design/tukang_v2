@@ -8,9 +8,5 @@
     "react/no-unescaped-entities": "warn",
     "react/no-unknown-property": "warn"
   },
-  "ignorePatterns": [
-    "app/admin/**/*",
-    "test-*.js",
-    "*.old.*"
-  ]
+  "ignorePatterns": ["app/admin/**/*", "test-*.js", "*.old.*"]
 }

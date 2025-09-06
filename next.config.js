@@ -55,11 +55,7 @@ const nextConfig = {
   // Redirects for SEO
   async redirects() {
     return [
-      {
-        source: "/booking",
-        destination: "/en/booking",
-        permanent: true,
-      },
+      // Remove the circular booking redirect
     ];
   },
 };

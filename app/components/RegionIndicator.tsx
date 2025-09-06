@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getRegionDetails } from "../en/components/region-selector.js";
+import { getRegionDetails } from "../components/region-selector.js";
 
 // Enhanced region detection with multiple fallback methods
 async function detectRegion() {

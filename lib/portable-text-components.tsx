@@ -5,19 +5,24 @@ import Image from "next/image";
 export const portableTextComponents: PortableTextComponents = {
   types: {
     image: ({ value }) => {
-      if (!value?.asset?.url) return null;
+      if (!value?.asset?.url) {
+        return null;
+      }
 
       return (
-        <div className="my-6">
-          <Image
-            src={value.asset.url}
-            alt={value.alt || ""}
-            width={800}
-            height={400}
-            className="rounded-lg"
-          />
+        <div className="my-8 w-full">
+          <div className="relative w-full rounded-xl overflow-hidden">
+            <Image
+              src={value.asset.url}
+              alt={value.alt || "Portfolio image"}
+              width={1200}
+              height={600}
+              className="w-full h-auto object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+            />
+          </div>
           {value.caption && (
-            <p className="text-sm text-gray-600 mt-2 text-center italic">
+            <p className="text-sm text-gray-400 mt-3 text-center italic">
               {value.caption}
             </p>
           )}

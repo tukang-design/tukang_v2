@@ -8,7 +8,7 @@ import ScrollProgress from "./ScrollProgress";
 export default function NavigationBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const getNavLink = (path: string) => `/en${path}`;
+  const getNavLink = (path: string) => path || "/";
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-olive/70 border-b border-accent/10 shadow-lg shadow-olive/20">
@@ -118,12 +118,12 @@ export default function NavigationBar() {
         <>
           {/* Full Screen Backdrop */}
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+            className="h-screen fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
           {/* Mobile Menu Panel - Full Height */}
-          <div className="fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-olive-dark border-l border-accent/20 z-50 lg:hidden shadow-2xl transform transition-transform duration-300 ease-in-out">
+          <div className="h-screen fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-olive-dark border-l border-accent/20 z-50 lg:hidden shadow-2xl transform transition-transform duration-300 ease-in-out">
             <div className="flex flex-col h-full">
               {/* Mobile Menu Header */}
               <div className="flex items-center justify-between p-6 border-b border-accent/20">
