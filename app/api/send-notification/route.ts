@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { sendEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -59,38 +59,10 @@ Final Estimate: ${
 Submitted: ${new Date().toLocaleString()}
     `.trim();
 
-    // Create nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || "587", 10),
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
-      },
-    });
-
-    console.log("Transporter created, attempting to send email...");
-    console.log("SMTP Config:", {
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      user: process.env.SMTP_USER,
-    });
-
-    try {
-      await transporter.verify();
-      console.log("SMTP transporter verified for send-notification");
-    } catch (verifyError) {
-      console.error(
-        "SMTP transporter verification failed for send-notification:",
-        verifyError
-      );
-    }
-
     // Send email
-    const emailResult = await transporter.sendMail({
-      from: `"Project Estimator" <${process.env.SMTP_USER}>`,
-      to: "studio@tukang.design",
+    await sendEmail({
+      from: process.env.SMTP_FROM || `"Project Estimator" <${process.env.SMTP_USER}>`,
+      to: process.env.CONTACT_TO || process.env.SMTP_USER || "studio@tukang.design",
       subject: `New Project Estimate: ${data.name} - ${
         data.region === "MY" ? "RM" : data.region === "SG" ? "S$" : "USD"
       } ${regionalPrices[
@@ -98,8 +70,6 @@ Submitted: ${new Date().toLocaleString()}
       ].toLocaleString()}`,
       text: emailContent,
     });
-
-    console.log("Email sent successfully:", emailResult.messageId);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending notification:", error);
