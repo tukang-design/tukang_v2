@@ -2,11 +2,20 @@ import js from "@eslint/js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
+import nextPlugin from "@next/eslint-plugin-next";
 import json from "@eslint/json";
 import markdown from "@eslint/markdown";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
+  // Next.js core-web-vitals rules (enables Next plugin detection)
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: { "@next/next": nextPlugin },
+    rules: {
+      ...nextPlugin.configs["core-web-vitals"].rules,
+    },
+  },
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: { js },

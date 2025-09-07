@@ -3,13 +3,9 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: NextRequest) {
   try {
-    if (process.env.NODE_ENV !== "production") {
-      console.log("=== EMAIL NOTIFICATION API CALLED ===");
-    }
+    console.log("=== EMAIL NOTIFICATION API CALLED ===");
     const data = await request.json();
-    if (process.env.NODE_ENV !== "production") {
-      console.log("Received data keys:", Object.keys(data || {}));
-    }
+    console.log("Received data:", data);
 
     // Format services list
     const servicesList = data.services
@@ -74,29 +70,27 @@ Submitted: ${new Date().toLocaleString()}
       },
     });
 
-    if (process.env.NODE_ENV !== "production") {
-      console.log("Transporter created, attempting to send email...");
-      console.log("SMTP Host/Port/User set");
-    }
+    console.log("Transporter created, attempting to send email...");
+    console.log("SMTP Config:", {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER,
+    });
 
     try {
       await transporter.verify();
-      if (process.env.NODE_ENV !== "production") {
-        console.log("SMTP transporter verified for send-notification");
-      }
+      console.log("SMTP transporter verified for send-notification");
     } catch (verifyError) {
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(
-          "SMTP transporter verification failed for send-notification:",
-          verifyError
-        );
-      }
+      console.error(
+        "SMTP transporter verification failed for send-notification:",
+        verifyError
+      );
     }
 
     // Send email
     const emailResult = await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"Project Estimator" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_TO || process.env.SMTP_USER || "studio@tukang.design",
+      from: `"Project Estimator" <${process.env.SMTP_USER}>`,
+      to: "studio@tukang.design",
       subject: `New Project Estimate: ${data.name} - ${
         data.region === "MY" ? "RM" : data.region === "SG" ? "S$" : "USD"
       } ${regionalPrices[
@@ -105,9 +99,7 @@ Submitted: ${new Date().toLocaleString()}
       text: emailContent,
     });
 
-    if (process.env.NODE_ENV !== "production") {
-      console.log("Email sent successfully:", emailResult.messageId);
-    }
+    console.log("Email sent successfully:", emailResult.messageId);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error sending notification:", error);
