@@ -22,6 +22,14 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
     },
   });
 
+  const notificationEmail =
+    process.env.BOOKING_NOTIFICATION_EMAIL || "studio@tukang.design";
+  if (!process.env.BOOKING_NOTIFICATION_EMAIL) {
+    console.warn(
+      "BOOKING_NOTIFICATION_EMAIL is not set. Using studio@tukang.design."
+    );
+  }
+
   // Format the booking data for email
   const currencySymbol = bookingData.selectedRegion === "MY" ? "RM" : "$";
 
@@ -117,7 +125,7 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
     // Use configured SMTP_FROM (or authenticated user) as the sender to avoid provider rejections.
     from: process.env.SMTP_FROM || process.env.SMTP_USER,
     replyTo: bookingData.contactInfo.email,
-    to: "studio@tukang.design",
+    to: notificationEmail,
     subject: `New ${websiteType} Booking - ${submissionId}`,
     html: emailContent,
   };
@@ -131,7 +139,9 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
       console.error("SMTP transporter verification failed for booking notifications:", verifyError);
     }
     await transporter.sendMail(mailOptions);
-    console.log("Email notification sent successfully to studio@tukang.design");
+    console.log(
+      `Email notification sent successfully to ${notificationEmail}`
+    );
     return true;
   } catch (emailError) {
     console.error("Failed to send email notification:", emailError);
@@ -267,7 +277,7 @@ export async function POST(request) {
       documentId = `fallback_${submissionId}`;
     }
 
-    // Send email notification to studio@tukang.design
+    // Send email notification to configured address
     const emailSent = await sendBookingNotification(
       bookingData,
       submissionId,

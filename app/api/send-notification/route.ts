@@ -84,10 +84,18 @@ Submitted: ${new Date().toLocaleString()}
       console.error("SMTP transporter verification failed for send-notification:", verifyError);
     }
 
+    const notificationEmail =
+      process.env.BOOKING_NOTIFICATION_EMAIL || "studio@tukang.design";
+    if (!process.env.BOOKING_NOTIFICATION_EMAIL) {
+      console.warn(
+        "BOOKING_NOTIFICATION_EMAIL is not set. Using studio@tukang.design."
+      );
+    }
+
     // Send email
     const emailResult = await transporter.sendMail({
       from: `"Project Estimator" <${process.env.SMTP_USER}>`,
-      to: "studio@tukang.design",
+      to: notificationEmail,
       subject: `New Project Estimate: ${data.name} - ${
         data.region === "MY" ? "RM" : data.region === "SG" ? "S$" : "USD"
       } ${regionalPrices[

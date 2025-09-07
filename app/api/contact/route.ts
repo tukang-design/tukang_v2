@@ -26,10 +26,18 @@ export async function POST(request: Request) {
       // continue - sendMail will fail with the same error and be caught below
     }
 
+    const notificationEmail =
+      process.env.BOOKING_NOTIFICATION_EMAIL || "studio@tukang.design";
+    if (!process.env.BOOKING_NOTIFICATION_EMAIL) {
+      console.warn(
+        "BOOKING_NOTIFICATION_EMAIL is not set. Using studio@tukang.design."
+      );
+    }
+
     // Email content
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "studio@tukang.design",
+      to: notificationEmail,
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
