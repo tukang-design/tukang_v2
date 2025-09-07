@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { getNotificationEmail } from "../../../lib/notification-email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -84,10 +85,12 @@ Submitted: ${new Date().toLocaleString()}
       console.error("SMTP transporter verification failed for send-notification:", verifyError);
     }
 
+    const notificationEmail = getNotificationEmail();
+
     // Send email
     const emailResult = await transporter.sendMail({
       from: `"Project Estimator" <${process.env.SMTP_USER}>`,
-      to: "studio@tukang.design",
+      to: notificationEmail,
       subject: `New Project Estimate: ${data.name} - ${
         data.region === "MY" ? "RM" : data.region === "SG" ? "S$" : "USD"
       } ${regionalPrices[

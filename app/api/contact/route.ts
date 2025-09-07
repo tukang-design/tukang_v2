@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { getNotificationEmail } from "../../../lib/notification-email";
 
 export async function POST(request: Request) {
   try {
@@ -26,10 +27,12 @@ export async function POST(request: Request) {
       // continue - sendMail will fail with the same error and be caught below
     }
 
+    const notificationEmail = getNotificationEmail();
+
     // Email content
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: "studio@tukang.design",
+      to: notificationEmail,
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

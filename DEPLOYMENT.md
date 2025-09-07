@@ -16,6 +16,7 @@ Environment variables (common)
 - SANITY_API_TOKEN — write token for Sanity if server-side writes/previews are needed.
 - SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS (or SMTP_PASSWORD) — SMTP credentials for nodemailer.
 - SMTP_FROM — From: address used in sent emails.
+- BOOKING_NOTIFICATION_EMAIL — recipient for booking and contact notifications.
 - QUOTE_ACCEPTANCE_SECRET — secret for validating acceptance links.
 - NEXT_SERVER_ACTIONS_ENCRYPTION_KEY — required if server actions encryption is used.
 - NEXT_PUBLIC_* — any public variables referenced by client code.
