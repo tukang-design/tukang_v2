@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { sanityClient } from "../../../../lib/sanity-client";
 import nodemailer from "nodemailer";
+import { getNotificationEmail } from "../../../../lib/notification-email";
 
 // Helper function to generate a unique submission ID
 function generateSubmissionId() {
@@ -21,6 +22,8 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
       pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
     },
   });
+
+  const notificationEmail = getNotificationEmail();
 
   // Format the booking data for email
   const currencySymbol = bookingData.selectedRegion === "MY" ? "RM" : "$";
@@ -117,7 +120,7 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
     // Use configured SMTP_FROM (or authenticated user) as the sender to avoid provider rejections.
     from: process.env.SMTP_FROM || process.env.SMTP_USER,
     replyTo: bookingData.contactInfo.email,
-    to: "studio@tukang.design",
+    to: notificationEmail,
     subject: `New ${websiteType} Booking - ${submissionId}`,
     html: emailContent,
   };
@@ -131,7 +134,9 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
       console.error("SMTP transporter verification failed for booking notifications:", verifyError);
     }
     await transporter.sendMail(mailOptions);
-    console.log("Email notification sent successfully to studio@tukang.design");
+    console.log(
+      `Email notification sent successfully to ${notificationEmail}`
+    );
     return true;
   } catch (emailError) {
     console.error("Failed to send email notification:", emailError);
@@ -267,7 +272,7 @@ export async function POST(request) {
       documentId = `fallback_${submissionId}`;
     }
 
-    // Send email notification to studio@tukang.design
+    // Send email notification to configured address
     const emailSent = await sendBookingNotification(
       bookingData,
       submissionId,
