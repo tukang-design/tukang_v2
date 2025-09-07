@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { sendEmail } from "@/lib/email";
 import { sanityWriteClient } from "@/lib/sanity";
 import { matrix, tiers, predefinedFeatures } from "@/lib/solutions-config";
 
@@ -128,25 +128,15 @@ export async function POST(request: Request) {
       console.warn("Sanity write failed for lead; continuing", e);
     }
 
-    // Email notification to studio
+    // Email notification to studio (Resend)
     try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST || "smtp.gmail.com",
-        port: Number(process.env.SMTP_PORT) || 587,
-        secure: false,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
-        },
-      });
-
       // Map selected feature IDs to labels for readability
       const featureLabelsMap = new Map(predefinedFeatures.map((f) => [f.id, f.label] as const));
       const selectedFeatureLabels = (selectedFeatures || []).map((id: string) => featureLabelsMap.get(id) || id);
 
-      await transporter.sendMail({
-        from: process.env.SMTP_FROM || process.env.SMTP_USER || email,
-        to: "studio@tukang.design",
+      await sendEmail({
+        from: process.env.SMTP_FROM || process.env.SMTP_USER || process.env.EMAIL_FROM || email,
+        to: process.env.CONTACT_TO || process.env.SMTP_USER || "studio@tukang.design",
         subject: `New Lead Capture - ${submissionId}`,
         html: `
           <h2>New Lead Capture</h2>
@@ -165,6 +155,7 @@ export async function POST(request: Request) {
           ${otherRequirements ? `<p><strong>Other:</strong> ${otherRequirements}</p>` : ""}
           ${createdId ? `<p><em>Saved to Sanity: ${createdId}</em></p>` : ""}
         `,
+        replyTo: email,
       });
     } catch (e) {
       console.warn("Lead email send failed", e);

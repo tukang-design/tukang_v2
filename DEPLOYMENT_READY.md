@@ -23,8 +23,6 @@ Environment variables (Production & Preview)
 - NEXT_PUBLIC_SANITY_DATASET: production
 - NEXT_PUBLIC_BUSINESS_EMAIL: studio@tukang.design
 - SANITY_API_TOKEN: your Sanity write token (Editor role or custom role with create/update)
-- SMTP_HOST: your SMTP host
-- SMTP_PORT: 587 (or per provider)
-- SMTP_USER: SMTP username
-- SMTP_PASS: SMTP password/app password
-- SMTP_FROM: Optional explicit from address
+- RESEND_API_KEY: API key for Resend (email sending)
+- EMAIL_FROM: Verified sender address (e.g., studio@tukang.design)
+- CONTACT_TO: Destination inbox for notifications

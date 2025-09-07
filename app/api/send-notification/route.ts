@@ -61,7 +61,7 @@ Submitted: ${new Date().toLocaleString()}
 
     // Send email
     await sendEmail({
-      from: process.env.SMTP_FROM || `"Project Estimator" <${process.env.SMTP_USER}>`,
+      from: process.env.SMTP_FROM || process.env.SMTP_USER || process.env.EMAIL_FROM || `"Project Estimator" <studio@tukang.design>`,
       to: process.env.CONTACT_TO || process.env.SMTP_USER || "studio@tukang.design",
       subject: `New Project Estimate: ${data.name} - ${
         data.region === "MY" ? "RM" : data.region === "SG" ? "S$" : "USD"

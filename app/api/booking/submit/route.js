@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { sanityClient } from "../../../../lib/sanity-client";
-import nodemailer from "nodemailer";
+import { sendEmail } from "@/lib/email";
 
 // Helper function to generate a unique submission ID
 function generateSubmissionId() {
@@ -11,16 +11,7 @@ function generateSubmissionId() {
 
 // Email configuration and sending function
 async function sendBookingNotification(bookingData, submissionId, websiteType) {
-  // Configure nodemailer (you'll need to set up these environment variables)
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: parseInt(process.env.SMTP_PORT || "587", 10),
-    secure: false,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
-    },
-  });
+  // Email will be sent via Resend (no SMTP)
 
   // Format the booking data for email
   const currencySymbol = bookingData.selectedRegion === "MY" ? "RM" : "$";
@@ -114,23 +105,15 @@ async function sendBookingNotification(bookingData, submissionId, websiteType) {
   `;
 
   const mailOptions = {
-    // Use configured SMTP_FROM (or authenticated user) as the sender to avoid provider rejections.
-    from: process.env.SMTP_FROM || process.env.SMTP_USER,
+    from: process.env.EMAIL_FROM || bookingData.contactInfo.email,
     replyTo: bookingData.contactInfo.email,
-    to: "studio@tukang.design",
+    to: process.env.CONTACT_TO || "studio@tukang.design",
     subject: `New ${websiteType} Booking - ${submissionId}`,
     html: emailContent,
   };
 
   try {
-    // Helpful verification when diagnosing production issues
-    try {
-      await transporter.verify();
-      console.log("SMTP transporter verified for booking notifications");
-    } catch (verifyError) {
-      console.error("SMTP transporter verification failed for booking notifications:", verifyError);
-    }
-    await transporter.sendMail(mailOptions);
+    await sendEmail(mailOptions);
     console.log("Email notification sent successfully to studio@tukang.design");
     return true;
   } catch (emailError) {
