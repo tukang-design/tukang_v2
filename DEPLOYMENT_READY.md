@@ -14,4 +14,17 @@ If you're ready to deploy to Vercel, follow this checklist:
 5. Trigger a production deploy in Vercel and verify logs.
 6. Smoke test site pages and API endpoints that send email or write to Sanity.
 
-If you want, I can run `npm run build` locally now to validate the build (I will need permission to run terminal commands). 
+If you want, I can run `npm run build` locally now to validate the build (I will need permission to run terminal commands).
+
+Environment variables (Production & Preview)
+- NEXT_PUBLIC_BASE_URL: https://tukang.design
+- NEXT_PUBLIC_SITE_URL: https://tukang.design
+- NEXT_PUBLIC_SANITY_PROJECT_ID: 330f0le5
+- NEXT_PUBLIC_SANITY_DATASET: production
+- NEXT_PUBLIC_BUSINESS_EMAIL: studio@tukang.design
+- SANITY_API_TOKEN: your Sanity write token (Editor role or custom role with create/update)
+- SMTP_HOST: your SMTP host
+- SMTP_PORT: 587 (or per provider)
+- SMTP_USER: SMTP username
+- SMTP_PASS: SMTP password/app password
+- SMTP_FROM: Optional explicit from address
