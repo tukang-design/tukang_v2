@@ -15,6 +15,10 @@ import {
 } from "../lib/structuredData";
 
 export const metadata = {
+  // Ensure absolute URL resolution for OG/Twitter
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://tukang.design"
+  ),
   title:
     "Tukang Design - End-to-End Design & Development | Full-stack Designer Malaysia",
   description:
@@ -93,18 +97,20 @@ export default function RootLayout({
         {/* Google tag (gtag.js) */}
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-13JMFQR6YB"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || ""}`}
         ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-13JMFQR6YB');
-            `,
-          }}
-        />
+        {process.env.NEXT_PUBLIC_GA_ID ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+              `,
+            }}
+          />
+        ) : null}
         <SEO structuredData={[businessData, websiteData]} />
       </head>
       <body className="bg-olive text-foreground font-lato antialiased">

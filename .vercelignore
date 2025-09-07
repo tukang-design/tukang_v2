@@ -1,8 +1,5 @@
-# Sanity Studio files - not needed for frontend deployment
-sanity/sanity.config.ts
-sanity/sanity.cli.ts.backup
-sanity/schemaTypes.ts
-sanity/schemaTypes/
+# Sanity Studio - not needed for frontend deployment
+sanity/**
 
 # Development files
 *.log

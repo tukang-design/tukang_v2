@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     const { name, email, message, region } = await request.json();
 
-    // Create transporter (you'll need to configure with your email service)
+    // Create transporter (configured via env)
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
       port: parseInt(process.env.SMTP_PORT || "587", 10),
@@ -17,19 +17,21 @@ export async function POST(request: Request) {
       },
     });
 
-    // Helpful verification when diagnosing production issues
-    try {
-      await transporter.verify();
-      console.log("SMTP transporter verified and ready to send");
-    } catch (verifyError) {
-      console.error("SMTP transporter verification failed:", verifyError);
-      // continue - sendMail will fail with the same error and be caught below
+    // Optional verification in non-production only
+    if (process.env.NODE_ENV !== "production") {
+      try {
+        await transporter.verify();
+        console.log("SMTP transporter verified and ready to send");
+      } catch (verifyError) {
+        console.warn("SMTP transporter verification failed (non-prod):", verifyError);
+      }
     }
 
     // Email content
     const mailOptions = {
-      from: process.env.SMTP_USER,
-      to: "studio@tukang.design",
+      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+      to:
+        process.env.CONTACT_TO || process.env.SMTP_USER || "studio@tukang.design",
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

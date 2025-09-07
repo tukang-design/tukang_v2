@@ -1,20 +1,32 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { sanityReadClient, sanityClient } from "@/lib/sanity";
+
+function isAuthorized(request) {
+  const header = request.headers.get("authorization") || "";
+  const bearer = process.env.ADMIN_BEARER_TOKEN || "";
+  const user = process.env.ADMIN_USERNAME || "";
+  const pass = process.env.ADMIN_PASSWORD || "";
+  if (header.startsWith("Bearer ")) {
+    const token = header.slice(7);
+    return bearer && token === bearer;
+  }
+  if (header.startsWith("Basic ")) {
+    try {
+      const decoded = Buffer.from(header.slice(6), "base64").toString("utf8");
+      const [u, p] = decoded.split(":");
+      return !!user && !!pass && u === user && p === pass;
+    } catch {
+      return false;
+    }
+  }
+  return false;
+}
 
 export async function GET(request) {
   try {
-    console.log("Admin API: GET request received");
-
-    // Simple authentication check - you should implement proper auth
-    const authHeader = request.headers.get("authorization");
-    console.log("Admin API: Auth header:", authHeader);
-
-    if (!authHeader || authHeader !== "Bearer admin-secret-key") {
-      console.log("Admin API: Unauthorized access attempt");
+    if (!isAuthorized(request)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    console.log("Admin API: Fetching bookings from Sanity");
     // Query to get all bookings, ordered by submission date (newest first)
     const query = `*[_type == "booking"] | order(submittedAt desc) {
       _id,
@@ -34,11 +46,6 @@ export async function GET(request) {
     }`;
 
     const bookings = await sanityReadClient.fetch(query);
-    console.log("Admin API: Fetched bookings count:", bookings.length);
-    console.log(
-      "Admin API: First booking:",
-      bookings[0] ? bookings[0].submissionId : "None"
-    );
 
     return NextResponse.json({
       success: true,
@@ -61,8 +68,7 @@ export async function GET(request) {
 // Update booking status
 export async function PATCH(request) {
   try {
-    const authHeader = request.headers.get("authorization");
-    if (!authHeader || authHeader !== "Bearer admin-secret-key") {
+    if (!isAuthorized(request)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

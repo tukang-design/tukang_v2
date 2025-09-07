@@ -28,7 +28,7 @@ export type Booking = {
 };
 
 // Server component function to fetch bookings directly from Sanity
-export async function getBookings(): Promise<Booking[]> {
+async function getBookings(): Promise<Booking[]> {
   try {
     const query = `*[_type == "booking"] | order(submittedAt desc) {
       _id,

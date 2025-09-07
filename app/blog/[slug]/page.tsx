@@ -253,7 +253,7 @@ export default async function BlogPostPage({
                             {children}
                           </h3>
                         ),
-                        normal: ({ children }: ComponentProps) => (
+                        normal: ({ children }: any) => (
                           <p className="text-gray-300 leading-relaxed mb-6 text-lg">
                             {children}
                           </p>

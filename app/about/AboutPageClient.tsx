@@ -1,11 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  PrimaryCTA,
-  SecondaryCTA,
-  ArrowRightIcon,
-} from "../components/CTAButton";
+// CTA components removed (unused)
 
 function SparkleIcon({ className = "w-5 h-5" }) {
   return (

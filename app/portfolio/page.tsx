@@ -2,7 +2,6 @@ import React from "react";
 import { sanityClient } from "../../lib/sanity";
 import Image from "next/image";
 import Link from "next/link";
-import { PrimaryCTA, SecondaryCTA } from "../components/CTAButton";
 
 interface PortfolioProject {
   _id: string;

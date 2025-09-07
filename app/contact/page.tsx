@@ -1,6 +1,5 @@
 // Enhanced Contact Page with Modern Design
 "use client";
-import Link from "next/link";
 import RegionSelector, {
   getRegionDetails,
 } from "../components/region-selector";

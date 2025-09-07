@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // i18n and experimental.appDir removed for App Router compatibility
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  // Enforce lint/type checks in CI/Prod
+  // (use `NEXT_IGNORE_*` envs locally if you need to bypass temporarily)
   images: {
     remotePatterns: [
       {

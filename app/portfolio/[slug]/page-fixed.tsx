@@ -1,6 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { sanityClient } from "../../../../lib/sanity";
+import { sanityClient } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";

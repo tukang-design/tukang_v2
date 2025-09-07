@@ -4,8 +4,10 @@ import crypto from "node:crypto";
 
 // Helper function to generate acceptance token
 function generateAcceptanceToken(submissionId) {
-  const secret =
-    process.env.QUOTE_ACCEPTANCE_SECRET || "tukang-quote-secret-2025";
+  const secret = process.env.QUOTE_ACCEPTANCE_SECRET;
+  if (!secret) {
+    throw new Error("Server misconfigured: QUOTE_ACCEPTANCE_SECRET is missing");
+  }
   return crypto
     .createHash("sha256")
     .update(submissionId + secret)
