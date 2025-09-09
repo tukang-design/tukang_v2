@@ -93,7 +93,7 @@ export async function GET(request) {
             <p>This quote was already accepted on ${new Date(
               booking.acceptedAt
             ).toLocaleDateString()}.</p>
-            <p>We'll be in touch soon to start your project!</p>
+            <p>We'll be in touch soon to follow up on your inquiry.</p>
           </div>
         </body>
         </html>

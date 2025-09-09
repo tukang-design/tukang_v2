@@ -95,7 +95,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
 
   if (!currentProject) {
     return (
-      <div className="relative aspect-[4/3] bg-gradient-to-br from-accent/10 to-brown/10 rounded-2xl flex items-center justify-center">
+      <div className="relative aspect-[4/3] bg-gradient-to-br from-accent/10 to-brown-500/10 rounded-2xl flex items-center justify-center">
         <span className="text-gray-400 font-mono">No projects available</span>
       </div>
     );
@@ -119,7 +119,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
               className="object-cover transition-all duration-500"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-accent/10 to-brown/10 flex items-center justify-center">
+            <div className="w-full h-full bg-gradient-to-br from-accent/10 to-brown-500/10 flex items-center justify-center">
               <span className="text-gray-400 font-mono">
                 {currentProject.title}
               </span>
@@ -150,7 +150,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
               href={`/portfolio/${
                 currentProject.slug?.current || currentProject._id
               }`}
-              className="inline-flex items-center text-accent hover:text-accent/80 transition-colors duration-200 font-medium text-lg group-hover:translate-x-2 transform transition-transform duration-300"
+              className="inline-flex items-center text-accent hover:text-accent/80 transition transform duration-200 font-medium text-lg group-hover:translate-x-2"
             >
               View Portfolio Details
               <svg
@@ -252,28 +252,28 @@ export default function PortfolioPreview() {
         _type: "image",
         asset: {
           _ref: "image-1",
-          url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+          url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
         },
-        alt: "E-commerce Platform"
+        alt: "E-commerce Platform",
       },
       galleryImages: [
         {
           _type: "image",
           asset: {
             _ref: "image-1-2",
-            url: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80"
+            url: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
           },
-          alt: "E-commerce Dashboard"
+          alt: "E-commerce Dashboard",
         },
         {
           _type: "image",
           asset: {
             _ref: "image-1-3",
-            url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2426&q=80"
+            url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2426&q=80",
           },
-          alt: "E-commerce Mobile"
-        }
-      ]
+          alt: "E-commerce Mobile",
+        },
+      ],
     },
     {
       _id: "2",
@@ -284,20 +284,20 @@ export default function PortfolioPreview() {
         _type: "image",
         asset: {
           _ref: "image-2",
-          url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80"
+          url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
         },
-        alt: "Corporate Website"
+        alt: "Corporate Website",
       },
       galleryImages: [
         {
           _type: "image",
           asset: {
             _ref: "image-2-2",
-            url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80"
+            url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
           },
-          alt: "Corporate Mobile View"
-        }
-      ]
+          alt: "Corporate Mobile View",
+        },
+      ],
     },
     {
       _id: "3",
@@ -308,20 +308,20 @@ export default function PortfolioPreview() {
         _type: "image",
         asset: {
           _ref: "image-3",
-          url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80"
+          url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
         },
-        alt: "SaaS Application"
+        alt: "SaaS Application",
       },
       galleryImages: [
         {
           _type: "image",
           asset: {
             _ref: "image-3-2",
-            url: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-4.0.3&auto=format&fit=crop&w=2532&q=80"
+            url: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-4.0.3&auto=format&fit=crop&w=2532&q=80",
           },
-          alt: "SaaS Dashboard"
-        }
-      ]
+          alt: "SaaS Dashboard",
+        },
+      ],
     },
   ];
 

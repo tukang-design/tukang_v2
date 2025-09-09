@@ -53,7 +53,7 @@ export const portableTextComponents: PortableTextComponents = {
       return (
         <a
           href={href}
-          className="text-accent hover:underline"
+          className="text-accent link-underline focus-ring"
           target={href.startsWith("http") ? "_blank" : undefined}
           rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
         >

@@ -1,5 +1,18 @@
 import React from "react";
 import "./globals.css";
+import { Lato, Roboto_Mono } from "next/font/google";
+
+// Next/font loaders must be called at module scope
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+const martian = Roboto_Mono({
+  subsets: ["latin"],
+  weight: ["700"],
+  display: "swap",
+});
 import NavigationBar from "./components/NavigationBar.simple";
 import Footer from "./components/Footer";
 import GlobalBookingSteps from "./components/GlobalBookingSteps";
@@ -19,10 +32,9 @@ export const metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://tukang.design"
   ),
-  title:
-    "Tukang Design - End-to-End Design & Development | Full-stack Designer Malaysia",
+  title: "End-to-End Web Design & Development | Tukang Design",
   description:
-    "Get end-to-end design & development services in Malaysia & Singapore. Tukang Design offers full-stack design solutions, custom web development, and complete digital experiences from Shah Alam. Fast delivery, competitive pricing. Get your quote today!",
+    "Tired of the handoff headache? Tukang Design offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
   keywords:
     "end-to-end design development, full-stack designer malaysia, web design shah alam, complete digital solutions, custom web development, full-stack development malaysia, design to development services",
   robots: "index, follow",
@@ -50,17 +62,17 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Tukang Design - End-to-End Design & Development",
+    title: "End-to-End Web Design & Development | Tukang Design",
     description:
-      "Get end-to-end design & development services in Malaysia & Singapore. Tukang Design offers full-stack design solutions and complete digital experiences from Shah Alam.",
+      "Tired of the handoff headache? Tukang Design offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
     url: "https://tukang.design",
     siteName: "Tukang Design",
     images: [
       {
-        url: "https://tukang.design/og-image.jpg",
+        url: "https://tukang.design/tukang-design-social-share.jpg",
         width: 1200,
         height: 630,
-        alt: "Tukang Design - End-to-End Design & Development",
+        alt: "Tukang Design - End-to-End Web Design & Development",
       },
     ],
     locale: "en_US",
@@ -68,10 +80,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tukang Design - End-to-End Design & Development",
+    title: "End-to-End Web Design & Development | Tukang Design",
     description:
-      "Get end-to-end design & development services in Malaysia & Singapore. Tukang Design offers full-stack design solutions and complete digital experiences from Shah Alam.",
-    images: ["https://tukang.design/og-image.jpg"],
+      "Tired of the handoff headache? Tukang Design offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+    images: ["https://tukang.design/tukang-design-social-share.jpg"],
     site: "@tukangdesign",
   },
   alternates: {
@@ -87,17 +99,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const htmlClass = `${lato.className} ${martian.className}`;
   const businessData = createBusinessStructuredData();
   const websiteData = createWebsiteStructuredData();
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={htmlClass + " scroll-smooth"}>
       <head>
         <GoogleTagManager />
         {/* Google tag (gtag.js) */}
         <script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || ""}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${
+            process.env.NEXT_PUBLIC_GA_ID || ""
+          }`}
         ></script>
         {process.env.NEXT_PUBLIC_GA_ID ? (
           <script
@@ -113,7 +128,7 @@ export default function RootLayout({
         ) : null}
         <SEO structuredData={[businessData, websiteData]} />
       </head>
-      <body className="bg-olive text-foreground font-lato antialiased">
+      <body className="bg-olive text-foreground antialiased animate-fade-in">
         <GoogleTagManagerNoScript />
         <NavigationBar />
 

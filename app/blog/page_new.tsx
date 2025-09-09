@@ -41,7 +41,7 @@ export default async function BlogPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-32 h-32 border-2 border-accent rounded-full animate-pulse"></div>
           <div
-            className="absolute bottom-20 right-20 w-48 h-48 border border-brown rotate-12"
+            className="absolute bottom-20 right-20 w-48 h-48 border border-brown-500 rotate-12"
             style={{ animation: "spin 20s linear infinite" }}
           ></div>
         </div>
@@ -97,7 +97,7 @@ export default async function BlogPage() {
             {/* Hero Title */}
             <h1 className="text-5xl lg:text-7xl font-bold text-accent font-mono mb-8 leading-tight">
               Design
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent via-brown to-accent">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent via-brown-500 to-accent">
                 Chronicles
               </span>
             </h1>

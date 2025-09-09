@@ -23,7 +23,7 @@ export default function ThankYouPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 border-2 border-accent rounded-full animate-pulse"></div>
           <div
-            className="absolute bottom-10 right-10 w-48 h-48 border border-brown rotate-12"
+            className="absolute bottom-10 right-10 w-48 h-48 border border-brown-500 rotate-12"
             style={{ animation: "spin 20s linear infinite" }}
           ></div>
           <div
@@ -186,25 +186,25 @@ export default function ThankYouPage() {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-brown/10 rounded-xl p-6 border border-brown/20">
-                  <div className="text-brown mb-3">📧</div>
-                  <h4 className="font-medium text-brown mb-2">Email</h4>
+                <div className="bg-brown-500/10 rounded-xl p-6 border border-brown-500/20">
+                  <div className="text-brown-700 mb-3">📧</div>
+                  <h4 className="font-medium text-brown-700 mb-2">Email</h4>
                   <p className="text-sm text-gray-300">studio@tukang.design</p>
                   <p className="text-xs text-gray-400 mt-1">
                     Response within 4 hours
                   </p>
                 </div>
 
-                <div className="bg-brown/10 rounded-xl p-6 border border-brown/20">
-                  <div className="text-brown mb-3">📱</div>
-                  <h4 className="font-medium text-brown mb-2">WhatsApp</h4>
+                <div className="bg-brown-500/10 rounded-xl p-6 border border-brown-500/20">
+                  <div className="text-brown-700 mb-3">📱</div>
+                  <h4 className="font-medium text-brown-700 mb-2">WhatsApp</h4>
                   <p className="text-sm text-gray-300">+60 12-345 6789</p>
                   <p className="text-xs text-gray-400 mt-1">Quick messaging</p>
                 </div>
 
-                <div className="bg-brown/10 rounded-xl p-6 border border-brown/20">
-                  <div className="text-brown mb-3">💼</div>
-                  <h4 className="font-medium text-brown mb-2">LinkedIn</h4>
+                <div className="bg-brown-500/10 rounded-xl p-6 border border-brown-500/20">
+                  <div className="text-brown-700 mb-3">💼</div>
+                  <h4 className="font-medium text-brown-700 mb-2">LinkedIn</h4>
                   <p className="text-sm text-gray-300">Connect with us</p>
                   <p className="text-xs text-gray-400 mt-1">
                     Professional network

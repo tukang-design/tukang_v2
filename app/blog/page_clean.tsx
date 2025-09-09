@@ -81,7 +81,7 @@ export default function BlogPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-32 h-32 border-2 border-accent rounded-full animate-pulse"></div>
           <div
-            className="absolute bottom-20 right-20 w-48 h-48 border border-brown rotate-12 animate-spin"
+            className="absolute bottom-20 right-20 w-48 h-48 border border-brown-500 rotate-12 animate-spin"
             style={{ animationDuration: "20s" }}
           ></div>
           <div
@@ -89,8 +89,7 @@ export default function BlogPage() {
             style={{ animationDuration: "3s" }}
           ></div>
 
-          {/* Grid overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_48%,rgba(57,255,20,0.03)_49%,rgba(57,255,20,0.03)_51%,transparent_52%)] bg-[length:20px_20px]"></div>
+          {/* Grid overlay removed to simplify background */}
         </div>
 
         {/* Glassmorphism Container */}
@@ -146,7 +145,7 @@ export default function BlogPage() {
               {/* Hero Title Block */}
               <h1 className="text-5xl lg:text-7xl font-bold text-accent font-mono mb-8 leading-tight">
                 Design
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent via-brown to-accent">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent via-brown-500 to-accent">
                   Chronicles
                 </span>
               </h1>
@@ -450,7 +449,7 @@ export default function BlogPage() {
                       </svg>
                     </div>
                     <div className="absolute top-8 left-1/2 transform -translate-x-1/2 -translate-y-4 w-2 h-2 bg-accent rounded-full animate-ping"></div>
-                    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 translate-y-4 w-1 h-1 bg-brown rounded-full animate-pulse"></div>
+                    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 translate-y-4 w-1 h-1 bg-brown-500 rounded-full animate-pulse"></div>
                   </div>
                   <h3 className="text-4xl lg:text-5xl font-bold text-accent font-mono mb-8 leading-tight">
                     Content Coming Soon
@@ -490,9 +489,9 @@ export default function BlogPage() {
                 </div>
               ) : (
                 <div className="max-w-2xl mx-auto">
-                  <div className="w-32 h-32 bg-gradient-to-br from-brown/20 to-brown/5 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-brown/10">
+                  <div className="w-32 h-32 bg-gradient-to-br from-brown-500 to-brown-700 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-brown-400">
                     <svg
-                      className="w-16 h-16 text-brown"
+                      className="w-16 h-16 text-brown-700"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -546,7 +545,7 @@ export default function BlogPage() {
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-olive-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-brown/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-brown-50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
                       <div className="absolute top-6 right-6 flex flex-col space-y-2">
                         <div className="px-3 py-1 bg-olive/95 backdrop-blur-sm rounded-full text-xs text-accent font-bold border border-accent/20">
@@ -709,7 +708,7 @@ export default function BlogPage() {
                       <div className="flex space-x-2">
                         <span className="w-2 h-2 bg-accent/40 rounded-full animate-pulse"></span>
                         <span
-                          className="w-2 h-2 bg-brown/40 rounded-full animate-pulse"
+                          className="w-2 h-2 bg-brown-300 rounded-full animate-pulse"
                           style={{ animationDelay: "0.5s" }}
                         ></span>
                         <span
@@ -721,7 +720,7 @@ export default function BlogPage() {
                   </div>
 
                   <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent/30 rounded-3xl transition-all duration-500 pointer-events-none"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-brown/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-brown-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-700 pointer-events-none"></div>
                 </article>
               ))}
             </div>
@@ -760,7 +759,7 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter Signup Section */}
-      <section className="py-20 bg-gradient-to-r from-olive-dark/50 to-brown/20">
+      <section className="py-20 bg-gradient-to-r from-olive-dark/50 to-brown-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="bg-olive-dark/80 backdrop-blur-sm rounded-3xl p-12 border border-accent/10">
             <h3 className="text-3xl lg:text-4xl font-bold text-accent font-mono mb-6">

@@ -95,7 +95,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
 
   if (!currentProject) {
     return (
-      <div className="relative aspect-[4/3] bg-gradient-to-br from-accent/10 to-brown/10 rounded-2xl flex items-center justify-center">
+      <div className="relative aspect-[4/3] rounded-2xl flex items-center justify-center card">
         <span className="text-gray-400 font-mono">No projects available</span>
       </div>
     );
@@ -119,7 +119,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
               className="object-cover transition-all duration-500"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-accent/10 to-brown/10 flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center card">
               <span className="text-gray-400 font-mono">
                 {currentProject.title}
               </span>

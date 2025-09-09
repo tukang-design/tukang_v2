@@ -23,7 +23,7 @@ function BookingSuccessContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-olive via-olive-dark to-black text-white">
+    <div className="min-h-screen bg-olive text-white">
       <div className="container mx-auto px-6 py-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -43,7 +43,7 @@ function BookingSuccessContent() {
             </svg>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-accent">
             Request Submitted Successfully!
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">

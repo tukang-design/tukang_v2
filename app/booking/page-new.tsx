@@ -216,7 +216,7 @@ export default function BookingPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 border-2 border-accent rounded-full animate-pulse"></div>
           <div
-            className="absolute bottom-10 right-10 w-48 h-48 border border-brown rotate-12"
+            className="absolute bottom-10 right-10 w-48 h-48 border border-brown-500 rotate-12"
             style={{ animation: "spin 20s linear infinite" }}
           ></div>
         </div>
@@ -485,8 +485,8 @@ export default function BookingPage() {
 
               {/* Advanced System Option */}
               <div className="text-center mt-12">
-                <div className="max-w-3xl mx-auto bg-gradient-to-br from-brown/20 to-brown/10 backdrop-blur-sm rounded-3xl border border-brown/30 p-8">
-                  <h3 className="text-2xl font-bold text-brown mb-4">
+                <div className="max-w-3xl mx-auto bg-gradient-to-br from-brown-500/20 to-brown-500/10 backdrop-blur-sm rounded-3xl border border-brown-500/30 p-8">
+                  <h3 className="text-2xl font-bold text-brown-700 mb-4">
                     Need Something More Complex?
                   </h3>
                   <p className="text-gray-300 mb-6 leading-relaxed">
@@ -495,7 +495,7 @@ export default function BookingPage() {
                   </p>
                   <button
                     onClick={handleAdvancedServiceClick}
-                    className="px-8 py-3 bg-brown text-white rounded-xl hover:bg-brown/80 transition-all duration-300 font-medium"
+                    className="px-8 py-3 bg-brown-500 text-white rounded-xl hover:bg-brown-600 transition-all duration-300 font-medium"
                   >
                     Book Discovery Call for Custom Solutions
                   </button>
@@ -748,10 +748,10 @@ export default function BookingPage() {
                 </div>
 
                 {/* Benefit Statement */}
-                <div className="mt-8 bg-brown/10 rounded-xl p-6 border border-brown/20">
+                <div className="mt-8 bg-brown-500/10 rounded-xl p-6 border border-brown-500/20">
                   <div className="flex items-start space-x-3">
                     <svg
-                      className="w-6 h-6 text-brown flex-shrink-0 mt-0.5"
+                      className="w-6 h-6 text-brown-700 flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -764,7 +764,7 @@ export default function BookingPage() {
                       />
                     </svg>
                     <div>
-                      <h4 className="font-medium text-brown mb-2">
+                      <h4 className="font-medium text-brown-700 mb-2">
                         Why we ask these questions
                       </h4>
                       <p className="text-sm text-gray-300">
@@ -842,8 +842,8 @@ export default function BookingPage() {
 
               {/* Urgency & Trust Signals */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-brown/10 rounded-xl p-6 border border-brown/20">
-                  <h4 className="font-medium text-brown mb-3">
+                <div className="bg-brown-500/10 rounded-xl p-6 border border-brown-500/20">
+                  <h4 className="font-medium text-brown-700 mb-3">
                     Secure Your Slot
                   </h4>
                   <p className="text-sm text-gray-300">

@@ -5,37 +5,40 @@ export async function POST(request: Request) {
   try {
     const { name, email, message, region } = await request.json();
 
-    // Email content
+    // Email content (light HTML matching booking style)
     const mailOptions = {
-      from: process.env.SMTP_FROM || process.env.SMTP_USER || process.env.EMAIL_FROM || "studio@tukang.design",
-      to: process.env.CONTACT_TO || process.env.SMTP_USER || "studio@tukang.design",
+      from:
+        process.env.SMTP_FROM ||
+        process.env.SMTP_USER ||
+        process.env.EMAIL_FROM ||
+        "studio@tukang.design",
+      to:
+        process.env.CONTACT_TO ||
+        process.env.SMTP_USER ||
+        "studio@tukang.design",
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
-            New Contact Form Submission
-          </h2>
-          
-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <h3 style="color: #495057; margin-top: 0;">Contact Details</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Region:</strong> ${region}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 640px; margin:0 auto; color:#0f1419;">
+          <h2 style="margin:0 0 8px; color:#2563eb;">New Contact Form Submission</h2>
+          <div style="background:#f8fafc; padding:12px 16px; border-radius:8px; margin-bottom:16px;">
+            <p style="margin:4px 0;"><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+            ${
+              region
+                ? `<p style="margin:4px 0;"><strong>Region:</strong> ${region}</p>`
+                : ""
+            }
           </div>
-          
-          <div style="background-color: #ffffff; padding: 20px; border: 1px solid #dee2e6; border-radius: 5px;">
-            <h3 style="color: #495057; margin-top: 0;">Message</h3>
-            <p style="line-height: 1.6; color: #333;">${message}</p>
+          <h3 style="margin:16px 0 8px;">Contact</h3>
+          <ul style="margin:0 0 16px; padding-left:18px;">
+            <li><strong>Name:</strong> ${name}</li>
+            <li><strong>Email:</strong> ${email}</li>
+          </ul>
+          <h3 style="margin:16px 0 8px;">Message</h3>
+          <div style="background:#ffffff; border:1px solid #e5e7eb; padding:12px 16px; border-radius:8px;">
+            <p style="margin:0; line-height:1.6; white-space:pre-wrap;">${message}</p>
           </div>
-          
-          <div style="margin-top: 20px; padding: 15px; background-color: #e7f3ff; border-radius: 5px;">
-            <p style="margin: 0; color: #0066cc;">
-              <strong>Reply to:</strong> ${email}
-            </p>
-          </div>
-        </div>
-      `,
+        </div>`,
     };
     await sendEmail(mailOptions);
 

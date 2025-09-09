@@ -104,7 +104,18 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: post.mainImage ? [post.mainImage.asset.url] : ["/og-blog.jpg"],
+      images: post.mainImage
+        ? [post.mainImage.asset.url]
+        : ["https://tukang.design/tukang-design-social-share.jpg"],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: post.mainImage
+        ? [post.mainImage.asset.url]
+        : ["https://tukang.design/tukang-design-social-share.jpg"],
     },
   };
 }

@@ -262,10 +262,11 @@ export default function LeadCaptureForm() {
         <form onSubmit={onSubmit} className="space-y-6">
           <header>
             <h1 className="text-3xl font-bold text-accent">
-              Start Your Project
+              Contact & Inquiry Test1
             </h1>
             <p className="text-gray-300">
-              Answer a few quick questions for an accurate recommendation.
+              Not sure what you need yet? Tell us a bit and we'll suggest
+              options.
             </p>
           </header>
 
@@ -602,11 +603,11 @@ export default function LeadCaptureForm() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm" htmlFor="name">
-                      Full Name
+                      Full Name (required)
                     </label>
                     <input
                       id="name"
-                      className="w-full rounded-md border bg-transparent p-2"
+                      className="w-full rounded-md border bg-transparent p-2 focus-ring"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -614,12 +615,12 @@ export default function LeadCaptureForm() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm" htmlFor="email">
-                      Email
+                      Email (required)
                     </label>
                     <input
                       id="email"
                       type="email"
-                      className="w-full rounded-md border bg-transparent p-2"
+                      className="w-full rounded-md border bg-transparent p-2 focus-ring"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -687,7 +688,7 @@ export default function LeadCaptureForm() {
                   <span className="block h-1 w-1 rounded-full bg-current" />
                 )}
               </span>
-              <div className="mt-1 w-px bg-brown/40 flex-1" />
+              <div className="mt-1 w-px bg-brown-400 flex-1" />
             </div>
             <div className="flex-1">
               <div className="text-base font-semibold text-foreground">
@@ -698,7 +699,7 @@ export default function LeadCaptureForm() {
                   {selectedGoalLabels.slice(0, 8).map((l) => (
                     <span
                       key={l}
-                      className="inline-flex items-center px-2.5 py-1 rounded-full border border-brown/40 text-sm text-brown bg-olive-dark/60 max-w-[180px] truncate"
+                      className="inline-flex items-center px-2.5 py-1 rounded-full border border-brown-400 text-sm text-brown-700 bg-olive-dark/60 max-w-[180px] truncate"
                     >
                       {l}
                     </span>
@@ -741,7 +742,7 @@ export default function LeadCaptureForm() {
                   <span className="block h-1 w-1 rounded-full bg-current" />
                 )}
               </span>
-              <div className="mt-1 w-px bg-brown/40 flex-1" />
+              <div className="mt-1 w-px bg-brown-400 flex-1" />
             </div>
             <div className="flex-1">
               <div className="text-base font-semibold text-foreground">
@@ -753,13 +754,13 @@ export default function LeadCaptureForm() {
                   {selectedFeatureLabels.slice(0, 8).map((l) => (
                     <span
                       key={l}
-                      className="inline-flex items-center px-2.5 py-1 rounded-full border border-brown/40 text-sm text-brown bg-olive-dark/60 max-w-[180px] truncate"
+                      className="inline-flex items-center px-2.5 py-1 rounded-full border border-brown-400 text-sm text-brown-700 bg-olive-dark/60 max-w-[180px] truncate"
                     >
                       {l}
                     </span>
                   ))}
                   {(otherRequirements || "").trim().length > 0 && (
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full border border-brown/40 text-sm text-brown bg-olive-dark/60">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full border border-brown-400 text-sm text-brown-700 bg-olive-dark/60">
                       Other noted
                     </span>
                   )}

@@ -377,26 +377,45 @@ export default function BookingPage() {
       case "lead-generation":
         return (
           <svg className={common} fill="none" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 17l6-6 4 4 8-8" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 17l6-6 4 4 8-8"
+            />
           </svg>
         );
       case "portfolio-showcase":
         return (
           <svg className={common} fill="none" viewBox="0 0 24 24">
-            <rect x="3" y="5" width="18" height="14" rx="2" ry="2" strokeWidth={2} />
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+              ry="2"
+              strokeWidth={2}
+            />
             <path strokeWidth={2} d="M3 15l5-4 4 3 3-2 6 5" />
           </svg>
         );
       case "business-presence":
         return (
           <svg className={common} fill="none" viewBox="0 0 24 24">
-            <path strokeWidth={2} d="M3 9h18M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M9 9V7a2 2 0 012-2h2a2 2 0 012 2v2" />
+            <path
+              strokeWidth={2}
+              d="M3 9h18M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M9 9V7a2 2 0 012-2h2a2 2 0 012 2v2"
+            />
           </svg>
         );
       case "online-sales":
         return (
           <svg className={common} fill="none" viewBox="0 0 24 24">
-            <path strokeWidth={2} d="M3 5h2l2 12a2 2 0 002 2h8a2 2 0 002-2l1-7H7" />
+            <path
+              strokeWidth={2}
+              d="M3 5h2l2 12a2 2 0 002 2h8a2 2 0 002-2l1-7H7"
+            />
             <circle cx="10" cy="21" r="1" strokeWidth={2} />
             <circle cx="17" cy="21" r="1" strokeWidth={2} />
           </svg>
@@ -411,26 +430,41 @@ export default function BookingPage() {
   };
 
   // Outline icon for additional features based on complexity
-  const AddonIcon = ({ complexity }: { complexity: AdditionalFeature["complexity"] }) => {
+  const AddonIcon = ({
+    complexity,
+  }: {
+    complexity: AdditionalFeature["complexity"];
+  }) => {
     const common = "w-6 h-6 stroke-current text-accent/80";
     if (complexity === "Basic") {
       return (
         <svg className={common} fill="none" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 13l4 4L19 7"
+          />
         </svg>
       );
     }
     if (complexity === "Intermediate") {
       return (
         <svg className={common} fill="none" viewBox="0 0 24 24">
-          <path strokeWidth={2} d="M12 3l2.5 4.5L19 9l-3.5 3 1 5-4.5-2.5L7.5 17l1-5L5 9l4.5-1.5L12 3z" />
+          <path
+            strokeWidth={2}
+            d="M12 3l2.5 4.5L19 9l-3.5 3 1 5-4.5-2.5L7.5 17l1-5L5 9l4.5-1.5L12 3z"
+          />
         </svg>
       );
     }
     // Advanced
     return (
       <svg className={common} fill="none" viewBox="0 0 24 24">
-        <path strokeWidth={2} d="M12 2l2 6h6l-5 3.5L17 18l-5-3-5 3 2-6.5L2 8h6l2-6z" />
+        <path
+          strokeWidth={2}
+          d="M12 2l2 6h6l-5 3.5L17 18l-5-3-5 3 2-6.5L2 8h6l2-6z"
+        />
       </svg>
     );
   };
@@ -566,8 +600,20 @@ export default function BookingPage() {
         body: JSON.stringify(bookingData),
       });
 
-      const result = await response.json();
-      console.log("Booking submission response:", result);
+      let result: any = null;
+      try {
+        result = await response.json();
+        console.log("Booking submission response:", result);
+      } catch (parseError) {
+        // Server returned non-JSON (HTML or plain text). Capture raw body for debugging.
+        const raw = await response.text();
+        console.error(
+          "Failed to parse JSON response from /api/booking/submit:",
+          parseError
+        );
+        console.error("Raw response:", raw);
+        result = { error: "Invalid JSON response from server", raw };
+      }
 
       if (response.ok) {
         console.log("Booking submitted successfully:", result);
@@ -672,7 +718,10 @@ export default function BookingPage() {
                         {goal.description}
                       </p>
                       <div className="mt-1 text-xs text-gray-400">
-                        Avg est: <span className="text-gray-200 font-semibold">{formatPrice(goal.basePrice[selectedRegion])}</span>
+                        Avg est:{" "}
+                        <span className="text-gray-200 font-semibold">
+                          {formatPrice(goal.basePrice[selectedRegion])}
+                        </span>
                       </div>
                     </div>
 
@@ -731,8 +780,9 @@ export default function BookingPage() {
               </p>
             </div>
 
-            {/* Project Outcome Summary */
-            // Icon above title, larger size; toned-down background
+            {
+              /* Project Outcome Summary */
+              // Icon above title, larger size; toned-down background
             }
             {selectedGoals.length > 0 && (
               <div className="mb-8 p-6 bg-olive-dark/50 border border-accent/20 rounded-xl">
@@ -820,10 +870,15 @@ export default function BookingPage() {
                       </p>
                       <div className="mt-2 text-xs text-gray-400 flex items-center gap-3">
                         <span>
-                          Price: <span className="text-gray-200 font-semibold">{formatPrice(feature.price[selectedRegion])}</span>
+                          Price:{" "}
+                          <span className="text-gray-200 font-semibold">
+                            {formatPrice(feature.price[selectedRegion])}
+                          </span>
                         </span>
                         <span className="text-gray-500">•</span>
-                        <span className="text-gray-300">{complexityLabel(feature.complexity)}</span>
+                        <span className="text-gray-300">
+                          {complexityLabel(feature.complexity)}
+                        </span>
                       </div>
                     </div>
 

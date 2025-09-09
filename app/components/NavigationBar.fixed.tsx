@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { SecondaryCTA } from "./CTAButton";
 import { useState } from "react";
 
 // Enhanced NavLink Component
@@ -45,9 +46,9 @@ function NavLink({
           </svg>
         )}
         <div
-          className={`absolute inset-0 rounded-lg bg-gradient-to-r from-accent/5 to-accent/10 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 ${
-            isActive ? "opacity-100" : ""
-          }`}
+        className={`absolute inset-0 rounded-lg bg-accent/5 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 ${
+          isActive ? "opacity-100" : ""
+        }`}
         ></div>
       </Link>
 
@@ -113,7 +114,7 @@ function MobileMenu({
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
                 <span className="text-olive font-mono font-bold">T</span>
               </div>
               <span className="font-mono font-bold text-accent">Menu</span>
@@ -227,7 +228,7 @@ function MobileMenu({
               </div>
               <Link
                 href="/contact"
-                className="block w-full text-center px-6 py-4 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-accent/30"
+                className="block w-full text-center px-6 py-4 text-olive rounded-xl font-bold transition-colors duration-300 bg-[linear-gradient(90deg,#39FF14,#2de50f)] bg-[length:200%_100%] bg-left hover:bg-right shadow-[0_10px_30px_rgba(57,255,20,0.15)]"
                 onClick={onClose}
               >
                 Start Project
@@ -277,7 +278,7 @@ export default function NavigationBar() {
             <div className="flex items-center">
               <Link href="/" className="group flex items-center space-x-3">
                 <div className="relative">
-                  <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-accent/25">
+                  <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg shadow-accent/25">
                     <span className="text-olive font-mono font-bold text-lg">
                       T
                     </span>
@@ -334,29 +335,7 @@ export default function NavigationBar() {
 
               {/* Enhanced CTA Button */}
               <div className="ml-8">
-                <Link
-                  href="/contact"
-                  className="group relative px-8 py-4 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold text-base transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 hover:scale-105 overflow-hidden border border-accent/20"
-                >
-                  <span className="relative z-10 flex items-center">
-                    Start Project
-                    <svg
-                      className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent/80 to-accent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 bg-accent/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </Link>
+                <SecondaryCTA href="/services">Explore Services</SecondaryCTA>
               </div>
             </nav>
 

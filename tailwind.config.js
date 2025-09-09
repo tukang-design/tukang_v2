@@ -8,19 +8,37 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        accent: "#39FF14", // neon green
+        // Brand palette
+        accent: "#39FF14", // deep green
         olive: {
-          DEFAULT: "#2D3A2E", // dark olive green
-          light: "#3C4A3B",
-          dark: "#1B241C",
+          50: "#f3f6f4", // very light olive
+          100: "#e2e9e3", // light olive
+          200: "#c6d4c9", // soft olive
+          300: "#9fb6a5", // muted olive
+          400: "#74937d", // medium olive
+          500: "#54755e", // olive
+          600: "#3e5947", // deep green
+          700: "#33493b", // darker olive
+          800: "#2a3b30", // very dark olive
+          900: "#233128", // darkest olive
+          950: "#131b16", // almost black
         },
         brown: {
-          DEFAULT: "#A78B6F", // earthy muted brown
-          light: "#C2B1A1",
-          dark: "#7C6247",
+          50: "#EFEBE8",
+          100: "#E6D9D1",
+          200: "#D7C0AA",
+          300: "#C4A488",
+          400: "#AE8161",
+          500: "#8E6B4F",
+          600: "#7A533E",
+          700: "#5F3F2E",
+          800: "#432819",
+          900: "#2B160C",
+          950: "#1A0F08",
         },
+        butter: "#F2DC99", // light surface
         foreground: "#E5E7EB", // light gray for text
-        background: "#2D3A2E", // same as olive default
+        background: "#0D0D0D", // page background
       },
       fontFamily: {
         mono: ['"Martian Mono"', "monospace"],

@@ -6,8 +6,13 @@ export const metadata = {
   title: "Detailed Project Onboarding & Solutions | Tukang Design",
   description:
     "End-to-end automated client onboarding: service tiers, solutions matrix, and a 5-phase process to go from enquiry to project kick-off.",
+  openGraph: {
+    images: ["https://tukang.design/tukang-design-social-share.jpg"],
+  },
+  twitter: {
+    images: ["https://tukang.design/tukang-design-social-share.jpg"],
+  },
 };
-
 
 const phases = [
   {
@@ -15,13 +20,11 @@ const phases = [
     items: [
       {
         k: "Form Submission",
-        v:
-          "Client completes a form with Primary Goal, Target Audience, Must‑Have Features, Business & Contact Info.",
+        v: "Client completes a form with Primary Goal, Target Audience, Must‑Have Features, Business & Contact Info.",
       },
       {
         k: "System Action",
-        v:
-          "Lead data is saved automatically; a confirmation message confirms receipt.",
+        v: "Lead data is saved automatically; a confirmation message confirms receipt.",
       },
     ],
   },
@@ -30,18 +33,15 @@ const phases = [
     items: [
       {
         k: "System Assessment",
-        v:
-          "Rules engine matches client needs against the Solutions Matrix and returns best‑fit tier + estimated cost.",
+        v: "Rules engine matches client needs against the Solutions Matrix and returns best‑fit tier + estimated cost.",
       },
       {
         k: "Automated Follow‑Up",
-        v:
-          "Client receives an email summary with the estimate and a booking calendar link.",
+        v: "Client receives an email summary with the estimate and a booking calendar link.",
       },
       {
         k: "Discovery Call Scheduling",
-        v:
-          "Calendar enforces earliest booking at least one day out for preparation.",
+        v: "Calendar enforces earliest booking at least one day out for preparation.",
       },
     ],
   },
@@ -50,8 +50,7 @@ const phases = [
     items: [
       {
         k: "Action",
-        v:
-          "First human‑led interaction to refine scope, customize features, and align budget/timeline.",
+        v: "First human‑led interaction to refine scope, customize features, and align budget/timeline.",
       },
       { k: "Outcome", v: "Project details confirmed and scope locked in." },
     ],
@@ -75,8 +74,7 @@ const phases = [
       },
       {
         k: "Automated Kick‑off",
-        v:
-          "Welcome email with links (docs, comms, repo) and a separate kick‑off email with client action items and first check‑in date.",
+        v: "Welcome email with links (docs, comms, repo) and a separate kick‑off email with client action items and first check‑in date.",
       },
     ],
   },
@@ -84,7 +82,11 @@ const phases = [
 
 function Check({ ok }: { ok: boolean }) {
   return (
-    <span className={`inline-flex h-5 w-5 items-center justify-center rounded border ${ok ? "border-accent/50 text-accent" : "border-gray-600 text-gray-500"}`}>
+    <span
+      className={`inline-flex h-5 w-5 items-center justify-center rounded border ${
+        ok ? "border-accent/50 text-accent" : "border-gray-600 text-gray-500"
+      }`}
+    >
       {ok ? (
         <svg className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
           <path
@@ -121,8 +123,13 @@ export default function SolutionsPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {tiers.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6">
-              <h3 className="text-lg font-semibold text-foreground">{t.name}</h3>
+            <div
+              key={t.name}
+              className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6"
+            >
+              <h3 className="text-lg font-semibold text-foreground">
+                {t.name}
+              </h3>
               <div className="mt-1 text-sm text-gray-400">{t.price}</div>
               <p className="mt-3 text-sm text-gray-300">{t.goal}</p>
               <ul className="mt-4 space-y-2 text-sm text-gray-300">
@@ -157,9 +164,15 @@ export default function SolutionsPage() {
               {matrix.map((row) => (
                 <tr key={row.need} className="border-t border-accent/10">
                   <td className="p-4 align-top text-foreground">{row.need}</td>
-                  <td className="p-4 text-center"><Check ok={row.landing} /></td>
-                  <td className="p-4 text-center"><Check ok={row.business} /></td>
-                  <td className="p-4 text-center"><Check ok={row.advanced} /></td>
+                  <td className="p-4 text-center">
+                    <Check ok={row.landing} />
+                  </td>
+                  <td className="p-4 text-center">
+                    <Check ok={row.business} />
+                  </td>
+                  <td className="p-4 text-center">
+                    <Check ok={row.advanced} />
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -169,7 +182,8 @@ export default function SolutionsPage() {
           <ul className="space-y-2 text-sm text-gray-300 list-disc pl-6">
             {matrix.map((row) => (
               <li key={row.need}>
-                <span className="text-foreground font-medium">{row.need}:</span> {row.note}
+                <span className="text-foreground font-medium">{row.need}:</span>{" "}
+                {row.note}
               </li>
             ))}
           </ul>
@@ -183,12 +197,19 @@ export default function SolutionsPage() {
         </h2>
         <ol className="space-y-6">
           {phases.map((p) => (
-            <li key={p.title} className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6">
-              <h3 className="text-lg font-semibold text-foreground mb-3">{p.title}</h3>
+            <li
+              key={p.title}
+              className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6"
+            >
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                {p.title}
+              </h3>
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {p.items.map((i) => (
                   <div key={i.k}>
-                    <dt className="text-xs uppercase tracking-wide text-gray-400">{i.k}</dt>
+                    <dt className="text-xs uppercase tracking-wide text-gray-400">
+                      {i.k}
+                    </dt>
                     <dd className="text-sm text-gray-300">{i.v}</dd>
                   </div>
                 ))}
@@ -201,12 +222,23 @@ export default function SolutionsPage() {
       {/* CTA */}
       <section className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-lg font-semibold text-foreground">Ready to start?</h3>
-          <p className="text-sm text-gray-300">Book a project or schedule a discovery call.</p>
+          <h3 className="text-lg font-semibold text-foreground">
+            Ready to start?
+          </h3>
+          <p className="text-sm text-gray-300">
+            Book a project or schedule a discovery call.
+          </p>
         </div>
         <div className="flex gap-3">
-          <Link href="/booking" className="px-4 py-2 border rounded-md">Book Project</Link>
-          <Link href="/schedule-discovery" className="px-4 py-2 border rounded-md">Schedule Discovery</Link>
+          <Link href="/booking" className="px-4 py-2 border rounded-md">
+            Book Project
+          </Link>
+          <Link
+            href="/schedule-discovery"
+            className="px-4 py-2 border rounded-md"
+          >
+            Schedule Discovery
+          </Link>
         </div>
       </section>
     </div>

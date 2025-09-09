@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: true,
   // i18n and experimental.appDir removed for App Router compatibility
   // Enforce lint/type checks in CI/Prod
   // (use `NEXT_IGNORE_*` envs locally if you need to bypass temporarily)

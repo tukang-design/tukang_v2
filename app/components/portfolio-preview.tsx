@@ -111,7 +111,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
 
   if (!currentProject) {
     return (
-      <div className="relative aspect-[4/3] bg-gradient-to-br from-accent/10 to-brown/10 rounded-2xl flex items-center justify-center">
+      <div className="relative aspect-[4/3] bg-gradient-to-br from-accent/10 to-brown-500/10 rounded-2xl flex items-center justify-center">
         <span className="text-gray-400 font-mono">No projects available</span>
       </div>
     );
@@ -135,7 +135,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
               className="object-cover transition-all duration-500"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-accent/10 to-brown/10 flex items-center justify-center">
+            <div className="w-full h-full bg-gradient-to-br from-accent/10 to-brown-500/10 flex items-center justify-center">
               <span className="text-gray-400 font-mono">
                 {currentProject.title}
               </span>
@@ -157,18 +157,18 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
                     currentProject.category.slice(0, 2).map((cat, index) => (
                       <span
                         key={index}
-                        className="px-4 py-2 bg-brown text-white text-sm rounded-full"
+                        className="px-4 py-2 bg-brown-500 text-white text-sm rounded-full"
                       >
                         {cat}
                       </span>
                     ))
                   ) : (
-                    <span className="px-4 py-2 bg-brown text-white text-sm rounded-full">
+                    <span className="px-4 py-2 bg-brown-500 text-white text-sm rounded-full">
                       Project
                     </span>
                   )
                 ) : (
-                  <span className="px-4 py-2 bg-brown text-white text-sm rounded-full">
+                  <span className="px-4 py-2 bg-brown-500 text-white text-sm rounded-full">
                     {currentProject.category}
                   </span>
                 )}

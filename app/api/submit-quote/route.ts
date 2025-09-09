@@ -76,28 +76,21 @@ export async function POST(request: NextRequest) {
     console.log("Quote saved to Sanity:", result._id);
 
     // Send notification to studio
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `https://tukang.design`;
-    const notificationResponse = await fetch(
-      `${baseUrl}/api/send-notification`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
-
-    console.log("Notification response status:", notificationResponse.status);
-    if (!notificationResponse.ok) {
-      const errorText = await notificationResponse.text();
-      console.error("Notification failed:", errorText);
+    let notificationSent = false;
+    try {
+      const { sendEstimateNotification } = await import("@/lib/notifications");
+      await sendEstimateNotification(data);
+      console.log("Internal notification sent successfully");
+      notificationSent = true;
+    } catch (notifyErr) {
+      console.error("Internal notification failed:", notifyErr);
+      notificationSent = false;
     }
 
     return NextResponse.json({
       success: true,
       id: result._id,
-      notificationSent: notificationResponse.ok,
+      notificationSent,
     });
   } catch (error) {
     console.error("Error submitting quote:", error);

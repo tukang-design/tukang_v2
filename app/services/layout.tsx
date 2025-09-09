@@ -12,6 +12,7 @@ export const metadata: Metadata = {
       "Complete web design and development services for Malaysian SMEs. From strategy and design to development and launch.",
     url: "https://tukang.design/services",
     type: "website",
+    images: ["https://tukang.design/tukang-design-social-share.jpg"],
   },
 };
 

@@ -120,22 +120,22 @@ export default async function PortfolioPage() {
                             project.category.slice(0, 2).map((cat, index) => (
                               <span
                                 key={index}
-                                className="px-3 py-1 bg-brown text-white text-sm rounded-full"
+                                className="px-3 py-1 bg-brown-500 text-white text-sm rounded-full"
                               >
                                 {cat}
                               </span>
                             ))
                           ) : (
-                            <span className="px-3 py-1 bg-brown text-white text-sm rounded-full">
+                            <span className="px-3 py-1 bg-brown-500 text-white text-sm rounded-full">
                               Project
                             </span>
                           )
                         ) : typeof project.category === "string" ? (
-                          <span className="px-3 py-1 bg-brown text-white text-sm rounded-full">
+                          <span className="px-3 py-1 bg-brown-500 text-white text-sm rounded-full">
                             {project.category}
                           </span>
                         ) : (
-                          <span className="px-3 py-1 bg-brown text-white text-sm rounded-full">
+                          <span className="px-3 py-1 bg-brown-500 text-white text-sm rounded-full">
                             {project.category?.title || "Project"}
                           </span>
                         )}

@@ -17,7 +17,10 @@ export const metadata: Metadata = {
     title: "Web Design Blog | Tips for Malaysian SMEs",
     description:
       "Expert insights on web design, digital marketing, and online business growth for Malaysian SMEs.",
-    images: ["/og-blog.jpg"],
+    images: ["https://tukang.design/tukang-design-social-share.jpg"],
+  },
+  twitter: {
+    images: ["https://tukang.design/tukang-design-social-share.jpg"],
   },
 };
 

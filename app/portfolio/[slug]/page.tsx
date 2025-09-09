@@ -167,14 +167,14 @@ export default async function ProjectDetail({
                   {project.category.map((cat, index) => (
                     <span
                       key={index}
-                      className="px-4 py-2 bg-brown text-white text-sm rounded-full"
+                      className="px-4 py-2 bg-brown-500 text-white text-sm rounded-full"
                     >
                       {cat}
                     </span>
                   ))}
                 </div>
               ) : (
-                <span className="px-4 py-2 bg-brown text-white text-sm rounded-full">
+                <span className="px-4 py-2 bg-brown-500 text-white text-sm rounded-full">
                   Project
                 </span>
               )}
@@ -374,7 +374,7 @@ export default async function ProjectDetail({
                       className="object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     {image.caption && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-4">
                         <p className="text-white text-sm">{image.caption}</p>
                       </div>
                     )}

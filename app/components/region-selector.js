@@ -35,11 +35,12 @@ async function detectRegion() {
 
     const response = await fetch("https://ipapi.co/json/", {
       signal: controller.signal,
+      headers: { Accept: "application/json" },
     });
 
     clearTimeout(timeoutId);
 
-    if (response.ok) {
+    if (response.ok && (response.headers.get("content-type") || "").includes("application/json")) {
       const data = await response.json();
       const countryCode = data.country_code;
 
@@ -51,7 +52,7 @@ async function detectRegion() {
       return "INT";
     }
   } catch (error) {
-    console.log("IP geolocation failed, falling back to browser detection");
+    console.log("IP geolocation failed or non-JSON; falling back to browser detection");
   }
 
   // Method 2: Browser language detection (fallback)

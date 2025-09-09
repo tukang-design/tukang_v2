@@ -198,26 +198,37 @@ async function testBookingForm() {
       // Log the submission data for verification
       if (submissionData) {
         console.log("\n📋 SUBMISSION DATA VERIFICATION:");
-        const data = JSON.parse(submissionData);
-        console.log("Package Name:", data.selectedService?.name || "MISSING");
-        console.log(
-          "Add-on Services:",
-          data.services?.map((s) => s.name).join(", ") || "MISSING"
-        );
-        console.log(
-          "Domain Choice:",
-          data.projectConfiguration?.domain || "MISSING"
-        );
-        console.log(
-          "Payment Plan:",
-          data.projectConfiguration?.paymentPlan || "MISSING"
-        );
-        console.log(
-          "Business Name:",
-          data.projectBrief?.businessName || "MISSING"
-        );
-        console.log("Contact Name:", data.name || "MISSING");
-        console.log("Estimated Price:", data.estimatedPrice || "MISSING");
+        let data = null;
+        try {
+          data = JSON.parse(submissionData);
+        } catch (err) {
+          console.warn(
+            "Submission postData is not valid JSON, raw data:",
+            submissionData
+          );
+        }
+
+        if (data) {
+          console.log("Package Name:", data.selectedService?.name || "MISSING");
+          console.log(
+            "Add-on Services:",
+            data.services?.map((s) => s.name).join(", ") || "MISSING"
+          );
+          console.log(
+            "Domain Choice:",
+            data.projectConfiguration?.domain || "MISSING"
+          );
+          console.log(
+            "Payment Plan:",
+            data.projectConfiguration?.paymentPlan || "MISSING"
+          );
+          console.log(
+            "Business Name:",
+            data.projectBrief?.businessName || "MISSING"
+          );
+          console.log("Contact Name:", data.name || "MISSING");
+          console.log("Estimated Price:", data.estimatedPrice || "MISSING");
+        }
       }
     } else {
       console.log("❌ Submit button not found");

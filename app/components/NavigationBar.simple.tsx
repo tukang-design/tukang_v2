@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { SecondaryCTA } from "./CTAButton";
 import Image from "next/image";
 import ScrollProgress from "./ScrollProgress";
 
@@ -30,7 +31,7 @@ export default function NavigationBar() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-mono font-bold text-accent text-xl leading-none">
+                <span className="font-mono font-bold text-[#39FF14] text-xl leading-none">
                   Tukang Design
                 </span>
               </div>
@@ -70,12 +71,7 @@ export default function NavigationBar() {
               Blog
             </Link>
 
-            <Link
-              href={getNavLink("/booking")}
-              className="px-6 py-3 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold text-base transition-all duration-300"
-            >
-              Book Project
-            </Link>
+            <SecondaryCTA href={getNavLink("/services")}>Explore Services</SecondaryCTA>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -194,13 +190,9 @@ export default function NavigationBar() {
 
               {/* Mobile CTA - Sticky at bottom */}
               <div className="p-6 border-t border-accent/20">
-                <Link
-                  href={getNavLink("/booking")}
-                  className="block w-full text-center px-6 py-4 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-accent/30"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Book Project
-                </Link>
+                <SecondaryCTA href={getNavLink("/services")} className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                  Explore Services
+                </SecondaryCTA>
               </div>
             </div>
           </div>

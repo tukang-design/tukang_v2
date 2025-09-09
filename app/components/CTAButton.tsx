@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 // CTA Button Types based on action hierarchy
-type CTAVariant = "primary" | "secondary" | "tertiary";
+type CTAVariant = "primary" | "secondary" | "tertiary" | "whatsapp";
 type CTASize = "sm" | "md" | "lg";
 
 interface CTAButtonProps {
@@ -20,7 +20,7 @@ interface CTAButtonProps {
 
 // Base styles for consistency
 const baseStyles =
-  "font-bold transition-all duration-300 inline-flex items-center justify-center";
+  "font-bold inline-flex items-center justify-center focus-ring disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-300";
 
 // Size variants
 const sizeStyles = {
@@ -32,19 +32,27 @@ const sizeStyles = {
 // Variant styles based on action intent
 const variantStyles = {
   primary: {
+    // Neon green primary with left-to-right darkening on hover
     default:
-      "bg-gradient-to-r from-accent to-accent/80 text-olive hover:from-accent/90 hover:to-accent/70 hover:shadow-lg hover:shadow-accent/30 transform hover:scale-105",
+      "text-[#0D0D0D] bg-[linear-gradient(90deg,#39FF14,#2de50f)] bg-[length:200%_100%] bg-left hover:bg-right shadow-[0_10px_30px_rgba(57,255,20,0.15)]",
     disabled: "bg-gray-600 text-gray-400 cursor-not-allowed",
   },
   secondary: {
+    // Outline with soft fill sweep on hover
     default:
-      "bg-transparent border-2 border-accent text-accent hover:bg-accent hover:text-olive hover:shadow-lg hover:shadow-accent/20",
+      "bg-transparent border-2 border-[#AEB5BF] text-[#AEB5BF] bg-[linear-gradient(90deg,transparent,rgba(174,181,191,0.15))] bg-[length:200%_100%] bg-left hover:bg-right",
     disabled:
       "bg-transparent border-2 border-gray-600 text-gray-400 cursor-not-allowed",
   },
   tertiary: {
-    default: "text-brown hover:text-accent bg-transparent",
+    default:
+      "text-[#AEB5BF] bg-[linear-gradient(90deg,transparent,rgba(174,181,191,0.10))] bg-[length:200%_100%] bg-left hover:bg-right",
     disabled: "text-gray-400 cursor-not-allowed",
+  },
+  whatsapp: {
+    default:
+      "text-white bg-[linear-gradient(90deg,#25D366,#19b757)] bg-[length:200%_100%] bg-left hover:bg-right shadow-[0_10px_30px_rgba(37,211,102,0.15)]",
+    disabled: "bg-gray-600 text-gray-300 cursor-not-allowed",
   },
 };
 
@@ -98,7 +106,7 @@ export function CTAButton({
   // Internal link
   if (href && !disabled) {
     return (
-      <Link href={href} className={styles} onClick={onClick}>
+      <Link href={href} className={styles} onClick={onClick} aria-label={typeof children === 'string' ? children : undefined}>
         {content}
       </Link>
     );
@@ -177,4 +185,8 @@ export const SecondaryCTA = (props: Omit<CTAButtonProps, "variant">) => (
 
 export const TertiaryCTA = (props: Omit<CTAButtonProps, "variant">) => (
   <CTAButton variant="tertiary" {...props} />
+);
+
+export const WhatsAppCTA = (props: Omit<CTAButtonProps, "variant">) => (
+  <CTAButton variant="whatsapp" {...props} />
 );
