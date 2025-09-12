@@ -69,10 +69,9 @@ export default function HomePageClient({ children }: HomePageClientProps) {
 
   // Animation words for the homepage headline
   const homepageHeadlineWords = [
-    { text: "GET YOUR", color: "text-accent/40", delay: 0 },
-    { text: "BUSINESS", color: "text-accent/40", delay: 200 },
-    { text: "ONLINE", color: "text-accent/40", delay: 600 },
-    { text: "THE RIGHT WAY", color: "text-accent/70", delay: 800 },
+    { text: "GET YOUR", color: "text-accent/20", delay: 0 },
+    { text: "BUSINESS ONLINE", color: "text-accent/40", delay: 300 },
+    { text: "THE RIGHT WAY", color: "text-accent/80", delay: 700 },
   ];
 
   return (
@@ -213,16 +212,16 @@ export default function HomePageClient({ children }: HomePageClientProps) {
         }
       `}</style>
       {/* HERO SECTION - AWARENESS */}
-      <section className="relative max-h-[78vh] overflow-visible pt-12">
+      <section className="relative max-h-[80dvh] overflow-visible pt-12">
         <div className="absolute inset-0 bg-olive-950 opacity-90"></div>
         <ClayBrowserMockup
           className={`relative py-4 lg:py-6 ${
             animationStarted ? "mockup-slide-in" : "opacity-0"
           }`}
         >
-          <div className="flex flex-col justify-evenly min-h-[600px] md:min-h-[560px] text-center pb-6">
+          <div className="flex flex-col justify-evenly min-h-[600px] md:min-h-[560px] text-center px-4">
             {/* Main Headline with Animated Text Reveal */}
-            <h1 className="max-w-7xl mx-auto text-5xl lg:text-7xl font-bold mb-6 font-mono leading-tight mockup-stage-2">
+            <h1 className="max-w-7xl mx-auto text-4xl lg:text-7xl font-bold font-mono leading-tight mockup-stage-2">
               {homepageHeadlineWords.map((word, index) => (
                 <span
                   key={index}
@@ -249,7 +248,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
             </p>
 
             {/* CTA inside mockup footer area */}
-            <div className="pt-4 flex items-center justify-center gap-4">
+            <div className="pt-4 flex items-center justify-center gap-4 mb-8">
               <PrimaryCTA href="/planner">Plan My Website</PrimaryCTA>
               <SecondaryCTA
                 href="/packages"
@@ -263,7 +262,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
 
             {/* Trust Badge */}
             <div
-              className={`flex flex-wrap items-center justify-center gap-2 text-center mockup-stage-3 ${
+              className={`flex flex-wrap items-center justify-center gap-2 text-center mockup-stage-3 mb-40 md:mb-20 ${
                 animationStarted ? "" : "opacity-0"
               }`}
             >
