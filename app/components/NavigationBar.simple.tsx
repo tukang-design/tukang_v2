@@ -12,7 +12,7 @@ export default function NavigationBar() {
   const getNavLink = (path: string) => (path && path.length > 0 ? path : "/");
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-olive/70 border-b border-accent/10 shadow-lg shadow-olive/20">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-olive-950/70 border-b border-accent/10 shadow-lg shadow-olive/20">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-6">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -78,7 +78,7 @@ export default function NavigationBar() {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center">
             <button
-              className="p-3 rounded-lg bg-olive-dark/50 border border-accent/20 text-accent hover:bg-olive-dark hover:border-accent/40 transition-all duration-300"
+              className="p-3 rounded-lg bg-olive-950/50 border border-accent/20 text-accent hover:bg-olive-dark hover:border-accent/40 transition-all duration-300"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <svg
@@ -120,16 +120,11 @@ export default function NavigationBar() {
           />
 
           {/* Mobile Menu Panel - Full Height */}
-          <div className="h-screen fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-olive-dark border-l border-accent/20 z-50 lg:hidden shadow-2xl transform transition-transform duration-300 ease-in-out">
+          <div className="h-screen fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-olive-950 border-l border-accent/20 z-50 lg:hidden shadow-2xl transform transition-transform duration-300 ease-in-out">
             <div className="flex flex-col h-full">
               {/* Mobile Menu Header */}
-              <div className="flex items-center justify-between p-6 border-b border-accent/20">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-accent to-accent/80 rounded-lg flex items-center justify-center">
-                    <span className="text-olive font-mono font-bold">T</span>
-                  </div>
-                  <span className="font-mono font-bold text-accent">Menu</span>
-                </div>
+              <div className="flex items-center justify-between p-6">
+                <div className="flex items-center space-x-3 ml-4"></div>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 rounded-lg bg-olive-dark/50 border border-accent/20 text-accent hover:bg-olive-dark hover:border-accent/40 transition-all duration-300"
@@ -154,38 +149,38 @@ export default function NavigationBar() {
               <nav className="flex-1 px-6 py-6 space-y-2">
                 <Link
                   href={getNavLink("")}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
+                  className="text-xl font-mono tracking-widest block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Home
+                  HOME
                 </Link>
                 <Link
                   href={getNavLink("/work")}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
+                  className="text-xl font-mono tracking-widest block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Work
+                  WORK
                 </Link>
                 <Link
                   href={getNavLink("/packages")}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
+                  className="text-xl font-mono tracking-widest block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Packages
+                  PACKAGES
                 </Link>
                 <Link
                   href={getNavLink("/contact")}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
+                  className="text-xl font-mono tracking-widest block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Contact
+                  CONTACT
                 </Link>
                 <Link
                   href={getNavLink("/about")}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
+                  className="text-xl font-mono tracking-widest block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  About
+                  ABOUT
                 </Link>
               </nav>
 

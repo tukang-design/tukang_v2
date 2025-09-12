@@ -139,7 +139,7 @@ export default function RootLayout({
         ) : null}
         <SEO structuredData={[businessData, websiteData]} />
       </head>
-      <body className="bg-olive text-foreground antialiased animate-fade-in">
+      <body className="bg-olive-950/70 text-foreground antialiased animate-fade-in">
         <GoogleTagManagerNoScript />
         <NavigationBar />
 

@@ -99,7 +99,7 @@ function MobileMenu({
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
       {/* Full Screen Menu */}
-      <div className="h-full w-full bg-white flex flex-col">
+      <div className="h-full w-full bg-background flex flex-col">
         {/* Header with Close Button */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div className="flex items-center space-x-3">
@@ -248,7 +248,7 @@ export default function NavigationBar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-olive/95 border-b border-accent/10 shadow-lg shadow-olive/20">
+      <header className="sticky top-0 z-40 backdrop-blur-md bg-olive-950/95 border-b border-accent/10 shadow-lg shadow-olive/20">
         <div className="max-w-7xl mx-auto px-6 sm:px-2 lg:px-2">
           <div className="flex justify-between items-center h-24">
             {/* Enhanced Logo */}
