@@ -31,7 +31,7 @@ export default function ClayBrowserMockup({
               <span className="size-3 rounded-full bg-[#00CA4E] shadow-inner shadow-black/20" />
             </div>
             <div className="flex-1 h-7 rounded-full bg-slate-300 border border-black/5 px-4 flex items-center text-xs text-slate-500">
-              https://tukang.design/
+              https://yourdomain.com/
             </div>
           </div>
 
