@@ -49,6 +49,27 @@ const nextConfig = {
     ];
   },
 
+  // Permanent redirects for route renaming
+  async redirects() {
+    return [
+      {
+        source: "/services",
+        destination: "/packages",
+        permanent: true,
+      },
+      {
+        source: "/portfolio",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        source: "/portfolio/:slug",
+        destination: "/work/:slug",
+        permanent: true,
+      },
+    ];
+  },
+
   // No locale redirects needed
 };
 

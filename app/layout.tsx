@@ -17,6 +17,8 @@ import NavigationBar from "./components/NavigationBar.simple";
 import Footer from "./components/Footer";
 import GlobalBookingSteps from "./components/GlobalBookingSteps";
 import RegionIndicator from "./components/RegionIndicator";
+import WhatsAppFAB from "./components/WhatsAppFAB";
+import MainViewport from "./components/MainViewport";
 import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
@@ -30,11 +32,11 @@ import {
 export const metadata = {
   // Ensure absolute URL resolution for OG/Twitter
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://tukang.design"
+    process.env.NEXT_PUBLIC_BASE_URL || "https://tadalstudio.com"
   ),
-  title: "End-to-End Web Design & Development | Tukang Design",
+  title: "End-to-End Web Design & Development | Tadal Studio",
   description:
-    "Tired of the handoff headache? Tukang Design offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+    "Tired of the handoff headache? Tadal Studio offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
   keywords:
     "end-to-end design development, full-stack designer malaysia, web design shah alam, complete digital solutions, custom web development, full-stack development malaysia, design to development services",
   robots: "index, follow",
@@ -62,17 +64,19 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "End-to-End Web Design & Development | Tukang Design",
+    title: "End-to-End Web Design & Development | Tadal Studio",
     description:
-      "Tired of the handoff headache? Tukang Design offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
-    url: "https://tukang.design",
-    siteName: "Tukang Design",
+      "Tired of the handoff headache? Tadal Studio offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+    url: process.env.NEXT_PUBLIC_BASE_URL || "https://tadalstudio.com",
+    siteName: "Tadal Studio",
     images: [
       {
-        url: "https://tukang.design/tukang-design-social-share.jpg",
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://tadalstudio.com"
+        }/tukang-design-social-share.jpg`,
         width: 1200,
         height: 630,
-        alt: "Tukang Design - End-to-End Web Design & Development",
+        alt: "Tadal Studio - End-to-End Web Design & Development",
       },
     ],
     locale: "en_US",
@@ -80,14 +84,17 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "End-to-End Web Design & Development | Tukang Design",
+    title: "End-to-End Web Design & Development | Tadal Studio",
     description:
-      "Tired of the handoff headache? Tukang Design offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
-    images: ["https://tukang.design/tukang-design-social-share.jpg"],
+      "Tired of the handoff headache? Tadal Studio offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+    images: [
+      process.env.NEXT_PUBLIC_BASE_URL ||
+        "https://tadalstudio.com/tukang-design-social-share.jpg",
+    ],
     site: "@tukangdesign",
   },
   alternates: {
-    canonical: "https://tukang.design",
+    canonical: process.env.NEXT_PUBLIC_BASE_URL || "https://tadalstudio.com",
   },
   verification: {
     google: "YOUR_GOOGLE_VERIFICATION_CODE",
@@ -107,6 +114,10 @@ export default function RootLayout({
     <html lang="en" className={htmlClass + " scroll-smooth"}>
       <head>
         <GoogleTagManager />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,-50..200"
+        />
         {/* Google tag (gtag.js) */}
         <script
           async
@@ -133,7 +144,7 @@ export default function RootLayout({
         <NavigationBar />
 
         {/* Main Content */}
-        <main className="min-h-screen">{children}</main>
+        <MainViewport>{children}</MainViewport>
 
         {/* Global Booking Steps (hidden on booking/admin) */}
         <GlobalBookingSteps />
@@ -142,6 +153,9 @@ export default function RootLayout({
 
         {/* Region Detection Indicator */}
         <RegionIndicator />
+
+        {/* Global WhatsApp Floating Action Button */}
+        <WhatsAppFAB />
       </body>
     </html>
   );

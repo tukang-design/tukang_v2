@@ -10,6 +10,7 @@ interface CTAButtonProps {
   size?: CTASize;
   href?: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
   children: React.ReactNode;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
@@ -61,6 +62,7 @@ export function CTAButton({
   size = "md",
   href,
   onClick,
+  type = "button",
   children,
   icon,
   iconPosition = "right",
@@ -106,7 +108,12 @@ export function CTAButton({
   // Internal link
   if (href && !disabled) {
     return (
-      <Link href={href} className={styles} onClick={onClick} aria-label={typeof children === 'string' ? children : undefined}>
+      <Link
+        href={href}
+        className={styles}
+        onClick={onClick}
+        aria-label={typeof children === "string" ? children : undefined}
+      >
         {content}
       </Link>
     );
@@ -118,7 +125,7 @@ export function CTAButton({
       className={styles}
       onClick={onClick}
       disabled={disabled}
-      type="button"
+      type={type}
     >
       {content}
     </button>

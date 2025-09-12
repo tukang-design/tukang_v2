@@ -8,7 +8,7 @@ const rateStore = new Map(); // key: ip+path, value: array of timestamps
 function getClientIp(req) {
   const xf = req.headers.get("x-forwarded-for");
   if (xf) return xf.split(",")[0].trim();
-  // @ts-ignore - next/server provides ip in some runtimes
+  // @ts-expect-error - next/server provides ip in some runtimes
   return req.ip || "127.0.0.1";
 }
 

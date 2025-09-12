@@ -3,6 +3,12 @@
 import { sanityClient } from "../../lib/sanity";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  PrimaryCTA,
+  SecondaryCTA,
+  ArrowRightIcon,
+  ArrowDownIcon,
+} from "../components/CTAButton";
 import { TypedObject } from "@portabletext/types";
 import { useEffect, useState } from "react";
 
@@ -391,38 +397,12 @@ export default function BlogPage() {
             {/* Advanced View Toggle Block */}
             <div className="flex items-center space-x-4">
               <div className="flex items-center bg-olive-dark/60 backdrop-blur-sm rounded-2xl p-2 border border-accent/10">
-                <button className="flex items-center space-x-2 px-4 py-3 bg-accent text-olive rounded-xl font-medium transition-all duration-300">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v3a2 2 0 002 2h2a2 2 0 002-2V7z"
-                    />
-                  </svg>
+                <SecondaryCTA size="md">
                   <span className="hidden sm:inline">Grid</span>
-                </button>
-                <button className="flex items-center space-x-2 px-4 py-3 text-gray-400 hover:text-accent rounded-xl font-medium transition-all duration-300">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 10h16M4 14h16M4 18h16"
-                    />
-                  </svg>
+                </SecondaryCTA>
+                <SecondaryCTA size="md">
                   <span className="hidden sm:inline">List</span>
-                </button>
+                </SecondaryCTA>
               </div>
             </div>
           </div>
@@ -464,27 +444,10 @@ export default function BlogPage() {
                     that will elevate your work.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className="group px-8 py-4 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-2xl font-bold text-lg hover:from-accent/90 hover:to-accent/70 transition-all duration-300 transform hover:scale-105">
-                      <span className="flex items-center">
-                        Subscribe for Updates
-                        <svg
-                          className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 7l5 5m0 0l-5 5m5-5H6"
-                          />
-                        </svg>
-                      </span>
-                    </button>
-                    <button className="px-8 py-4 bg-olive-dark border-2 border-accent/20 text-accent rounded-2xl font-bold text-lg hover:border-accent/50 hover:bg-accent/5 transition-all duration-300">
-                      Browse Portfolio
-                    </button>
+                    <PrimaryCTA icon={<ArrowRightIcon />} iconPosition="right">
+                      Subscribe for Updates
+                    </PrimaryCTA>
+                    <SecondaryCTA href="/work">Browse Portfolio</SecondaryCTA>
                   </div>
                 </div>
               ) : (
@@ -512,18 +475,12 @@ export default function BlogPage() {
                     discover relevant content.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button
-                      onClick={() => setSearchQuery("")}
-                      className="px-6 py-3 bg-accent text-olive rounded-xl font-medium hover:bg-accent/90 transition-colors duration-300"
-                    >
+                    <PrimaryCTA onClick={() => setSearchQuery("")}>
                       Clear Search
-                    </button>
-                    <button
-                      onClick={() => setSelectedCategory("all")}
-                      className="px-6 py-3 bg-olive-dark border border-accent/20 text-accent rounded-xl font-medium hover:border-accent/50 transition-colors duration-300"
-                    >
+                    </PrimaryCTA>
+                    <SecondaryCTA onClick={() => setSelectedCategory("all")}>
                       Show All Categories
-                    </button>
+                    </SecondaryCTA>
                   </div>
                 </div>
               )}
@@ -728,24 +685,9 @@ export default function BlogPage() {
 
           {filteredPosts.length > 0 && (
             <div className="text-center mt-20">
-              <button className="group px-10 py-5 bg-gradient-to-r from-accent to-accent/80 text-olive rounded-2xl font-bold text-lg hover:from-accent/90 hover:to-accent/70 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-accent/25">
-                <span className="flex items-center">
-                  Load More Articles
-                  <svg
-                    className="ml-3 w-6 h-6 group-hover:translate-y-1 transition-transform duration-200"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                    />
-                  </svg>
-                </span>
-              </button>
+              <PrimaryCTA icon={<ArrowDownIcon />} iconPosition="right">
+                Load More Articles
+              </PrimaryCTA>
               <p className="text-gray-400 text-lg mt-6">
                 Showing{" "}
                 <span className="text-accent font-bold">
@@ -776,9 +718,7 @@ export default function BlogPage() {
                 placeholder="Enter your email"
                 className="flex-1 px-6 py-4 bg-olive border border-accent/20 rounded-xl text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
               />
-              <button className="px-8 py-4 bg-accent text-olive rounded-xl font-bold hover:bg-accent/90 transition-colors duration-300 whitespace-nowrap">
-                Subscribe
-              </button>
+              <PrimaryCTA>Subscribe</PrimaryCTA>
             </div>
 
             <p className="text-gray-400 text-sm mt-4">

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { SecondaryCTA } from "./CTAButton";
+import { SecondaryCTA, PrimaryCTA } from "./CTAButton";
 import Image from "next/image";
 import ScrollProgress from "./ScrollProgress";
 
@@ -24,15 +24,15 @@ export default function NavigationBar() {
               <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center">
                 <Image
                   src="/logo.gif"
-                  alt="Tukang Design Logo"
+                  alt="Tadal Studio Logo"
                   width={40}
                   height={40}
                   className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-mono font-bold text-[#39FF14] text-xl leading-none">
-                  Tukang Design
+                <span className="font-mono font-bold text-[#39FF14] text-2xl leading-none">
+                  TADAL STUDIO
                 </span>
               </div>
             </Link>
@@ -47,16 +47,16 @@ export default function NavigationBar() {
               Home
             </Link>
             <Link
-              href={getNavLink("/services")}
+              href={getNavLink("/packages")}
               className="px-2 py-4 rounded-lg font-semibold text-gray-300 hover:text-accent transition-all duration-300"
             >
-              Services
+              Packages
             </Link>
             <Link
-              href={getNavLink("/portfolio")}
+              href={getNavLink("/work")}
               className="px-2 py-4 rounded-lg font-semibold text-gray-300 hover:text-accent transition-all duration-300"
             >
-              Portfolio
+              Work
             </Link>
             <Link
               href={getNavLink("/about")}
@@ -65,13 +65,14 @@ export default function NavigationBar() {
               About
             </Link>
             <Link
-              href={getNavLink("/blog")}
+              href={getNavLink("/contact")}
               className="px-2 py-4 rounded-lg font-semibold text-gray-300 hover:text-accent transition-all duration-300"
             >
-              Blog
+              Contact
             </Link>
-
-            <SecondaryCTA href={getNavLink("/services")}>Explore Services</SecondaryCTA>
+            <PrimaryCTA href={getNavLink("/planner")}>
+              Plan My Website
+            </PrimaryCTA>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -159,25 +160,25 @@ export default function NavigationBar() {
                   Home
                 </Link>
                 <Link
-                  href={getNavLink("/portfolio")}
+                  href={getNavLink("/work")}
                   className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Portfolio
+                  Work
                 </Link>
                 <Link
-                  href={getNavLink("/services")}
+                  href={getNavLink("/packages")}
                   className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Services
+                  Packages
                 </Link>
                 <Link
-                  href={getNavLink("/blog")}
+                  href={getNavLink("/contact")}
                   className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Blog
+                  Contact
                 </Link>
                 <Link
                   href={getNavLink("/about")}
@@ -190,9 +191,13 @@ export default function NavigationBar() {
 
               {/* Mobile CTA - Sticky at bottom */}
               <div className="p-6 border-t border-accent/20">
-                <SecondaryCTA href={getNavLink("/services")} className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                  Explore Services
-                </SecondaryCTA>
+                <PrimaryCTA
+                  href={getNavLink("/planner")}
+                  className="w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Plan My Website
+                </PrimaryCTA>
               </div>
             </div>
           </div>

@@ -121,27 +121,23 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
     <div className="relative">
       {/* Portfolio Card */}
       <div
-        className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer"
+        className={`relative aspect-square rounded-2xl overflow-hidden group cursor-pointer bg-cover bg-center`}
+        style={
+          allImages.length > 0
+            ? { backgroundImage: `url(${allImages[currentImageIndex]?.url})` }
+            : undefined
+        }
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          {allImages.length > 0 ? (
-            <Image
-              src={allImages[currentImageIndex]?.url || ""}
-              alt={allImages[currentImageIndex]?.alt || currentProject.title}
-              fill
-              className="object-cover transition-all duration-500"
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-accent/10 to-brown-500/10 flex items-center justify-center">
-              <span className="text-gray-400 font-mono">
-                {currentProject.title}
-              </span>
-            </div>
-          )}
-        </div>
+        {/* If there are no images, show a subtle placeholder */}
+        {allImages.length === 0 && (
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-brown-500/10 flex items-center justify-center">
+            <span className="text-gray-400 font-mono">
+              {currentProject.title}
+            </span>
+          </div>
+        )}
 
         {/* Gradient Overlay - darker at bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 group-hover:from-black/90 group-hover:via-black/60 group-hover:to-black/30 transition-all duration-300" />
@@ -188,7 +184,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
 
             {/* CTA Button */}
             <Link
-              href={`/portfolio/${
+              href={`/work/${
                 currentProject.slug?.current || currentProject._id
               }`}
               className="inline-flex items-center text-accent hover:text-accent/80 transition-all duration-300 font-medium text-lg group-hover:translate-x-2 transform"
@@ -285,6 +281,11 @@ export default function PortfolioPreview() {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // activeIndex controls which project is shown in the full-section preview.
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [incomingIndex, setIncomingIndex] = useState<number | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   // Fallback projects with proper typing
   const FALLBACK_PROJECTS: PortfolioProject[] = [
     {
@@ -360,5 +361,158 @@ export default function PortfolioPreview() {
     );
   }
 
-  return <PortfolioShowcase projects={projects} />;
+  // Use the first project's main image (if present) as the section background
+  const firstImageUrl = projects[activeIndex]?.mainImage?.asset?.url || null;
+
+  // navigation handlers for the preview (in-place)
+  const handleNext = () => {
+    if (isTransitioning || projects.length <= 1) return;
+    const next = (activeIndex + 1) % projects.length;
+    setIncomingIndex(next);
+    setIsTransitioning(true);
+    // let the CSS transition run, then swap active
+    setTimeout(() => {
+      setActiveIndex(next);
+      setIncomingIndex(null);
+      setIsTransitioning(false);
+    }, 520); // slightly more than CSS duration (500ms)
+  };
+
+  const handlePrev = () => {
+    if (isTransitioning || projects.length <= 1) return;
+    const prev = (activeIndex - 1 + projects.length) % projects.length;
+    setIncomingIndex(prev);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex(prev);
+      setIncomingIndex(null);
+      setIsTransitioning(false);
+    }, 520);
+  };
+
+  return (
+    <section id="portfolio" className="relative">
+      <div className="mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Right showcase column */}
+          <div className="col-span-12">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg h-[85vh]">
+              {/* Active background layer */}
+              <div
+                key={activeIndex}
+                className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ease-in-out ${
+                  isTransitioning ? "opacity-0" : "opacity-100"
+                }`}
+                style={{
+                  backgroundImage: `linear-gradient(to right, rgba(15,20,25,0.75) 0%, rgba(15,20,25,0.45) 40%, rgba(0,0,0,0.15) 100%), url(${
+                    projects[activeIndex]?.mainImage?.asset?.url || ""
+                  })`,
+                }}
+              />
+
+              {/* Incoming layer (fades in when transitioning) */}
+              {incomingIndex !== null && (
+                <div
+                  className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ease-in-out ${
+                    isTransitioning ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{
+                    backgroundImage: `linear-gradient(to right, rgba(15,20,25,0.75) 0%, rgba(15,20,25,0.45) 40%, rgba(0,0,0,0.15) 100%), url(${
+                      projects[incomingIndex]?.mainImage?.asset?.url || ""
+                    })`,
+                  }}
+                />
+              )}
+
+              {/* Overlay content: bottom-left project info + navigation */}
+              <div className="absolute inset-0 flex flex-col justify-between p-8">
+                <div className="lg:col-span-4 text-left text-white">
+                  <h4 className="text-lg font-bold text-accent/70 mb-4">
+                    Recent Work
+                  </h4>
+                </div>
+                <div className="flex-1" />
+                <div className="flex items-center justify-between w-full p-6 bg-olive-950/60 backdrop-blur-sm rounded-xl">
+                  <div className="text-left text-white">
+                    <h3 className="max-w-4xl text-2xl lg:text-3xl font-bold leading-tight">
+                      {projects[activeIndex]?.title || "Project Title"}
+                    </h3>
+                    <Link
+                      href={`/work/${
+                        projects[activeIndex]?.slug?.current ||
+                        projects[activeIndex]?._id
+                      }`}
+                      className="inline-flex items-center mt-3 text-accent font-medium"
+                    >
+                      View Portfolio Details
+                      <svg
+                        className="ml-2 w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </Link>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      aria-label="Previous project"
+                      className="w-10 h-10 rounded-full bg-olive-dark/60 flex items-center justify-center border border-accent/20 text-accent hover:bg-olive-dark transition"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </button>
+                    {/* Counter */}
+                    <div className="text-gray-300 font-mono text-sm">
+                      {activeIndex + 1} / {projects.length}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      aria-label="Next project"
+                      className="w-10 h-10 rounded-full bg-olive-dark/60 flex items-center justify-center border border-accent/20 text-accent hover:bg-olive-dark transition"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

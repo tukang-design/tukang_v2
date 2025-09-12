@@ -1,8 +1,12 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { SecondaryCTA, WhatsAppCTA } from "./CTAButton";
+import { usePathname } from "next/navigation";
 
 export default function BookingSteps() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/contact")) return null;
   const steps = [
     {
       title: "Tell Us About Your Project",

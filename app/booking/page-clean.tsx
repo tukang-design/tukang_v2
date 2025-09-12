@@ -1048,7 +1048,7 @@ export default function BookingPage() {
               </ul>
 
               <Link
-                href="/schedule-discovery"
+                href="https://calendar.app.google/SrBsskVewCfjWUv16"
                 className="inline-block px-8 py-3 bg-accent text-olive font-semibold rounded-lg hover:bg-accent/90 transition-all"
               >
                 Schedule Discovery Call

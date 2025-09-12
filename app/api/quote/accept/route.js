@@ -126,7 +126,7 @@ export async function GET(request) {
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Quote Accepted - Tukang Design</title>
+          <title>Quote Accepted - Tadal Studio</title>
           <script src="https://cdn.tailwindcss.com"></script>
           <script>
             tailwind.config = {
@@ -162,7 +162,7 @@ export async function GET(request) {
                           </svg>
                       </div>
                       <h1 class="text-4xl font-bold text-white mb-4">🎉 Quote Accepted!</h1>
-                      <p class="text-xl text-gray-300">Thank you for choosing Tukang Design</p>
+                      <p class="text-xl text-gray-300">Thank you for choosing Tadal Studio</p>
                   </div>
 
                   <!-- Main Card -->
@@ -254,7 +254,7 @@ export async function GET(request) {
 
                   <!-- Footer -->
                   <div class="text-center mt-8 text-gray-400">
-                      <p>&copy; 2024 Tukang Design. All rights reserved.</p>
+                      <p>&copy; 2024 Tadal Studio. All rights reserved.</p>
                   </div>
               </div>
           </div>

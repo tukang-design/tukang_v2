@@ -52,7 +52,7 @@ const coreServices: ServiceCategory[] = [
     description:
       "High-converting single page perfect for marketing campaigns and showcases",
     basePrice: 1500,
-    priceRange: "RM 1,500 - 3,000",
+    priceRange: "RM 1,500",
     features: [
       "Strategic UI/UX Design",
       "Mobile-Responsive Design",
@@ -67,7 +67,7 @@ const coreServices: ServiceCategory[] = [
     name: "The Business Website",
     description: "Complete online presence for established SMEs (5-7 pages)",
     basePrice: 3000,
-    priceRange: "RM 3,000 - 8,000",
+    priceRange: "RM 3,000",
     features: [
       "Multi-Page Website Design",
       "Professional Branding",

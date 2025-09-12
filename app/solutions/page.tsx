@@ -1,246 +1,211 @@
 import React from "react";
 import Link from "next/link";
-import { tiers, matrix } from "@/lib/solutions-config";
 
 export const metadata = {
-  title: "Detailed Project Onboarding & Solutions | Tukang Design",
+  title: "Solutions | Tadal Studio",
   description:
-    "End-to-end automated client onboarding: service tiers, solutions matrix, and a 5-phase process to go from enquiry to project kick-off.",
+    "Technologies we support, payment options, and common problems we solve for web projects.",
   openGraph: {
-    images: ["https://tukang.design/tukang-design-social-share.jpg"],
-  },
-  twitter: {
     images: ["https://tukang.design/tukang-design-social-share.jpg"],
   },
 };
 
-const phases = [
-  {
-    title: "Phase 1: Initial Lead Capture",
-    items: [
-      {
-        k: "Form Submission",
-        v: "Client completes a form with Primary Goal, Target Audience, Must‑Have Features, Business & Contact Info.",
-      },
-      {
-        k: "System Action",
-        v: "Lead data is saved automatically; a confirmation message confirms receipt.",
-      },
-    ],
-  },
-  {
-    title: "Phase 2: Automated Recommendation",
-    items: [
-      {
-        k: "System Assessment",
-        v: "Rules engine matches client needs against the Solutions Matrix and returns best‑fit tier + estimated cost.",
-      },
-      {
-        k: "Automated Follow‑Up",
-        v: "Client receives an email summary with the estimate and a booking calendar link.",
-      },
-      {
-        k: "Discovery Call Scheduling",
-        v: "Calendar enforces earliest booking at least one day out for preparation.",
-      },
-    ],
-  },
-  {
-    title: "Phase 3: The Discovery Call",
-    items: [
-      {
-        k: "Action",
-        v: "First human‑led interaction to refine scope, customize features, and align budget/timeline.",
-      },
-      { k: "Outcome", v: "Project details confirmed and scope locked in." },
-    ],
-  },
-  {
-    title: "Phase 4: Proposal and Onboarding",
-    items: [
-      { k: "Action", v: "Draft detailed proposal and corresponding invoice." },
-      {
-        k: "System Trigger",
-        v: "Proposal and invoice are sent for client review and approval.",
-      },
-    ],
-  },
-  {
-    title: "Phase 5: Project Kick‑off",
-    items: [
-      {
-        k: "Payment Confirmation",
-        v: "Gateway notifies system when 50% deposit is received.",
-      },
-      {
-        k: "Automated Kick‑off",
-        v: "Welcome email with links (docs, comms, repo) and a separate kick‑off email with client action items and first check‑in date.",
-      },
-    ],
-  },
-];
-
-function Check({ ok }: { ok: boolean }) {
-  return (
-    <span
-      className={`inline-flex h-5 w-5 items-center justify-center rounded border ${
-        ok ? "border-accent/50 text-accent" : "border-gray-600 text-gray-500"
-      }`}
-    >
-      {ok ? (
-        <svg className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-          <path
-            fillRule="evenodd"
-            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-            clipRule="evenodd"
-          />
-        </svg>
-      ) : (
-        <span className="block h-1 w-1 rounded-full bg-gray-600" />
-      )}
-    </span>
-  );
-}
-
 export default function SolutionsPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-      <header className="space-y-3">
-        <h1 className="text-3xl md:text-4xl font-bold font-mono text-accent">
-          Detailed Project Onboarding & Solutions
-        </h1>
-        <p className="text-gray-300 max-w-3xl">
-          End‑to‑end automated onboarding: service tiers matched to goals, a
-          solutions matrix to guide recommendations, and a 5‑phase workflow to
-          move from enquiry to kick‑off.
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+      {/* Hero (matching About page hero styles) */}
+      <section className="relative overflow-hidden bg-olive-950">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute -top-24 -right-24 w-[400px] h-[400px] rounded-full bg-slate-500 blur-3xl motion-safe:animate-pulse" />
+          <div className="absolute -bottom-36 -left-36 w-[400px] h-[400px] rounded-full bg-brown-900 blur-3xl motion-safe:animate-pulse" />
+        </div>
+
+        <div className="absolute inset-0 opacity-90"></div>
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 py-24">
+          <h1 className="text-4xl md:text-6xl font-normal text-accent/30 tracking-widest font-mono mb-2">
+            SOLUTIONS
+          </h1>
+          <h4 className="max-w-4xl text-slate-300 font-medium text-lg lg:text-xl mb-8 ml-0 mx-auto">
+            We match the stack to your goals, team, and budget. This page lists
+            the technologies we support, how you can pay for projects, and what
+            problems we solve. For deliverables and prices, see{" "}
+            <Link href="/packages" className="underline">
+              Packages
+            </Link>
+            .
+          </h4>
+        </div>
+
+        {/* Decorative Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 border border-accent/20 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-16 h-16 bg-accent/10 rounded-lg animate-float"></div>
+      </section>
+
+      {/* Tech we use */}
+      <section id="tech" className="space-y-4">
+        <h2 className="text-2xl font-mono font-bold text-accent">
+          Tech we use
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="rounded-xl border border-accent/20 bg-olive-dark/40 p-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              Site builders
+            </h3>
+            <ul className="mt-2 space-y-1 text-sm text-gray-300">
+              <li>Webflow</li>
+              <li>Framer</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-accent/20 bg-olive-dark/40 p-4">
+            <h3 className="text-lg font-semibold text-foreground">CMS</h3>
+            <ul className="mt-2 space-y-1 text-sm text-gray-300">
+              <li>WordPress</li>
+              <li>Sanity</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-accent/20 bg-olive-dark/40 p-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              E-commerce
+            </h3>
+            <ul className="mt-2 space-y-1 text-sm text-gray-300">
+              <li>WooCommerce</li>
+              <li>Shopify</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-accent/20 bg-olive-dark/40 p-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              Frontend frameworks
+            </h3>
+            <ul className="mt-2 space-y-1 text-sm text-gray-300">
+              <li>Next.js</li>
+              <li>Astro</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-accent/20 bg-olive-dark/40 p-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              Hosting and deploy
+            </h3>
+            <ul className="mt-2 space-y-1 text-sm text-gray-300">
+              <li>Vercel</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-accent/20 bg-olive-dark/40 p-4">
+            <h3 className="text-lg font-semibold text-foreground">Payments</h3>
+            <ul className="mt-2 space-y-1 text-sm text-gray-300">
+              <li>Stripe</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Payments */}
+      <section id="payments" className="space-y-4">
+        <h2 className="text-2xl font-mono font-bold text-accent">
+          Payment options
+        </h2>
+        <div className="space-y-3 text-sm text-gray-300">
+          <div>
+            <h4 className="font-semibold text-foreground">Installments</h4>
+            <p>
+              Spread project payments over 6 or 12 months. A small installment
+              fee applies. Full details appear in your proposal.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-foreground">
+              Care and growth plans
+            </h4>
+            <p>
+              Monthly plans to keep your site secure, fast, and improving with
+              updates, backups, small edits, and periodic reviews.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-foreground">Currencies</h4>
+            <p>Default in MYR. Quotes and invoices available in USD or SGD.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Problems we solve */}
+      <section id="problems" className="space-y-4">
+        <h2 className="text-2xl font-mono font-bold text-accent">
+          What we fix
+        </h2>
+        <ul className="list-disc pl-6 space-y-2 text-sm text-gray-300">
+          <li>
+            Fragmented vendors and handoffs that break intent from design to
+            build
+          </li>
+          <li>Unclear pricing and slow cycles that stall launches</li>
+          <li>Stacks chosen for the wrong job</li>
+        </ul>
+        <p className="text-sm text-gray-300 max-w-2xl">
+          One team aligns strategy, design, and code so your site looks right
+          and works right.
         </p>
-      </header>
+      </section>
 
-      {/* Phase 1: Service Tiers */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-mono font-bold text-accent">
-          Phase 1: Our Service Tiers
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tiers.map((t) => (
-            <div
-              key={t.name}
-              className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6"
-            >
-              <h3 className="text-lg font-semibold text-foreground">
-                {t.name}
-              </h3>
-              <div className="mt-1 text-sm text-gray-400">{t.price}</div>
-              <p className="mt-3 text-sm text-gray-300">{t.goal}</p>
-              <ul className="mt-4 space-y-2 text-sm text-gray-300">
-                {t.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-accent/60" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
+      {/* FAQs */}
+      <section id="faqs" className="space-y-4">
+        <h2 className="text-2xl font-mono font-bold text-accent">FAQs</h2>
+
+        <div className="space-y-3">
+          <details className="bg-olive-dark/40 border border-accent/20 rounded-xl p-4">
+            <summary className="font-medium">
+              Can you work with our existing stack
+            </summary>
+            <div className="mt-2 text-sm text-gray-300">
+              Yes. We extend or stabilize Webflow, WordPress, Shopify, and
+              headless setups.
             </div>
-          ))}
+          </details>
+
+          <details className="bg-olive-dark/40 border border-accent/20 rounded-xl p-4">
+            <summary className="font-medium">Will this scale later</summary>
+            <div className="mt-2 text-sm text-gray-300">
+              Yes. We plan for migration paths and future features.
+            </div>
+          </details>
+
+          <details className="bg-olive-dark/40 border border-accent/20 rounded-xl p-4">
+            <summary className="font-medium">Where do I see prices</summary>
+            <div className="mt-2 text-sm text-gray-300">
+              On the Packages pages. Your estimate is finalized after using the
+              Project Planner.
+            </div>
+          </details>
         </div>
       </section>
 
-      {/* Phase 2: Solutions Matrix */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-mono font-bold text-accent">
-          Phase 2: Project Solutions Matrix
-        </h2>
-        <div className="overflow-x-auto rounded-2xl border border-accent/20">
-          <table className="w-full text-sm">
-            <thead className="bg-olive-dark/60 text-gray-300">
-              <tr>
-                <th className="text-left p-4">Project Goal / Need</th>
-                <th className="p-4">Landing Page</th>
-                <th className="p-4">Business Website</th>
-                <th className="p-4">Advanced System</th>
-              </tr>
-            </thead>
-            <tbody>
-              {matrix.map((row) => (
-                <tr key={row.need} className="border-t border-accent/10">
-                  <td className="p-4 align-top text-foreground">{row.need}</td>
-                  <td className="p-4 text-center">
-                    <Check ok={row.landing} />
-                  </td>
-                  <td className="p-4 text-center">
-                    <Check ok={row.business} />
-                  </td>
-                  <td className="p-4 text-center">
-                    <Check ok={row.advanced} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="rounded-xl border border-accent/20 bg-olive-dark/40 p-4">
-          <ul className="space-y-2 text-sm text-gray-300 list-disc pl-6">
-            {matrix.map((row) => (
-              <li key={row.need}>
-                <span className="text-foreground font-medium">{row.need}:</span>{" "}
-                {row.note}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Phase 3–5: Automated Onboarding */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-mono font-bold text-accent">
-          Phase 3–5: Automated Onboarding Process
-        </h2>
-        <ol className="space-y-6">
-          {phases.map((p) => (
-            <li
-              key={p.title}
-              className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6"
-            >
-              <h3 className="text-lg font-semibold text-foreground mb-3">
-                {p.title}
-              </h3>
-              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {p.items.map((i) => (
-                  <div key={i.k}>
-                    <dt className="text-xs uppercase tracking-wide text-gray-400">
-                      {i.k}
-                    </dt>
-                    <dd className="text-sm text-gray-300">{i.v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </li>
-          ))}
+      {/* Next steps */}
+      <section id="next" className="space-y-4">
+        <h2 className="text-2xl font-mono font-bold text-accent">Next steps</h2>
+        <ol className="list-decimal pl-6 space-y-2 text-sm text-gray-300">
+          <li>
+            Review{" "}
+            <Link href="/packages" className="underline">
+              Packages
+            </Link>{" "}
+            to compare deliverables
+          </li>
+          <li>
+            Use the{" "}
+            <Link href="/planner" className="underline">
+              Project Planner
+            </Link>{" "}
+            to get a tailored estimate and timeline
+          </li>
         </ol>
       </section>
-
-      {/* CTA */}
-      <section className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground">
-            Ready to start?
-          </h3>
-          <p className="text-sm text-gray-300">
-            Book a project or schedule a discovery call.
-          </p>
-        </div>
-        <div className="flex gap-3">
-          <Link href="/booking" className="px-4 py-2 border rounded-md">
-            Book Project
-          </Link>
-          <Link
-            href="/schedule-discovery"
-            className="px-4 py-2 border rounded-md"
-          >
-            Schedule Discovery
-          </Link>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

@@ -1,19 +1,29 @@
 import React from "react";
+import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 
-export const metadata = {
-  title: "About - Tukang Design | Full-Stack Design & Development Studio",
+export const metadata: Metadata = {
+  title: "About Tadal Studio | Full-Stack Design & Development in Malaysia",
   description:
-    "Tukang Design is a Full-Stack Design & Development studio based in Malaysia. Discover our journey, values, and commitment to creating exceptional digital experiences.",
+    "We build credible, conversion-ready websites with strategy, design, and code under one roof. Based in Malaysia, working worldwide.",
   openGraph: {
-    title: "About - Tukang Design",
+    title: "About Tadal Studio | Full-Stack Design & Development in Malaysia",
     description:
-      "Tukang Design is a Full-Stack Design & Development studio based in Malaysia.",
-    images: ["https://tukang.design/tukang-design-social-share.jpg"],
+      "We build credible, conversion-ready websites with strategy, design, and code under one roof.",
+    url: "/about",
+    type: "website",
+    images: [
+      { url: "/tukang-design-social-share.jpg", width: 1200, height: 630 },
+    ],
   },
   twitter: {
-    images: ["https://tukang.design/tukang-design-social-share.jpg"],
+    card: "summary_large_image",
+    title: "About Tadal Studio | Full-Stack Design & Development in Malaysia",
+    description:
+      "We build credible, conversion-ready websites with strategy, design, and code under one roof.",
+    images: ["/tukang-design-social-share.jpg"],
   },
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

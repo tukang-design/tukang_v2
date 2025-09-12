@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { SecondaryCTA } from "./CTAButton";
+import { SecondaryCTA, PrimaryCTA } from "./CTAButton";
 import { useState } from "react";
 
 // Enhanced NavLink Component
@@ -46,9 +46,9 @@ function NavLink({
           </svg>
         )}
         <div
-        className={`absolute inset-0 rounded-lg bg-accent/5 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 ${
-          isActive ? "opacity-100" : ""
-        }`}
+          className={`absolute inset-0 rounded-lg bg-accent/5 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 ${
+            isActive ? "opacity-100" : ""
+          }`}
         ></div>
       </Link>
 
@@ -149,61 +149,47 @@ function MobileMenu({
               Home
             </Link>
             <Link
-              href="/portfolio"
+              href="/work"
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
               onClick={onClose}
             >
-              Portfolio
+              Work
             </Link>
 
             {/* Services Submenu */}
             <div className="space-y-1">
               <Link
-                href="/services"
+                href="/packages"
                 className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
                 onClick={onClose}
               >
-                Services
+                Packages
               </Link>
               <div className="ml-4 space-y-1">
                 <Link
-                  href="/services/design"
+                  href="/packages#landing"
                   className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
                   onClick={onClose}
                 >
-                  UI/UX Design
+                  Landing Page
                 </Link>
                 <Link
-                  href="/services/development"
+                  href="/packages#business"
                   className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
                   onClick={onClose}
                 >
-                  Development
+                  Professional Website
                 </Link>
                 <Link
-                  href="/services/consulting"
+                  href="/packages#custom"
                   className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
                   onClick={onClose}
                 >
-                  Consulting
-                </Link>
-                <Link
-                  href="/services/branding"
-                  className="block px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-accent hover:bg-accent/5 transition-all duration-200"
-                  onClick={onClose}
-                >
-                  Branding
+                  Custom Web System
                 </Link>
               </div>
             </div>
 
-            <Link
-              href="/blog"
-              className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
-              onClick={onClose}
-            >
-              Blog
-            </Link>
             <Link
               href="/about"
               className="block px-4 py-3 rounded-xl text-gray-300 hover:text-accent hover:bg-accent/10 transition-all duration-200"
@@ -226,13 +212,15 @@ function MobileMenu({
                   Currently in English
                 </span>
               </div>
-              <Link
-                href="/contact"
-                className="block w-full text-center px-6 py-4 text-olive rounded-xl font-bold transition-colors duration-300 bg-[linear-gradient(90deg,#39FF14,#2de50f)] bg-[length:200%_100%] bg-left hover:bg-right shadow-[0_10px_30px_rgba(57,255,20,0.15)]"
-                onClick={onClose}
-              >
-                Start Project
-              </Link>
+              <div className="w-full">
+                <PrimaryCTA
+                  href="/planner"
+                  className="w-full"
+                  onClick={onClose}
+                >
+                  Plan My Website
+                </PrimaryCTA>
+              </div>
             </div>
           </nav>
         </div>
@@ -248,24 +236,19 @@ export default function NavigationBar() {
 
   const servicesSubmenu = [
     {
-      href: "/services/design",
-      label: "UI/UX Design",
-      description: "User interface and experience design",
+      href: "/packages#landing",
+      label: "Landing Page",
+      description: "Conversion-focused single page website",
     },
     {
-      href: "/services/development",
-      label: "Development",
-      description: "Full-stack web development",
+      href: "/packages#business",
+      label: "Professional Website",
+      description: "Multi-page company site with CMS",
     },
     {
-      href: "/services/consulting",
-      label: "Consulting",
-      description: "Technical strategy and advice",
-    },
-    {
-      href: "/services/branding",
-      label: "Branding",
-      description: "Brand identity and visual systems",
+      href: "/packages#custom",
+      label: "Custom Web System",
+      description: "Bookings, memberships, commerce and more",
     },
   ];
 
@@ -302,14 +285,14 @@ export default function NavigationBar() {
             {/* Enhanced Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-4">
               <NavLink href="/" label="Home" />
-              <NavLink href="/portfolio" label="Portfolio" />
+              <NavLink href="/work" label="Work" />
               <NavLink
-                href="/services"
-                label="Services"
+                href="/packages"
+                label="Packages"
                 hasSubmenu={true}
                 submenuItems={servicesSubmenu}
               />
-              <NavLink href="/blog" label="Blog" />
+
               <NavLink href="/about" label="About" />
 
               {/* Search Button */}
@@ -335,7 +318,7 @@ export default function NavigationBar() {
 
               {/* Enhanced CTA Button */}
               <div className="ml-8">
-                <SecondaryCTA href="/services">Explore Services</SecondaryCTA>
+                <PrimaryCTA href="/planner">Plan My Website</PrimaryCTA>
               </div>
             </nav>
 

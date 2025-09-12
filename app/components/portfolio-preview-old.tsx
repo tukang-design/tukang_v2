@@ -147,7 +147,7 @@ function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
 
             {/* CTA Button */}
             <Link
-              href={`/portfolio/${
+              href={`/work/${
                 currentProject.slug?.current || currentProject._id
               }`}
               className="inline-flex items-center text-accent hover:text-accent/80 transition transform duration-200 font-medium text-lg group-hover:translate-x-2"

@@ -161,7 +161,7 @@ export default async function ProjectDetail({
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Back Button */}
         <Link
-          href="/portfolio"
+          href="/work"
           className="inline-flex items-center gap-2 text-white hover:text-accent transition-colors mb-8"
         >
           <svg
@@ -177,7 +177,7 @@ export default async function ProjectDetail({
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          Back to Portfolio
+          Back to Work
         </Link>
 
         {/* Hero Section */}
@@ -418,7 +418,7 @@ export default async function ProjectDetail({
               Start a Project
             </Link>
             <Link
-              href="/portfolio"
+              href="/work"
               className="border border-gray-600 text-white px-8 py-3 rounded-lg font-semibold hover:border-accent hover:text-accent transition-colors"
             >
               View More Work

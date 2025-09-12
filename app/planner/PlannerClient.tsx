@@ -1,6 +1,6 @@
 "use client";
-import React, { useMemo, useState } from "react";
-import { PrimaryCTA } from "../components/CTAButton";
+import React, { useMemo, useState, useEffect } from "react";
+import { PrimaryCTA, SecondaryCTA } from "../components/CTAButton";
 import { useSearchParams } from "next/navigation";
 import {
   ADD_ONS,
@@ -60,55 +60,86 @@ export default function PlannerClient() {
     return [min, max] as [number, number];
   }, [availableAddOns, selectedAddOns]);
 
-  async function submitLead(e: React.FormEvent) {
-    e.preventDefault();
+  async function submitLead(e?: React.FormEvent) {
+    // allow calling without an event (sidebar PrimaryCTA) or as a normal form submit
+    if (e && typeof e.preventDefault === "function") e.preventDefault();
     setError(null);
     setSubmitting(true);
     try {
-      const service: any = {
-        id: tierCfg.id,
-        name: tierCfg.name,
-        ...(tier === "advanced" && selectedPlatform
-          ? (() => {
-              const pf = getPlatformCfg(selectedPlatform);
-              return {
-                basePrice: pf.priceRange[0],
-                basePriceRange: pf.priceRange,
-              };
-            })()
-          : {
-              basePrice: tierCfg.basePrice,
-              basePriceRange: tierCfg.basePriceRange,
-            }),
-      };
+      // Build minimal PlannerAnswers shape expected by /api/plan
       const selectedAddOnIds = Object.entries(selectedAddOns)
         .filter(([, v]) => v)
         .map(([id]) => id);
 
-      const projectDetails = {
-        selectedAddOns: selectedAddOnIds,
-        features: [],
-        timeline: tierCfg.timeline || "",
+      const pages = {
+        home: tier === "landing",
+        about: tier !== "landing",
+        services: tier !== "landing",
+        work: false,
+        contact: true,
+        otherPages: 0,
       };
 
-      const payload = {
-        service,
-        selectedPlatform: selectedPlatform || null,
-        projectDetails,
-        contactInfo: { name, email, phone, company },
-        region: "MY",
-        language: "en",
+      const answers = {
+        basics: {
+          companyName: company || name || "Individual",
+          industry: "Other",
+          audience: ["B2C"],
+          websiteStatus: "none",
+        },
+        goal: "inquiries",
+        pages,
+        features: {
+          contactForm: true,
+          whatsapp: false,
+          blog: false,
+          cms: false,
+          store: false,
+          booking: false,
+          membership: false,
+          dashboard: false,
+          multilingualCount: 0,
+        },
+        content: {
+          logoColors: "ready",
+          copy: "polish",
+          images: "ready",
+          legal: { privacy: false, terms: false, cookies: false },
+          migrateCount: 0,
+        },
+        integrations: {},
+        timing: {
+          idealLaunchISO: new Date(Date.now() + 14 * 24 * 3600 * 1000)
+            .toISOString()
+            .slice(0, 10),
+          flexibility: "flex_2w",
+          budgetBand: "3k_to_6k",
+          paymentPref: "standard",
+        },
+        contact: {
+          fullName: name || company || "No name",
+          email: email,
+          phone: phone || "",
+          notes: "",
+          consent: true,
+        },
       };
 
-      const res = await fetch("/api/booking", {
+      const res = await fetch("/api/plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(answers),
       });
       const data = await res.json();
-      if (!res.ok || data.error)
-        throw new Error(data.error || "Submission failed");
-      setSubmittedId(data.submissionId || data.documentId || "SUBMITTED");
+      if (!res.ok) {
+        const msg = data?.errors
+          ? data.errors.join("; ")
+          : data?.error || "Submission failed";
+        throw new Error(msg);
+      }
+      setSubmittedId(
+        data.id || data.submissionId || data.documentId || "SUBMITTED"
+      );
     } catch (err: any) {
       setError(err?.message || "Something went wrong");
     } finally {
@@ -116,9 +147,15 @@ export default function PlannerClient() {
     }
   }
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [step]);
+
   if (submittedId) {
     return (
-      <div className="max-w-2xl mx-auto p-6 mt-8 rounded-2xl border border-accent/20 bg-olive-dark/60">
+      <div className="max-w-2xl m-auto p-6 min-h-[50vh] rounded-2xl border border-accent/20 bg-olive-950 mb-8">
         <h1 className="text-3xl font-bold text-accent text-center">
           Thank You! Your Plan is Headed Your Way.
         </h1>
@@ -137,10 +174,12 @@ export default function PlannerClient() {
             View Packages
           </a>
           <a
-            href="/schedule-discovery"
+            href="https://calendar.app.google/SrBsskVewCfjWUv16"
             className="text-center px-5 py-3 rounded-xl border border-accent/30 text-accent hover:border-accent/60 transition"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Book a 15‑min discovery
+            Book a 15min discovery
           </a>
         </div>
       </div>
@@ -148,43 +187,42 @@ export default function PlannerClient() {
   }
 
   return (
-    <div className="min-h-screen bg-olive">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+    <div className="min-h-fit bg-background">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <header className="mb-6">
           <div className="text-sm text-gray-400">Step {step} of 3</div>
-          <h1 className="text-2xl lg:text-3xl font-bold text-accent">
-            Project Scope Planner
+          <h1 className="text-2xl lg:text-3xl font-bold text-accent/40">
+            PROJECT SCOPE PLANNER
           </h1>
           <p className="text-gray-300">
             Unsure where to begin? Plan your perfect website step‑by‑step.
           </p>
           <div className="mt-3 inline-flex items-center gap-2 text-sm text-brown-700">
-            <span className="px-2 py-0.5 rounded-full bg-olive-dark/60 border border-brown-400">
-              Selected: {tierCfg.name}
-            </span>
-            <button
-              className="underline underline-offset-2"
-              onClick={() =>
-                setTier(
-                  tier === "landing"
-                    ? "business"
-                    : tier === "business"
-                    ? "advanced"
-                    : "landing"
-                )
-              }
-            >
-              Change
-            </button>
+            {/* Package selector as button tabs */}
+            <div className="flex items-center gap-2">
+              {Object.entries(TIERS).map(([id, cfg]) => (
+                <button
+                  key={id}
+                  onClick={() => setTier(id as TierId)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors duration-150 ${
+                    tier === id
+                      ? "bg-accent/30 text-olive-200 border-accent/40 hover:bg-accent/40 hover:border-accent/60"
+                      : "bg-olive-900/60 border-accent/20 text-gray-300 hover:bg-olive-900/80 hover:border-accent/40 hover:text-olive-100"
+                  }`}
+                >
+                  {cfg.name}
+                </button>
+              ))}
+            </div>
           </div>
         </header>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <main className="lg:col-span-2 space-y-6">
+        <div className="relative">
+          <main className="mb-4">
             {step === 2 && (
-              <section className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-5">
-                <div className="mb-4">
-                  <h2 className="text-xl font-bold text-white mb-2">
+              <section className="rounded-2xl border border-accent/20 bg-olive-950 p-5">
+                <div className="mb-6">
+                  <h2 className="text-xl font-bold text-accent mb-2">
                     {tier === "landing"
                       ? "Customize Your Landing Page"
                       : tier === "business"
@@ -192,8 +230,8 @@ export default function PlannerClient() {
                       : "Configure Your Custom System"}
                   </h2>
                   {tier !== "advanced" && (
-                    <div className="text-sm text-gray-400 mt-1">
-                      Base Price Range:{" "}
+                    <div className="text-sm font-normal text-slate-300 font-mono mt-1">
+                      Price starts from{" "}
                       {tierCfg.basePriceRange
                         ? formatMYRRange(
                             tierCfg.basePriceRange[0],
@@ -203,7 +241,7 @@ export default function PlannerClient() {
                     </div>
                   )}
                   {tier === "advanced" && (
-                    <div className="text-sm text-gray-400 mt-1">
+                    <div className="text-sm font-normal text-slate-300 font-mono mt-1">
                       Base Price: {formatMYR(tierCfg.basePrice)} — choose a
                       platform below to see the platform starting range.
                     </div>
@@ -212,10 +250,10 @@ export default function PlannerClient() {
 
                 {tier === "advanced" && (
                   <div className="mb-6">
-                    <div className="text-sm font-semibold text-white mb-2">
+                    <div className="text-md font-semibold text-white font-mono mb-2">
                       Select Your Platform Type
                     </div>
-                    <div className="text-sm text-gray-300 mb-3">
+                    <div className="text-sm font-normal text-gray-300 mb-4">
                       First, define the core function of your web system. The
                       initial price range for development varies based on the
                       complexity of the required architecture.
@@ -226,19 +264,19 @@ export default function PlannerClient() {
                           key={p.id}
                           className={`block p-3 rounded-xl border ${
                             selectedPlatform === p.id
-                              ? "border-accent"
-                              : "border-accent/20"
-                          } bg-olive-dark/40 cursor-pointer`}
+                              ? "border-accent shadow-[0_0_0_2px_rgba(57,255,20,0.15)]"
+                              : "border-accent/20 hover:border-accent/50 hover:bg-olive-dark/60"
+                          } bg-olive-dark/40 cursor-pointer transition-colors`}
                         >
                           <div className="flex items-start justify-between">
                             <div>
-                              <div className="text-sm font-medium text-foreground">
+                              <div className="text-sm font-semibold text-foreground">
                                 {p.label}
                               </div>
-                              <div className="text-xs text-gray-400 mt-1">
+                              <div className="text-xs font-normal text-gray-400 mt-1">
                                 {p.description}
                               </div>
-                              <div className="text-xs text-brown-700 mt-2">
+                              <div className="text-xs font-normal text-slate-300 font-mono mt-2">
                                 Starting Price Range:{" "}
                                 {formatMYRRange(
                                   p.priceRange[0],
@@ -262,8 +300,8 @@ export default function PlannerClient() {
                 )}
 
                 <div className="space-y-2">
-                  <div className="text-sm font-semibold text-gray-300">
-                    Additional Services
+                  <div className="text-md font-semibold text-white font-mono mb-2">
+                    Additional Add-ons
                   </div>
                   {availableAddOns.length === 0 && (
                     <div className="text-gray-400">
@@ -275,21 +313,21 @@ export default function PlannerClient() {
                     {availableAddOns.map((a) => (
                       <label
                         key={a.id}
-                        className="block p-3 rounded-xl border border-accent/20 bg-olive-dark/40 hover:bg-olive-dark/60 cursor-pointer"
+                        className="block p-3 rounded-xl border border-accent/20 bg-olive-dark/40 hover:border-accent/50 hover:bg-olive-dark/60 cursor-pointer transition-colors"
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
-                            <div className="text-sm font-medium text-foreground">
+                            <div className="text-sm font-semibold text-foreground">
                               {a.label}
                             </div>
                             {a.description && (
-                              <div className="text-xs text-gray-400 mt-1">
+                              <div className="text-xs font-normal text-gray-400 mt-1">
                                 {a.description}
                               </div>
                             )}
                           </div>
                           <div className="text-right flex-shrink-0">
-                            <div className="text-sm text-brown-700">
+                            <div className="text-xs font-normal text-slate-300 font-mono mt-2">
                               {a.priceRange
                                 ? `+ ${formatMYRRange(
                                     a.priceRange[0],
@@ -318,14 +356,20 @@ export default function PlannerClient() {
                   </div>
                 </div>
 
-                <div className="mt-5 flex justify-end">
-                  <PrimaryCTA onClick={() => setStep(3)}>Continue</PrimaryCTA>
+                <div className="mt-5 flex items-center justify-end">
+                  <PrimaryCTA
+                    onClick={() => setStep(3)}
+                    disabled={tier === "advanced" && !selectedPlatform}
+                    aria-disabled={tier === "advanced" && !selectedPlatform}
+                  >
+                    Proceed to Contact & Estimate
+                  </PrimaryCTA>
                 </div>
               </section>
             )}
 
             {step === 3 && (
-              <section className="rounded-2xl border border-accent/20 bg-olive-dark/50 p-5">
+              <section className="rounded-2xl border border-accent/20 bg-olive-950 p-5">
                 <h2 className="text-xl font-bold text-white mb-2">
                   Your Personalized Website Plan is Ready!
                 </h2>
@@ -333,6 +377,113 @@ export default function PlannerClient() {
                   Just a quick step to unlock your full project estimate and
                   receive a comprehensive summary in your inbox.
                 </p>
+
+                <div className="mb-6">
+                  <div className="text-md font-semibold text-white font-mono mb-2">
+                    Additional Add-ons
+                  </div>
+                  {availableAddOns.length === 0 && (
+                    <div className="text-gray-400">
+                      No add‑ons available for this package.
+                    </div>
+                  )}
+
+                  <div className="space-y-3">
+                    {availableAddOns.map((a) => (
+                      <label
+                        key={a.id}
+                        className="block p-3 rounded-xl border border-accent/20 bg-olive-dark/40 hover:bg-olive-dark/60 cursor-pointer"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <div className="text-sm font-semibold text-foreground">
+                              {a.label}
+                            </div>
+                            {a.description && (
+                              <div className="text-xs font-normal text-gray-400 mt-1">
+                                {a.description}
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-right flex-shrink-0">
+                            <div className="text-xs font-normal text-slate-300 font-mono mt-2">
+                              {a.priceRange
+                                ? `+ ${formatMYRRange(
+                                    a.priceRange[0],
+                                    a.priceRange[1]
+                                  )}`
+                                : a.price
+                                ? `+ ${formatMYR(a.price)}`
+                                : ""}
+                            </div>
+                            <div className="mt-2">
+                              <input
+                                type="checkbox"
+                                checked={!!selectedAddOns[a.id]}
+                                onChange={(e) =>
+                                  setSelectedAddOns((prev) => ({
+                                    ...prev,
+                                    [a.id]: e.target.checked,
+                                  }))
+                                }
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Inline estimate card */}
+                <div className="mb-6 rounded-lg p-4 bg-olive-900/30 border border-accent/10">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-foreground">{tierCfg.name}</div>
+                    <div className="text-slate-400 font-medium font-mono">
+                      {tier === "advanced" && selectedPlatform
+                        ? formatMYRRange(
+                            getPlatformCfg(selectedPlatform).priceRange[0],
+                            getPlatformCfg(selectedPlatform).priceRange[1]
+                          )
+                        : tierCfg.basePriceRange
+                        ? formatMYRRange(
+                            tierCfg.basePriceRange[0],
+                            tierCfg.basePriceRange[1]
+                          )
+                        : formatMYR(tierCfg.basePrice)}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    {availableAddOns
+                      .filter((a) => selectedAddOns[a.id])
+                      .map((a) => (
+                        <div
+                          key={a.id}
+                          className="flex items-center justify-between text-sm text-gray-300"
+                        >
+                          <span>{a.label}</span>
+                          <span className="text-slate-400 font-medium font-mono">
+                            {a.priceRange
+                              ? `+ ${formatMYRRange(
+                                  a.priceRange[0],
+                                  a.priceRange[1]
+                                )}`
+                              : a.price
+                              ? `+ ${formatMYR(a.price)}`
+                              : ""}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+
+                  <div className="mt-4 pt-4 text-xs text-gray-400 border-t border-accent/10">
+                    <strong>Disclaimer:</strong> This tool provides a high-level
+                    budget estimate. The final quotation will be provided after
+                    a detailed discovery call where we confirm the full scope of
+                    your technical requirements.
+                  </div>
+                </div>
 
                 <form
                   onSubmit={submitLead}
@@ -397,8 +548,19 @@ export default function PlannerClient() {
                     </div>
                   )}
 
-                  <div className="sm:col-span-2 flex justify-end">
-                    <PrimaryCTA disabled={submitting}>
+                  <div className="sm:col-span-2 flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={() => setStep(2)}
+                      className="text-sm px-4 py-2 rounded-md border bg-transparent text-gray-300 hover:bg-olive-dark/30"
+                    >
+                      Back
+                    </button>
+
+                    <PrimaryCTA
+                      type="submit"
+                      disabled={submitting || !(name.trim() && email.trim())}
+                    >
                       {submitting ? "Submitting…" : "Unlock Estimate"}
                     </PrimaryCTA>
                   </div>
@@ -407,83 +569,8 @@ export default function PlannerClient() {
             )}
           </main>
 
-          <aside className="lg:col-span-1">
-            <div className="sticky top-6 rounded-2xl border border-accent/20 bg-olive-950/50 p-5">
-              <h5 className="text-lg text-slate-300 mb-4">
-                Your Project Estimate
-              </h5>
-
-              <p className="text-sm text-gray-400 mb-4">
-                You have selected <strong>{tierCfg.name}</strong>. Now customise
-                your package by selecting additional services. The prices below
-                reflect estimated ranges for common requests.
-              </p>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-foreground">{tierCfg.name}</div>
-                  <div className="text-brown font-semibold">
-                    {tier === "advanced" && selectedPlatform
-                      ? formatMYRRange(
-                          getPlatformCfg(selectedPlatform).priceRange[0],
-                          getPlatformCfg(selectedPlatform).priceRange[1]
-                        )
-                      : tierCfg.basePriceRange
-                      ? formatMYRRange(
-                          tierCfg.basePriceRange[0],
-                          tierCfg.basePriceRange[1]
-                        )
-                      : formatMYR(tierCfg.basePrice)}
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  {availableAddOns
-                    .filter((a) => selectedAddOns[a.id])
-                    .map((a) => (
-                      <div
-                        key={a.id}
-                        className="flex items-center justify-between text-sm text-gray-300"
-                      >
-                        <span>{a.label}</span>
-                        <span className="text-brown">
-                          {a.priceRange
-                            ? `+ ${formatMYRRange(
-                                a.priceRange[0],
-                                a.priceRange[1]
-                              )}`
-                            : a.price
-                            ? `+ ${formatMYR(a.price)}`
-                            : ""}
-                        </span>
-                      </div>
-                    ))}
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-accent/10">
-                  <div className="mb-4 rounded-lg p-3 bg-olive/40 border border-accent/10 text-sm text-gray-300">
-                    <strong>Disclaimer:</strong> This tool provides a high-level
-                    budget estimate. The final quotation will be provided after
-                    a detailed discovery call where we confirm the full scope of
-                    your technical requirements.
-                  </div>
-                  <div className="text-xs text-gray-400 mb-1">Next Step</div>
-                  <div className="mt-2">
-                    <button
-                      onClick={() => setStep(3)}
-                      className="w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-accent text-white font-semibold"
-                    >
-                      Proceed to Contact & Estimate
-                    </button>
-                  </div>
-                  {tier === "advanced" && !selectedPlatform && (
-                    <div className="text-xs text-gray-500 mt-2">
-                      Tip: choose a platform to see its starting range before
-                      submitting.
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+          <aside className="lg:col-span-1" aria-hidden>
+            {/* Estimate card intentionally hidden on step 2; shown inline above */}
           </aside>
         </div>
       </div>

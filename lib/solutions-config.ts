@@ -11,8 +11,7 @@ export const tiers: Tier[] = [
     id: "landing",
     name: "Landing Page for Lead Generation",
     price: "From RM1500",
-    goal:
-      "Capture leads for a specific product, service, or campaign — focused single-page with clear CTA.",
+    goal: "Capture leads for a specific product, service, or campaign — focused single-page with clear CTA.",
     features: [
       "High‑engagement, interactive design",
       "Custom WhatsApp messaging for high‑intent visitors",
@@ -26,8 +25,7 @@ export const tiers: Tier[] = [
     id: "business",
     name: "Professional Business Website",
     price: "From RM3000",
-    goal:
-      "Establish a comprehensive online presence with multiple pages to communicate services and credibility.",
+    goal: "Establish a comprehensive online presence with multiple pages to communicate services and credibility.",
     features: [
       "Up to 5 custom pages (Home, About, Services, Contact, Blog)",
       "Advanced contact forms with conditional logic",
@@ -39,8 +37,7 @@ export const tiers: Tier[] = [
     id: "advanced",
     name: "Complex Advanced System",
     price: "From RM5000",
-    goal:
-      "Custom, integrated system with advanced functionality: database, user accounts, and third‑party integrations.",
+    goal: "Custom, integrated system with advanced functionality: database, user accounts, and third‑party integrations.",
     features: [
       "E‑commerce (cart, products, secure gateway)",
       "Content Management System (CMS)",
@@ -66,8 +63,7 @@ export const matrix: MatrixRow[] = [
     landing: true,
     business: true,
     advanced: true,
-    note:
-      "Landing Page excels for a targeted campaign; Business Website for ongoing multi‑faceted lead gen.",
+    note: "Landing Page excels for a targeted campaign; Business Website for ongoing multi‑faceted lead gen.",
   },
   {
     id: "establish-presence",
@@ -83,8 +79,7 @@ export const matrix: MatrixRow[] = [
     landing: true,
     business: true,
     advanced: true,
-    note:
-      "Landing Page works for a simple showcase; Business Website fits multi‑page case studies.",
+    note: "Landing Page works for a simple showcase; Business Website fits multi‑page case studies.",
   },
   {
     id: "sell-products",
@@ -141,5 +136,7 @@ export const predefinedGoals = matrix.map((m) => ({ id: m.id, label: m.need }));
 // Consolidate features from tiers into a selectable list
 const featureSet = new Set<string>();
 for (const t of tiers) for (const f of t.features) featureSet.add(f);
-export const predefinedFeatures = Array.from(featureSet).map((f) => ({ id: f.toLowerCase().replace(/[^a-z0-9]+/g, "-"), label: f }));
-
+export const predefinedFeatures = Array.from(featureSet).map((f) => ({
+  id: f.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+  label: f,
+}));

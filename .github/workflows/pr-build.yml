@@ -18,7 +18,7 @@ jobs:
       NEXT_PUBLIC_SANITY_DATASET: production
       NEXT_PUBLIC_GTM_ID: ${{ secrets.NEXT_PUBLIC_GTM_ID }}
       # Fallback GA ID if secret not set
-      GA_ID: G-13JMFQR6YB
+      GA_ID: G-0E285C72XW
       NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID != '' && secrets.NEXT_PUBLIC_GA_ID || env.GA_ID }}
       # Server secrets
       SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}

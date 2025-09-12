@@ -142,7 +142,7 @@ export default async function ProjectDetail({
             {/* Back Button - Constrained width */}
             <div className="w-full mx-auto pt-12">
               <Link
-                href="/portfolio"
+                href="/work"
                 className="inline-flex items-center gap-2 text-white hover:text-accent transition-colors mb-8"
               >
                 <svg
@@ -158,7 +158,7 @@ export default async function ProjectDetail({
                     d="M15 19l-7-7 7-7"
                   />
                 </svg>
-                Back to Portfolio
+                Back to Work
               </Link>
             </div>
             <div className="mb-6">

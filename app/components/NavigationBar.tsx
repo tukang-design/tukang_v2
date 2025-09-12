@@ -147,18 +147,18 @@ function MobileMenu({
               Home
             </Link>
             <Link
-              href="/portfolio"
+              href="/work"
               className="block py-4 px-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
               onClick={onClose}
             >
-              Portfolio
+              Work
             </Link>
             <Link
-              href="/services"
+              href="/packages"
               className="block py-4 px-4 text-xl font-medium text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
               onClick={onClose}
             >
-              Services
+              Packages
             </Link>
             <Link
               href="/blog"
@@ -187,15 +187,20 @@ function MobileMenu({
         {/* Bottom CTAs */}
         <div className="p-6 border-t border-gray-200 space-y-4">
           <SecondaryCTA
-            href="/services"
+            href="/packages"
             icon={<ArrowRightIcon />}
             className="w-full py-4 text-lg"
             onClick={onClose}
           >
-            Explore Services
+            Explore Packages
           </SecondaryCTA>
 
-          <WhatsAppCTA href="https://wa.me/60174062788" external className="w-full py-4 text-lg" onClick={onClose}>
+          <WhatsAppCTA
+            href="https://wa.me/60174062788"
+            external
+            className="w-full py-4 text-lg"
+            onClick={onClose}
+          >
             WhatsApp Us
           </WhatsAppCTA>
         </div>
@@ -225,24 +230,19 @@ export default function NavigationBar() {
 
   const servicesSubmenu = [
     {
-      href: "/services/design",
-      label: "UI/UX Design",
-      description: "User interface and experience design",
+      href: "/packages#landing",
+      label: "Landing Page",
+      description: "Conversion-focused single page website",
     },
     {
-      href: "/services/development",
-      label: "Development",
-      description: "Full-stack web development",
+      href: "/packages#business",
+      label: "Professional Website",
+      description: "Multi-page company site with CMS",
     },
     {
-      href: "/services/consulting",
-      label: "Consulting",
-      description: "Technical strategy and advice",
-    },
-    {
-      href: "/services/branding",
-      label: "Branding",
-      description: "Brand identity and visual systems",
+      href: "/packages#custom",
+      label: "Custom Web System",
+      description: "Bookings, memberships, commerce and more",
     },
   ];
 
@@ -279,10 +279,10 @@ export default function NavigationBar() {
             {/* Enhanced Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-4">
               <NavLink href="/" label="Home" />
-              <NavLink href="/portfolio" label="Portfolio" />
+              <NavLink href="/work" label="Work" />
               <NavLink
-                href="/services"
-                label="Services"
+                href="/packages"
+                label="Packages"
                 hasSubmenu={true}
                 submenuItems={servicesSubmenu}
               />
@@ -312,8 +312,12 @@ export default function NavigationBar() {
 
               {/* Enhanced CTA Button */}
               <div className="ml-8">
-                <SecondaryCTA href="/services" icon={<ArrowRightIcon />} size="lg">
-                  Explore Services
+                <SecondaryCTA
+                  href="/packages"
+                  icon={<ArrowRightIcon />}
+                  size="lg"
+                >
+                  Explore Packages
                 </SecondaryCTA>
               </div>
             </nav>
@@ -379,7 +383,7 @@ export default function NavigationBar() {
               <div className="relative max-w-md mx-auto">
                 <input
                   type="text"
-                  placeholder="Search projects, articles, services..."
+                  placeholder="Search projects, articles, packages..."
                   className="w-full pl-10 pr-4 py-3 bg-olive-dark/80 border border-accent/20 rounded-xl text-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
                   autoFocus
                 />

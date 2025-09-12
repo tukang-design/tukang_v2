@@ -24,13 +24,14 @@ export default defineConfig([
   },
   // TypeScript recommended rules
   tseslint.configs.recommended,
-  // React recommended rules
-  pluginReact.configs.flat.recommended,
   // Project overrides to align with Next.js App Router and TS setup
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
+    plugins: { react: pluginReact },
     settings: { react: { version: "detect" } },
     rules: {
+      // Base React recommended rules (scoped only to source files)
+      ...pluginReact.configs.flat.recommended.rules,
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
       "react/no-unescaped-entities": "off",
@@ -43,8 +44,31 @@ export default defineConfig([
   // Global fallback rules (ensure disabling of legacy rules)
   { rules: { "react/react-in-jsx-scope": "off" }, ignores: [] },
   // Top-level ignores
-  { ignores: ["app/admin/**/*", "test-*.js", "*.old.*", "src/app/**/*"] },
+  {
+    ignores: [
+      "app/admin/**/*",
+      "test-*.js",
+      "*.old.*",
+      "src/app/**/*",
+      ".continue/**/*",
+      "sanity/**/*",
+      ".next/**/*",
+      "next-env.d.ts",
+      "**/*.md",
+      "package-lock.json",
+    ],
+  },
   // JSON/Markdown linting
-  { files: ["**/*.json"], plugins: { json }, language: "json/json", extends: ["json/recommended"] },
-  { files: ["**/*.md"], plugins: { markdown }, language: "markdown/gfm", extends: ["markdown/recommended"] },
+  {
+    files: ["**/*.json"],
+    plugins: { json },
+    language: "json/json",
+    extends: ["json/recommended"],
+  },
+  {
+    files: ["**/*.md"],
+    plugins: { markdown },
+    language: "markdown/gfm",
+    extends: ["markdown/recommended"],
+  },
 ]);

@@ -82,7 +82,7 @@ export default function ThankYouPage() {
 
               <div className="max-w-2xl mx-auto space-y-4 text-gray-300 leading-relaxed">
                 <p className="text-lg">
-                  Thank you for choosing Tukang Design for your digital project
+                  Thank you for choosing Tadal Studio for your digital project
                   needs. We're excited to help bring your vision to life.
                 </p>
                 <p>
@@ -224,7 +224,7 @@ export default function ThankYouPage() {
             </Link>
 
             <Link
-              href="/portfolio"
+              href="/work"
               className="px-8 py-4 bg-olive-dark border border-accent/20 text-accent rounded-xl font-medium transition-all duration-300 hover:border-accent/40 text-center"
             >
               View Our Work

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-// CTA components removed (unused)
+import { PrimaryCTA } from "../components/CTAButton";
 
 function SparkleIcon({ className = "w-5 h-5" }) {
   return (
@@ -51,12 +51,13 @@ export default function AboutPageClient() {
 
         <div className="absolute inset-0 opacity-90"></div>
         <div className="relative max-w-7xl mx-auto px-6 sm:px-8 py-24">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-brown-500 font-mono mb-8">
-            Seamless Website Development with Full-Stack Design.
+          <h1 className="text-4xl md:text-6xl font-normal text-accent/30 tracking-widest font-mono mb-2">
+            TADAL STUDIO
           </h1>
-          <h4 className="max-w-4xl text-slate-300 text-lg lg:text-xl mb-8 ml-0 mx-auto">
-            Strategy, design, and development delivered as one. Perfectly built
-            for your business needs.
+          <h4 className="max-w-4xl text-slate-300 font-medium text-lg lg:text-xl mb-8 ml-0 mx-auto">
+            We build credible, conversion-ready websites with an integrated team
+            for strategy, design, and code. Based in Malaysia, working
+            worldwide.
           </h4>
         </div>
 
@@ -67,89 +68,143 @@ export default function AboutPageClient() {
 
       {/* The Problem */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-            <div className="group bg-brown-950/50 border border-brown-700 rounded-2xl p-8 h-400 rounded-2xl p-8 h-full transition-colors hover:border-brown-500">
-              <div className="flex items-center gap-3">
-                <span className="text-slate-300 motion-safe:group-hover:animate-ping [animation-iteration-count:1]">
-                  <SparkleIcon className="w-6 h-6" />
-                </span>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-200 font-mono">
-                  The Problem
-                </h2>
-              </div>
+        <div className="max-w-4xl mx-auto px-6 sm:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-6 items-stretch">
+            <div className="group bg-brown-950/50 border border-brown-700 rounded-2xl p-8 h-full transition-colors hover:border-brown-500 text-center">
+              <h2 className="text-3xl md:text-4xl text-center font-bold text-slate-200 font-mono">
+                Why us
+              </h2>
               <div className="mt-3 h-px bg-brown-600 group-hover:bg-brown-500 transition-colors" />
               <p className="mt-4 text-slate-400 leading-relaxed">
-                Tukang Design was founded to solve a single, frustrating problem
-                in the web design industry: the costly gap between a great idea
-                and a flawless final product. This disconnect leads to
-                compromised vision, missed deadlines, and fragmented websites.
+                One partner from brief to launch. Clear packages. Fast delivery.
+                A path to grow with add-ons and care plans.
               </p>
+
+              <div className="mt-6">
+                <ol className="list-none text-slate-400 text-sm space-y-4">
+                  <li>
+                    <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                      <div className="flex w-fit gap-2 mx-auto">
+                        <h4 className="text-xl text-slate-100 font-semibold text-center">
+                          DISCOVER
+                        </h4>
+                      </div>
+                      <p className="mt-2 text-slate-400 text-sm">
+                        Align goals, audience, scope and success metrics in a
+                        short discovery session. We capture must-haves and
+                        nice-to-haves and produce a concise brief.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                      <div className="flex w-fit gap-2 mx-auto">
+                        <h4 className="text-xl text-slate-100 font-semibold text-center">
+                          DESIGN
+                        </h4>
+                      </div>
+                      <p className="mt-2 text-slate-400 text-sm">
+                        We map information architecture, produce wireframes and
+                        high-fidelity screens, and validate interactions with a
+                        prototype so stakeholders can preview the flow.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                      <div className="flex w-fit gap-2 mx-auto">
+                        <h4 className="text-xl text-slate-100 font-semibold text-center">
+                          BUILD
+                        </h4>
+                      </div>
+                      <p className="mt-2 text-slate-400 text-sm">
+                        Implement components and pages, connect integrations,
+                        and run QA. We deliver incremental builds so you can
+                        review early and often.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                      <div className="flex w-fit gap-2 mx-auto">
+                        <h4 className="text-xl text-slate-100 font-semibold text-center">
+                          LAUNCH
+                        </h4>
+                      </div>
+                      <p className="mt-2 text-slate-400 text-sm">
+                        Configure domain, analytics, tracking, and handover. We
+                        support the initial launch window and monitor health.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                      <div className="flex w-fit gap-2 mx-auto">
+                        <h4 className="text-xl text-slate-100 font-semibold text-center">
+                          SUPPORT
+                        </h4>
+                      </div>
+                      <p className="mt-2 text-slate-400 text-sm">
+                        Fixes and small enhancements for 30 days post-launch. We
+                        offer ongoing care plans for maintenance and growth.
+                      </p>
+                    </div>
+                  </li>
+                </ol>
+              </div>
             </div>
 
-            <div className="group bg-olive-950/50 border border-olive-700 rounded-2xl p-8 h-400 rounded-2xl p-8 h-full transition-colors hover:border-olive-500">
-              <div className="flex items-center gap-3">
-                <span className="text-olive-500 motion-safe:group-hover:animate-bounce">
-                  <BoltIcon className="w-6 h-6" />
-                </span>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-200 font-mono">
-                  The Solution
-                </h2>
-              </div>
+            <div className="group bg-olive-950/50 border border-olive-700 rounded-2xl text-center p-8 h-full transition-colors hover:border-olive-500">
+              <h2 className="text-center text-2xl md:text-3xl font-bold text-slate-200 font-mono">
+                Backgrounds & Stacks
+              </h2>
               <div className="mt-3 h-px bg-olive-600 group-hover:bg-olive-500 transition-colors" />
               <p className="mt-4 text-slate-400 leading-relaxed">
-                Our solution is the Full-Stack model. Where strategy, design,
-                and development are unified, handled by a single, expert team.
-                Just a seamless process from the first sketch to the final
-                launch.
+                Our team has more than 10 years delivering across agencies,
+                corporate initiatives, Big 4 programs, GLCs, and MNCs.
               </p>
-            </div>
-          </div>
-          {/* Philosophy */}
-          <div id="philosophy" className="mt-20 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-200 font-mono">
-              “Tukang”
-            </h2>
-            <p className="max-w-4xl mx-auto mt-4 text-slate-300 leading-relaxed">
-              The name 'Tukang' (craftsman) is at the heart of everything we do.
-              It represents our commitment to skill, precision, and building
-              digital experiences with genuine care. This is the clarity and
-              accountability your project deserves.
-            </p>
 
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-              <div className="group rounded-xl border bg-slate-950 border-slate-600 p-6 py-8 text-center transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
-                <div className="flex w-fit items-center gap-2 mx-auto">
-                  <SparkleIcon className="w-4 h-4 text-slate-500" />
-                  <div className="text-slate-300 font-semibold">Craft</div>
+              <div className="mt-6">
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {[
+                    "Webflow",
+                    "Framer",
+                    "WordPress",
+                    "WooCommerce",
+                    "Shopify",
+                    "Next.js",
+                    "Astro",
+                    "Vercel",
+                    "Sanity",
+                    "Strapi",
+                    "Stripe",
+                    "And more..",
+                  ].map((s) => (
+                    <span
+                      key={s}
+                      className="text-xs px-3 py-1 bg-olive-900 text-slate-300 rounded-full"
+                    >
+                      {s}
+                    </span>
+                  ))}
                 </div>
-                <p className="mt-2 text-slate-400 text-sm">
-                  Every detail matters — from typography to transitions to
-                  semantics.
-                </p>
-                <div className="mt-4 h-1 w-12 mx-auto rounded bg-slate-400/60 group-hover:w-16 transition-all" />
               </div>
-              <div className="group rounded-xl border bg-slate-950 border-slate-600 p-6 py-8 text-center transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
-                <div className="flex w-fit items-center gap-2 mx-auto">
-                  <BoltIcon className="w-4 h-4 text-slate-500" />
-                  <div className="text-slate-300 font-semibold">Clarity</div>
-                </div>
-                <p className="mt-2 text-gray-300 text-sm">
-                  One accountable team throughout — zero miscommunication.
+
+              <div className="mt-6 text-xs text-slate-500">
+                <p>
+                  Disclosure: Experience shown may include work delivered by
+                  team members in prior roles.
                 </p>
-                <div className="mt-4 h-1 w-12 mx-auto rounded bg-slate-400/60 group-hover:w-16 transition-all" />
               </div>
-              <div className="group rounded-xl border bg-slate-950 border-slate-600 p-6 py-8 text-center transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
-                <div className="flex w-fit items-center gap-2 mx-auto">
-                  <SparkleIcon className="w-4 h-4 text-slate-500" />
-                  <div className="text-slate-300 font-semibold">
-                    Consistency
-                  </div>
-                </div>
-                <p className="mt-2 text-gray-300 text-sm">
-                  From first sketch to final launch, the vision stays intact.
-                </p>
-                <div className="mt-4 h-1 w-12 mx-auto rounded bg-slate-400/60 group-hover:w-16 transition-all" />
+
+              <div className="mt-6 mx-auto">
+                <PrimaryCTA href="/planner" className="min-w-[50%]">
+                  Plan My Website
+                </PrimaryCTA>
               </div>
             </div>
           </div>

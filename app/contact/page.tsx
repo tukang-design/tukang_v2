@@ -1,31 +1,42 @@
-// Enhanced Contact Page with Modern Design
 "use client";
-import RegionSelector, {
-  getRegionDetails,
-} from "../components/region-selector";
+import RegionSelector from "../components/region-selector";
 import { useState } from "react";
-import { SecondaryCTA, WhatsAppCTA } from "../components/CTAButton";
+import { SecondaryCTA, WhatsAppCTA, PrimaryCTA } from "../components/CTAButton";
 
 export default function ContactPage() {
   const [region, setRegion] = useState<"MY" | "SG" | "INT">("INT");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const regionDetails = getRegionDetails(region);
+  const [status, setStatus] = useState<
+    | { type: "success"; message: string }
+    | { type: "error"; message: string }
+    | null
+  >(null);
+  const [thanks, setThanks] = useState(false);
 
   type ContactForm = {
     name: string;
     email: string;
     message: string;
     region: "MY" | "SG" | "INT";
+    company?: string;
+    phone?: string;
+    projectType?: string;
+    launchDate?: string;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setStatus(null);
 
     const target = e.target as typeof e.target & {
       name: { value: string };
       email: { value: string };
       message: { value: string };
+      company?: { value: string };
+      phone?: { value: string };
+      projectType?: { value: string };
+      launchDate?: { value: string };
     };
 
     const data: ContactForm = {
@@ -33,321 +44,324 @@ export default function ContactPage() {
       email: target.email.value,
       message: target.message.value,
       region,
+      company: target.company?.value || undefined,
+      phone: target.phone?.value || undefined,
+      projectType: target.projectType?.value || undefined,
+      launchDate: target.launchDate?.value || undefined,
     };
 
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      alert("Message sent successfully!");
-      // Reset form
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.message || "Failed to send message");
+      }
+      setStatus({ type: "success", message: "Message sent successfully." });
       (e.target as HTMLFormElement).reset();
+      setThanks(true);
     } catch (error) {
-      alert("Failed to send message. Please try again.");
+      setStatus({
+        type: "error",
+        message:
+          "Failed to send message. Please try again in a moment or WhatsApp us.",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-olive">
+    <div className="bg-olive page-fade">
       <RegionSelector onChange={setRegion} showSelector={false} />
 
       {/* Hero Section */}
-      <section className="py-20 bg-olive">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-6xl font-bold text-accent font-mono mb-6">
-              Get in Touch
+      <section className="py-16">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8">
+          <div className="mb-10">
+            <h1 className="text-4xl lg:text-6xl font-bold text-accent font-mono mb-4">
+              Contact Tadal Studio
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Not ready to decide yet or still figuring things out? Have
-              questions about our services? We'd love to hear from you.
+            <p className="text-xl text-gray-300 leading-relaxed">
+              Tell us what you want to build. We reply with a plan and a fixed
+              quote.
             </p>
-            <div className="mt-6 text-center text-lg font-semibold text-accent">
-              You see rates in {regionDetails.symbol}. For custom quotes, see
-              our Services page.
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-slate-300">
+              <div className="rounded-xl border border-accent/20 bg-olive-950 px-4 py-3">
+                Response time: within 1 business day
+              </div>
+              <div className="rounded-xl border border-accent/20 bg-olive-950 px-4 py-3">
+                Hours: Mon–Fri, 10:00–18:00 MYT
+              </div>
+              <div className="rounded-xl border border-accent/20 bg-olive-950 px-4 py-3">
+                Based in: Shah Alam, Malaysia. Working worldwide.
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Form & Options */}
-      <section className="py-20 bg-olive-dark/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="py-12">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8">
+          <div className="grid grid-cols-1 gap-8 items-start">
             {/* Contact Form */}
-            <div className="card">
-              <h2 className="text-3xl font-bold text-accent font-mono mb-6">
-                Send us a Message
+            <div className="rounded-2xl border border-accent/20 bg-olive-950 p-6 md:p-8">
+              <h2 className="text-3xl font-bold text-accent font-mono mb-2">
+                Contact form
               </h2>
-              <p className="text-gray-300 mb-8">
-                Fill out the form below and we'll get back to you within 24
-                hours.
+              <p className="text-gray-300 mb-6">
+                We only use your details to prepare your plan and quote.
               </p>
 
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-white font-semibold mb-2"
-                  >
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    aria-required="true"
-                    className="w-full bg-olive border border-brown-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
-                    placeholder="Your full name"
-                  />
-                </div>
+              {/* Inline status messages */}
+              <div aria-live="polite" className="min-h-[1.25rem] mb-2">
+                {status?.type === "success" && (
+                  <div className="text-sm text-[#39FF14] font-medium">
+                    {status.message}
+                  </div>
+                )}
+                {status?.type === "error" && (
+                  <div className="text-sm text-red-400 font-medium">
+                    {status.message}
+                  </div>
+                )}
+              </div>
 
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-white font-semibold mb-2"
-                  >
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    aria-required="true"
-                    className="w-full bg-olive border border-brown-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
-                    placeholder="your@email.com"
-                  />
-                </div>
+              {!thanks ? (
+                <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-white font-semibold mb-2"
+                    >
+                      Full name*
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      aria-required="true"
+                      className="w-full bg-olive-900/60 border border-olive-700/50 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
+                      placeholder="Your full name"
+                    />
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-white font-semibold mb-2"
-                  >
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={6}
-                    required
-                    aria-required="true"
-                    className="w-full bg-olive border border-brown-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-none focus-ring"
-                    placeholder="Tell us about your project, questions, or how we can help..."
-                  />
-                </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-white font-semibold mb-2"
+                    >
+                      Email*
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      aria-required="true"
+                      className="w-full bg-olive-900/60 border border-olive-700/50 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
+                      placeholder="your@email.com"
+                    />
+                  </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-accent text-olive font-bold py-4 px-6 rounded-lg hover:bg-accent/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-lg focus-ring"
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </button>
-              </form>
+                  <div>
+                    <label
+                      htmlFor="company"
+                      className="block text-white font-semibold mb-2"
+                    >
+                      Company (optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      className="w-full bg-olive-900/60 border border-olive-700/50 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
+                      placeholder="Your company name"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-white font-semibold mb-2"
+                    >
+                      WhatsApp or phone (optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      className="w-full bg-olive-900/60 border border-olive-700/50 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
+                      placeholder="e.g. +60 17-406 2788"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="projectType"
+                      className="block text-white font-semibold mb-2"
+                    >
+                      Project type*
+                    </label>
+                    <select
+                      id="projectType"
+                      name="projectType"
+                      required
+                      aria-required="true"
+                      className="w-full bg-olive-900/60 border border-olive-700/50 rounded-lg px-4 py-3 text-white focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select an option
+                      </option>
+                      <option>Landing Page</option>
+                      <option>Business Website</option>
+                      <option>Custom Web System</option>
+                      <option>Not sure</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="launchDate"
+                      className="block text-white font-semibold mb-2"
+                    >
+                      Ideal launch date (optional)
+                    </label>
+                    <input
+                      type="date"
+                      id="launchDate"
+                      name="launchDate"
+                      className="w-full bg-olive-900/60 border border-olive-700/50 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors focus-ring"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block text-white font-semibold mb-2"
+                    >
+                      Message*
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={6}
+                      required
+                      aria-required="true"
+                      className="w-full bg-olive-900/60 border border-olive-700/50 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-none focus-ring"
+                      placeholder="Tell us about your project, questions, or how we can help..."
+                    />
+                  </div>
+
+                  <div className="text-sm text-slate-400">
+                    We’ll only use this info to contact you about your request.
+                    See our{" "}
+                    <a
+                      href="/privacy"
+                      className="underline hover:text-slate-300"
+                    >
+                      Privacy Policy
+                    </a>
+                    .
+                  </div>
+
+                  <PrimaryCTA
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </PrimaryCTA>
+                </form>
+              ) : (
+                <div className="text-center py-8">
+                  <h3 className="text-2xl font-bold text-accent font-mono mb-2">
+                    Thanks — we’ve got your message
+                  </h3>
+                  <p className="text-gray-300 mb-4">
+                    We will reply within 1 business day with next steps. If it
+                    is urgent, WhatsApp us for a faster response.
+                  </p>
+                  <WhatsAppCTA
+                    onClick={() =>
+                      window.dispatchEvent(new Event("open-wa-fab"))
+                    }
+                    size="md"
+                    className="mt-2"
+                  >
+                    WhatsApp Us
+                  </WhatsAppCTA>
+                </div>
+              )}
             </div>
 
             {/* Quick Actions & Contact Info */}
             <div className="space-y-8">
               {/* Quick Start Options */}
-              <div className="card">
+              <div className="rounded-2xl border border-accent/20 bg-olive-950 p-6 md:p-8">
                 <h3 className="text-2xl font-bold text-accent font-mono mb-6">
-                  Quick Start Options
+                  Prefer WhatsApp?
                 </h3>
-
-                <div className="space-y-4">
-                  <SecondaryCTA
-                    href="/services"
-                    className="w-full"
-                    icon={
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 4V3a2 2 0 012-2h4a2 2 0 012 2v4M6 21h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                    }
-                  >
-                    Explore Services
-                  </SecondaryCTA>
-
-                  <SecondaryCTA
-                    href="https://calendar.app.google/SrBsskVewCfjWUv16"
-                    external
-                    className="w-full"
-                    icon={
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 4V3a2 2 0 012-2h4a2 2 0 012 2v4M6 21h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                    }
-                  >
-                    Book Discovery Call
-                  </SecondaryCTA>
-
-                  <WhatsAppCTA
-                    href="https://wa.me/601126472187"
-                    external
-                    className="w-full"
-                    icon={
-                      <svg
-                        className="w-5 h-5"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M20.52 3.48A11.78 11.78 0 0012.02 0C5.46 0 .2 5.26.2 11.74c0 2.07.54 4.09 1.57 5.88L0 24l6.55-1.72a11.7 11.7 0 005.47 1.39h.01c6.55 0 11.82-5.26 11.82-11.74 0-3.14-1.23-6.08-3.33-8.28zM12.03 21.2h-.01a9.44 9.44 0 01-4.81-1.32l-.34-.2-3.89 1.02 1.04-3.79-.22-.35a9.38 9.38 0 01-1.47-5.09c0-5.19 4.24-9.42 9.45-9.42 2.52 0 4.89.98 6.68 2.76 1.78 1.78 2.76 4.15 2.76 6.66 0 5.19-4.24 9.42-9.45 9.42zm5.49-7.08c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.36.22-.66.07-.3-.15-1.28-.47-2.44-1.5-.9-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.13-.13.3-.34.45-.5.15-.17.2-.28.3-.48.1-.2.05-.37-.02-.52-.07-.15-.68-1.63-.94-2.24-.25-.6-.5-.52-.68-.53h-.58c-.2 0-.52.07-.8.37-.28.3-1.05 1.03-1.05 2.5 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.48.71.31 1.27.5 1.7.64.71.22 1.36.19 1.87.12.57-.08 1.77-.72 2.02-1.43.25-.71.25-1.32.17-1.43-.07-.11-.27-.18-.57-.33z" />
-                      </svg>
-                    }
-                  >
-                    WhatsApp Us
-                  </WhatsAppCTA>
-                </div>
+                <p className="text-gray-300 mb-4">Tap to message us.</p>
+                <WhatsAppCTA
+                  onClick={() => window.dispatchEvent(new Event("open-wa-fab"))}
+                  className="w-full"
+                >
+                  WhatsApp Us
+                </WhatsAppCTA>
               </div>
 
               {/* Contact Information */}
-              <div className="card">
+              <div className="rounded-2xl border border-accent/20 bg-olive-950 p-6 md:p-8">
                 <h3 className="text-2xl font-bold text-accent font-mono mb-6">
-                  Contact Information
+                  Email
                 </h3>
-
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mr-4">
-                      <svg
-                        className="w-5 h-5 text-accent"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold">Email</p>
-                      <a
-                        href="mailto:hello@tukangdesign.com"
-                        className="text-accent hover:text-accent/80 transition-colors"
-                      >
-                        hello@tukangdesign.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mr-4">
-                      <svg
-                        className="w-5 h-5 text-accent"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold">WhatsApp</p>
-                      <a
-                        href="https://wa.me/60174062788"
-                        className="text-accent hover:text-accent/80 transition-colors"
-                      >
-                        +60 17-406 2788
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mr-4">
-                      <svg
-                        className="w-5 h-5 text-accent"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold">Response Time</p>
-                      <p className="text-gray-300">Within 24 hours</p>
-                    </div>
-                  </div>
-                </div>
+                <a
+                  href="mailto:hello@tadal.studio"
+                  className="text-accent hover:text-accent/80 transition-colors"
+                >
+                  hello@tadal.studio
+                </a>
               </div>
 
               {/* FAQ Preview */}
-              <div className="bg-olive-dark/50 rounded-2xl p-8 border border-brown-500/30">
+              <div className="rounded-2xl border border-accent/20 bg-olive-950 p-6 md:p-8">
                 <h3 className="text-2xl font-bold text-accent font-mono mb-6">
-                  Common Questions
+                  Request a short call
                 </h3>
+                <p className="text-gray-300 mb-3">
+                  Ask for a 15 minute discovery call. We will send a calendar
+                  link.
+                </p>
+                <SecondaryCTA
+                  href="https://calendar.app.google/SrBsskVewCfjWUv16"
+                  external
+                >
+                  Request a 15 minute call
+                </SecondaryCTA>
+              </div>
 
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">
-                      How long does a project take?
-                    </h4>
-                    <p className="text-gray-300 text-sm">
-                      Landing pages: 3-5 days. Business websites: 1-2 weeks.
-                      Custom systems: 2-8 weeks.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">
-                      Do you offer revisions?
-                    </h4>
-                    <p className="text-gray-300 text-sm">
-                      Yes! All packages include 2 rounds of revisions to ensure
-                      you're 100% satisfied.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">
-                      What's included in support?
-                    </h4>
-                    <p className="text-gray-300 text-sm">
-                      30 days of free post-launch support for bug fixes and
-                      minor adjustments.
-                    </p>
-                  </div>
-                </div>
+              {/* What happens next */}
+              <div className="rounded-2xl border border-accent/20 bg-olive-950 p-6 md:p-8">
+                <h3 className="text-2xl font-bold text-accent font-mono mb-6">
+                  What happens next
+                </h3>
+                <ul className="list-disc pl-5 text-slate-300 space-y-2">
+                  <li>
+                    We review your message and reply within 1 business day.
+                  </li>
+                  <li>If helpful, we’ll propose a 15 minute discovery call.</li>
+                  <li>
+                    You receive a plan, timeline, and a fixed quote.
+                    Installments are available.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

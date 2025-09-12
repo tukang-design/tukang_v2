@@ -5,12 +5,45 @@ import RegionSelector from "./region-selector";
 import {
   PrimaryCTA,
   SecondaryCTA,
-  TertiaryCTA,
   ArrowDownIcon,
-  ArrowRightIcon,
 } from "../components/CTAButton";
 import ContactSection from "../components/ContactSection";
 import ClayBrowserMockup from "./ClayBrowserMockup";
+function SparkleIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+    >
+      <path
+        d="M12 2l2.2 5.6L20 10l-5.8 2.4L12 18l-2.2-5.6L4 10l5.8-2.4L12 2z"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="opacity-90"
+      />
+    </svg>
+  );
+}
+
+function BoltIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+    >
+      <path
+        d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 interface HomePageClientProps {
   children?: React.ReactNode;
@@ -20,6 +53,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
   const [region, setRegion] = useState("INT"); // Default to international while detecting
   const [animationStarted, setAnimationStarted] = useState(false);
   const [marqueeRunning, setMarqueeRunning] = useState(false);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(0);
 
   useEffect(() => {
     // Start animation after component mounts
@@ -35,10 +69,10 @@ export default function HomePageClient({ children }: HomePageClientProps) {
 
   // Animation words for the homepage headline
   const homepageHeadlineWords = [
-    { text: "Your", color: "text-brown-400", delay: 0 },
-    { text: "Vision,", color: "text-brown-400", delay: 200 },
-    { text: "Perfectly", color: "text-white", delay: 600 },
-    { text: "Built.", color: "text-white", delay: 800 },
+    { text: "GET YOUR", color: "text-accent/40", delay: 0 },
+    { text: "BUSINESS", color: "text-accent/40", delay: 200 },
+    { text: "ONLINE", color: "text-accent/40", delay: 600 },
+    { text: "THE RIGHT WAY", color: "text-accent/70", delay: 800 },
   ];
 
   return (
@@ -179,7 +213,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
         }
       `}</style>
       {/* HERO SECTION - AWARENESS */}
-      <section className="relative max-h-[85vh] overflow-visible pt-12">
+      <section className="relative max-h-[78vh] overflow-visible pt-12">
         <div className="absolute inset-0 bg-olive-950 opacity-90"></div>
         <ClayBrowserMockup
           className={`relative py-4 lg:py-6 ${
@@ -187,14 +221,6 @@ export default function HomePageClient({ children }: HomePageClientProps) {
           }`}
         >
           <div className="flex flex-col justify-evenly min-h-[600px] md:min-h-[560px] text-center pb-6">
-            {/* Status Badge */}
-            <div className="inline-flex items-center fit-content mx-auto px-4 py-2 rounded-full bg-olive-700/80 border border-olive-400/70 mb-8 mockup-stage-1">
-              <span className="w-2 h-2 bg-[#39FF14] rounded-full mr-2 animate-pulse"></span>
-              <span className="text-[#39FF14] text-sm font-medium">
-                Available for New Projects
-              </span>
-            </div>
-
             {/* Main Headline with Animated Text Reveal */}
             <h1 className="max-w-7xl mx-auto text-5xl lg:text-7xl font-bold mb-6 font-mono leading-tight mockup-stage-2">
               {homepageHeadlineWords.map((word, index) => (
@@ -212,201 +238,152 @@ export default function HomePageClient({ children }: HomePageClientProps) {
                 </span>
               ))}
             </h1>
-
-            {/* Animated Banners (inside mockup) */}
-            <div
-              className={`space-y-4 ${
-                animationStarted
-                  ? "animate-subtitle mockup-stage-3"
-                  : "opacity-0"
+            {/* Subheadline */}
+            <p
+              className={`text-xl text-gray-300 font-normal max-w-3xl mx-auto leading-relaxed mockup-stage-3 ${
+                animationStarted ? "" : "opacity-0"
               }`}
             >
-              {/* Top banner - END-TO-END moving left, slanted */}
-              <div className="marquee-container w-full my-6">
-                <div
-                  className={`marquee-slide-left ${
-                    animationStarted ? "is-in" : ""
-                  }`}
-                >
-                  <div className="marquee-left">
-                    <div
-                      className={`marquee-track ${
-                        marqueeRunning ? "running" : ""
-                      }`}
-                    >
-                      <div className="banner-segment bg-olive-950 text-accent font-mono text-4xl md:text-3xl">
-                        <span>END-TO-END DESIGN & DEVELOPMENT</span>
-                        <span>END-TO-END DESIGN & DEVELOPMENT</span>
-                      </div>
-                      <div className="banner-segment bg-olive-950 text-accent font-mono text-4xl md:text-3xl">
-                        <span>END-TO-END DESIGN & DEVELOPMENT</span>
-                        <span>END-TO-END DESIGN & DEVELOPMENT</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              Strategy, design, and code in one team. Launch fast with pricing
+              you can plan for.
+            </p>
+
             {/* CTA inside mockup footer area */}
-            <div className="pt-4 flex items-center justify-center">
+            <div className="pt-4 flex items-center justify-center gap-4">
+              <PrimaryCTA href="/planner">Plan My Website</PrimaryCTA>
               <SecondaryCTA
-                href="#services"
+                href="/packages"
                 icon={
                   <ArrowDownIcon className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-200" />
                 }
               >
-                View Our Services
+                View Packages
               </SecondaryCTA>
+            </div>
+
+            {/* Trust Badge */}
+            <div
+              className={`flex flex-wrap items-center justify-center gap-2 text-center mockup-stage-3 ${
+                animationStarted ? "" : "opacity-0"
+              }`}
+            >
+              <div
+                className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-olive-800/70 border border-olive-400/50 text-slate-100 text-sm shadow-sm backdrop-blur-sm hover:border-olive-300/60 transition-colors max-w-fit"
+                role="listitem"
+                aria-label="Transparent pricing from RM1,500"
+              >
+                <span className="material-symbols-outlined text-accent/50 text-xs leading-none">
+                  price_check
+                </span>
+                <span className="font-normal">Transparent pricing</span>
+              </div>
+
+              <div
+                className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-olive-800/70 border border-olive-400/50 text-slate-100 text-sm shadow-sm backdrop-blur-sm hover:border-olive-300/60 transition-colors max-w-fit"
+                role="listitem"
+                aria-label="7 day delivery option"
+              >
+                <span className="material-symbols-outlined text-accent/50 text-xs leading-none">
+                  schedule
+                </span>
+                <span className="font-medium">Go-Live in 7 Days</span>
+              </div>
+
+              <div
+                className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-olive-800/70 border border-olive-400/50 text-slate-100 text-sm shadow-sm backdrop-blur-sm hover:border-olive-300/60 transition-colors max-w-fit"
+                role="listitem"
+                aria-label="Remote friendly across time zones"
+              >
+                <span className="material-symbols-outlined text-accent/50 text-xs leading-none">
+                  public
+                </span>
+                <span className="font-medium">Available Worldwide</span>
+              </div>
             </div>
           </div>
         </ClayBrowserMockup>
       </section>
 
-      <section className="relative z-20 -mt-16 pt-20 pb-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6 text-white font-mono">
-              A Better Way <br />
-              to Build Your Website.
+      {/* POSITIONING */}
+      <section className="relative z-20 pt-20 pb-20 bg-background">
+        <div className="max-w-7xl mx-auto relative z-10 px-6 sm:px-8">
+          <div className="text-center mb-12 px-4 sm:px-6 lg:px-8">
+            <h2 className="text-4xl font-bold mb-6 text-slate-200 font-mono">
+              Built to Ship
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Our seamless, end-to-end process is built on a foundation of
-              clarity, accountability, and a unified vision from the first
-              sketch to the final launch.
+            <p className="text-lg text-slate-400 max-w-4xl mx-auto leading-relaxed font-semibold mb-4">
+              We are a full-stack design and development studio. Our team
+              backgrounds span more than 10 years across agencies, corporate
+              initiatives, Big 4 consulting, GLCs, and MNCs.{" "}
+            </p>
+            <p className="text-lg text-slate-400 max-w-4xl mx-auto leading-relaxed font-semibold">
+              We exist to remove handoff gaps so business owners get a site that
+              looks right and works right.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Unified Vision */}
-            <div className="bg-slate-950 border border-slate-600 rounded-2xl p-6 text-center relative z-20 transition-transform hover:bg-slate-950/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
-              <div className="w-20 h-20 bg-slate-300/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-300/20 transition-colors duration-300 mx-auto">
-                {/* Unified Vision Icon */}
-                <svg
-                  className="w-10 h-10 text-slate-500"
-                  viewBox="0 0 8.4666665 8.466667"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="m6.6094358.26460707a.26460982.26460982 0 0 0 -.1834512.07803141l-.7932333.79530032a.26460982.26460982 0 0 0 -.031006.037207c-.7215352-.35529475-1.5184459-.45572996-2.2753133-.32246091-.8672467.15270461-1.6816093.61170611-2.2639446 1.34772141-1.16467048 1.4720306-1.04142903 3.5881073.2852539 4.9159791 1.3266833 1.3278718 3.442906 1.4522231 4.9159791.2888713 1.3797685-1.089665 1.7906786-2.9904373 1.0283611-4.5402914a.26460982.26460982 0 0 0 .03824-.032039l.792717-.7927169a.26460982.26460982 0 0 0 0-.3751709l-.4743897-.4728394.2108399-.2108399a.26460982.26460982 0 0 0 -.1932697-.45320232.26460982.26460982 0 0 0 -.1819011.08009848l-.2092896.20928955-.4743897-.47490643a.26460982.26460982 0 0 0 -.1912028-.07803141zm.0041341.64078779.2868041.28680424-.8164875.8164876v-.5761922zm-2.6329143.41806234c.5383268.0023 1.0801419.144271 1.5740642.429948v.7844482l-.1033528.1033529c-.4079172-.3262043-.9237539-.5229655-1.4846639-.5229655-1.3119945 0-2.3807334 1.0687388-2.3807334 2.3807333 0 1.3119942 1.0687389 2.3807333 2.3807334 2.3807333 1.3119941 0 2.3828002-1.0687391 2.3828002-2.3807333 0-.561058-.196714-1.0765888-.5234821-1.4841472l.1038696-.1038696h.7839314c.7891542 1.3626913.4645906 3.0988467-.7782471 4.0803712-1.2657627.9996295-3.074755.8929492-4.2147299-.2480469-1.13997471-1.1409963-1.24312519-2.9498629-.2423625-4.2147299.6254768-.790542 1.5567783-1.2091309 2.5021729-1.2050945zm3.2943727.2423625.2873211.2868042-.5291667.5291667h-.5741252zm-3.3083252 1.0815877c.4170775 0 .8002717.1381218 1.1094929.3689697l-.5751587.5751587c-.1576342-.0935384-.3390659-.1508951-.5343342-.1508951-.5813677 0-1.0562662.4769657-1.0562665 1.0583334 0 .5813676.4748988 1.0588501 1.0562665 1.0588501.5813676 0 1.0588501-.4774825 1.0588501-1.0588501 0-.1948863-.057695-.375357-.1508954-.5327841l.5756757-.5756754c.2312869.3088593.3700031.6913264.3700031 1.1084595 0 1.0260113-.8276222 1.8515666-1.8536335 1.8515666-1.0260116 0-1.8515667-.8255553-1.8515667-1.8515666 0-1.0260114.8255551-1.8515667 1.8515667-1.8515667zm0 1.3224c.04763 0 .092715.0082.1364258.019637l-.3219443.3219443a.26460982.26460982 0 1 0 .3731038.3751707l.3229777-.3229776c.011254.043379.018604.088165.018604.1353923 0 .2953848-.2337822.5296834-.5291667.5296834-.2953848 0-.5270998-.2342986-.5270998-.5296834s.231715-.5291667.5270995-.5291667z" />
-                </svg>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            <div className="group rounded-xl border bg-slate-950 border-slate-600 p-6 py-8 text-center transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+              <div className="flex w-fit items-center gap-2 mx-auto">
+                <SparkleIcon className="w-4 h-4 text-slate-500" />
+                <div className="text-slate-100 font-semibold">
+                  One team from strategy to ship
+                </div>
               </div>
-              <h3 className="text-2xl font-bold text-slate-300 mb-4">
-                A Unified Vision
-              </h3>
-              <p className="text-slate-400 leading-relaxed">
-                With a single expert team managing both design and development,
-                your vision remains pure and uncompromised.
+              <p className="mt-2 text-slate-400 text-sm">
+                No gaps between branding, UX, and development. Decisions stay
+                aligned throughout the project lifecycle.
               </p>
+              <div className="mt-4 h-1 w-12 mx-auto rounded bg-slate-400/60 group-hover:w-16 transition-all" />
             </div>
-
-            {/* Efficient Process */}
-            <div className="bg-slate-950 border border-slate-600 rounded-2xl p-6 text-center relative z-20 transition-transform hover:bg-slate-950/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
-              <div className="w-20 h-20 bg-slate-300/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-300/20 transition-colors duration-300 mx-auto">
-                {/* Efficient Process Icon */}
-                <svg
-                  className="w-10 h-10 text-slate-500"
-                  viewBox="0 -46 512 512"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="m435.960938 302.972656-17.921876 24.054688 24.121094 17.972656h-53.058594c-6.675781-25.847656-30.195312-45-58.101562-45h-150c-27.90625 0-51.425781 19.152344-58.101562 45h-32.898438c-33.085938 0-60-26.914062-60-60s26.914062-60 60-60h32.898438c6.675781 25.847656 30.195312 45 58.101562 45h150c27.90625 0 51.425781-19.152344 58.101562-45h31.898438c24.050781 0 46.792969-9.328125 64.042969-26.265625 17.382812-17.066406 26.957031-39.703125 26.957031-63.734375s-9.574219-46.667969-26.957031-63.734375c-17.25-16.9375-39.992188-26.265625-64.042969-26.265625h-31.898438c-6.675781-25.847656-30.195312-45-58.101562-45h-150c-27.90625 0-51.425781 19.152344-58.101562 45h-11.898438l-56-42-18 24 24 18h-61v30h61l-24 18 18 24 56-42h11.898438c6.675781 25.847656 30.195312 45 58.101562 45h150c27.90625 0 51.425781-19.152344 58.101562-45h31.898438c33.636719 0 61 26.914062 61 60s-27.363281 60-61 60h-31.898438c-6.675781-25.847656-30.195312-45-58.101562-45h-150c-27.90625 0-51.425781 19.152344-58.101562 45h-32.898438c-49.625 0-90 40.375-90 90s40.375 90 90 90h32.898438c6.675781 25.847656 30.195312 45 58.101562 45h150c27.90625 0 51.425781-19.152344 58.101562-45h53.058594l-24.121094 17.972656 17.921876 24.054688 76.039062-57.027344zm-104.960938-212.972656h-150c-16.542969 0-30-13.457031-30-30s13.457031-30 30-30h150c16.542969 0 30 13.457031 30 30s-13.457031 30-30 30zm-150 90h150c16.542969 0 30 13.457031 30 30s-13.457031 30-30 30h-150c-16.542969 0-30-13.457031-30-30s13.457031-30 30-30zm150 210h-150c-16.542969 0-30-13.457031-30-30s13.457031 30-30 30h150c16.542969 0 30 13.457031 30 30s-13.457031 30-30 30zm0 0" />
-                </svg>
+            <div className="group rounded-xl border bg-slate-950 border-slate-600 p-6 py-8 text-center transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+              <div className="flex w-fit items-center gap-2 mx-auto">
+                <BoltIcon className="w-4 h-4 text-slate-500" />
+                <div className="text-slate-100 font-semibold">
+                  Built for clarity and conversion
+                </div>
               </div>
-              <h3 className="text-2xl font-bold text-slate-300 mb-4">
-                An Efficient Process
-              </h3>
-              <p className="text-slate-400 leading-relaxed">
-                We eliminate the traditional bottlenecks. This means a faster
-                development cycle and fewer surprises.
+              <p className="mt-2 text-slate-400 text-sm">
+                Information architecture, persuasive copy, and fast pages that
+                support campaign performance and conversions.
               </p>
+              <div className="mt-4 h-1 w-12 mx-auto rounded bg-slate-400/60 group-hover:w-16 transition-all" />
             </div>
-
-            {/* Cohesive Final Product */}
-            <div className="bg-slate-950 border border-slate-600 rounded-2xl p-6 text-center relative z-20 transition-transform hover:bg-slate-950/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
-              <div className="w-20 h-20 bg-slate-300/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-300/20 transition-colors duration-300 mx-auto">
-                {/* Cohesive Final Product Icon */}
-                <svg
-                  className="w-10 h-10 text-slate-500"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="m10.6049 1.32445c.8787-.432601 1.9115-.4326 2.7902 0l8.752 4.30902c1.1372.55989 1.1372 2.17318 0 2.73306l-2.3022 1.13346 2.3022 1.13341c1.1372.5599 1.1372 2.1732 0 2.7331l-2.3022 1.1335 2.3022 1.1334c1.1372.5599 1.1372 2.1732 0 2.7331l-8.752 4.309c-.8787.4326-1.9115.4326-2.7902 0l-8.75201-4.309c-1.13719-.5599-1.137183-2.1732 0-2.7331l2.30219-1.1334-2.30219-1.1335c-1.13719-.5599-1.137183-2.1732 0-2.7331l2.30217-1.13341-2.30217-1.13346c-1.13719-.55989-1.137183-2.17318 0-2.73306zm1.9067 1.79432c-.3216-.15836-.7016-.15836-1.0232 0l-7.88322 3.88123 7.88322 3.8812c.3216.1584.7016.1584 1.0232 0l7.8832-3.8812zm-6.09261 7.49583-2.81381 1.3854 7.88322 3.8812c.3216.1584.7016.1584 1.0232 0l7.8832-3.8812-2.8138-1.3854-4.1859 2.061c-.8787.4326-1.9115.4326-2.7902-.0001zm.00002 5-2.81383 1.3854 7.88322 3.8812c.3216.1584.7016.1584 1.0232 0l7.8832-3.8812-2.8138-1.3854-4.1859 2.0609c-.8787.4326-1.9115.4326-2.7902 0z"
-                  />
-                </svg>
+            <div className="group rounded-xl border bg-slate-950 border-slate-600 p-6 py-8 text-center transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+              <div className="flex w-fit items-center gap-2 mx-auto">
+                <SparkleIcon className="w-4 h-4 text-slate-500" />
+                <div className="text-slate-100 font-semibold">
+                  Global delivery, local practicality
+                </div>
               </div>
-              <h3 className="text-2xl font-bold text-slate-300 mb-4">
-                A Cohesive Final Product
-              </h3>
-              <p className="text-slate-400 leading-relaxed">
-                The result is a website where design and functionality are in
-                perfect harmony.
+              <p className="mt-2 text-slate-400 text-sm">
+                Prices shown in MYR. Quotes and invoices available in USD or
+                SGD. Meetings scheduled in MYT with options for Europe, MENA,
+                and APAC.
               </p>
+              <div className="mt-4 h-1 w-12 mx-auto rounded bg-slate-400/60 group-hover:w-16 transition-all" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* PORTFOLIO PREVIEW SECTION - CONSIDERATION */}
-      <section className="py-20 bg-olive">
-        <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            {/* Left Column - Title and Copy (1/3 width) */}
-            <div className="lg:col-span-4 lg:pr-8">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-accent font-mono leading-tight">
-                Our Work
-              </h2>
-              <p className="text-xl text-gray-300 leading-relaxed mb-8">
-                Explore these case studies to see how our integrated process
-                delivers websites that not only look stunning but also achieve
-                real business goals.
-              </p>
-              {/* CTA moved after portfolio cards for better mobile order */}
-              <div className="mt-10 sm:text-center lg:text-left">
-                <SecondaryCTA
-                  href="/portfolio"
-                  icon={<ArrowRightIcon />}
-                  size="lg"
-                  className="w-full sm:w-auto"
-                >
-                  View All Our Work
-                </SecondaryCTA>
-              </div>
-            </div>
+      {/* WIP Content / Don't Remove */}
 
-            {/* Right Column - Portfolio Showcase (2/3 width) */}
-            <div className="lg:col-span-8 lg:pl-8">
-              {/* Portfolio Preview Component */}
-              {children}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES PREVIEW SECTION - INTEREST */}
-      <section id="services" className="relative z-20 py-20 bg-olive">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-accent font-mono leading-tight">
-              End-to-End
-              <br />
-              <span className="text-white">Design & Development.</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              A seamless, unified process for building websites that are as
-              technically sound as they are beautiful.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {/* Lead Generation Landing Page */}
-            <div className="card relative justify-items-center z-20 text-center">
-              <div className="w-16 h-16 mx-auto bg-brown-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brown-500/20 transition-colors duration-300">
+      {/* SERVICE TIERS - pulled from services page */}
+      <section className="w-full px-6 sm:px-8 py-16 bg-olive-950 text-center">
+        <h2 className="text-2xl lg:text-3xl font-bold text-white mb-2">
+          Start Here
+        </h2>
+        <p className="text-gray-300 mb-8">
+          Choose a pillar, then add optional add-ons as needed.
+        </p>
+        <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-3 gap-8 mb-8">
+          {/* Tier 1: Landing */}
+          <div className="text-left bg-olive-950 p-8 rounded-2xl border border-accent/20 flex flex-col h-full">
+            <div className="mb-4">
+              <div className="w-16 h-16 bg-brown-400/10 rounded-2xl flex items-center justify-center mb-4">
                 <svg
-                  className="w-8 h-8 text-brown-700"
+                  className="w-8 h-8 text-brown-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -419,20 +396,29 @@ export default function HomePageClient({ children }: HomePageClientProps) {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Lead Generation Landing Page
+              <h3 className="text-2xl font-bold mb-1 text-brown-400">
+                Launch Landing Page
               </h3>
-              <p className="text-xl text-gray-300 leading-relaxed mb-4">
-                A single, high-impact page designed to capture leads and convert
-                visitors into qualified inquiries.
+              <p className="text-slate-300 text-md leading-relaxed">
+                A focused page that explains your offer and captures leads.
               </p>
             </div>
+            <span className="w-fit text-xs text-accent/50 py-1 px-4 bg-accent/10 rounded-full mb-6">
+              Launch in 5 - 7 days
+            </span>
 
-            {/* Professional Business Website */}
-            <div className="card relative justify-items-center z-20 text-center">
-              <div className="w-16 h-16 mx-auto bg-brown-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brown-500/20 transition-colors duration-300">
+            <div className="bg-olive-900 px-4 py-3 rounded-xl flex items-center gap-4 justify-between mt-auto">
+              <p className="text-slate-300 text-xs">Price starts from </p>
+              <p className="text-brown-400 text-lg">RM1,500</p>
+            </div>
+          </div>
+
+          {/* Tier 2: Business */}
+          <div className="text-left bg-olive-950 p-8 rounded-2xl border border-accent/20 flex flex-col h-full">
+            <div className="mb-4">
+              <div className="w-16 h-16 bg-brown-400/10 rounded-2xl flex items-center justify-center mb-4">
                 <svg
-                  className="w-8 h-8 text-brown-700"
+                  className="w-8 h-8 text-brown-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -441,24 +427,32 @@ export default function HomePageClient({ children }: HomePageClientProps) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 1.5M7 13l1.5 1.5M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z"
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Professional Business Website
+              <h3 className="text-2xl font-bold mb-1 text-brown-400">
+                Professional Website
               </h3>
-              <p className="text-xl text-gray-300 leading-relaxed mb-4">
-                A complete, multi-page site to build trust, showcase your brand,
-                and establish credibility.
+              <p className="text-slate-300 text-md leading-relaxed">
+                A trust-building company site ready for campaigns.
               </p>
             </div>
+            <span className="w-fit text-xs text-accent/50 py-1 px-4 bg-accent/10 rounded-full mb-6">
+              Launch in 10 - 14 days
+            </span>
+            <div className="bg-olive-900 px-4 py-3 rounded-xl flex items-center gap-4 justify-between mt-auto">
+              <p className="text-slate-300 text-xs">Price starts from </p>
+              <p className="text-accent/50 text-lg">RM3,000</p>
+            </div>
+          </div>
 
-            {/* Custom Web Platforms */}
-            <div className="card relative z-20 justify-items-center text-center">
-              <div className="w-16 h-16 mx-auto bg-brown-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brown-500/20 transition-colors duration-300">
+          {/* Tier 3: Advanced */}
+          <div className="text-left bg-olive-950 p-8 rounded-2xl border border-accent/20 flex flex-col h-full">
+            <div className="mb-4">
+              <div className="w-16 h-16 bg-brown-400/10 rounded-2xl flex items-center justify-center mb-4">
                 <svg
-                  className="w-8 h-8 text-brown-700"
+                  className="w-8 h-8 text-brown-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -471,24 +465,315 @@ export default function HomePageClient({ children }: HomePageClientProps) {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Custom Web Platforms
+              <h3 className="text-2xl font-bold mb-1 text-brown-400">
+                Custom Web System
               </h3>
-              <p className="text-xl text-gray-300 leading-relaxed mb-4">
-                Advanced solutions with e-commerce, booking systems, custom CMS,
-                or membership portals.
+              <p className="text-slate-300 text-md leading-relaxed">
+                Features tailored for bookings, membership, dashboards, or
+                internal workflows.
               </p>
             </div>
+            <span className="w-fit text-xs text-slate-400/50 py-1 px-4 bg-slate-400/10 rounded-full mb-6">
+              Timeline by project scope
+            </span>
+
+            <div className="bg-olive-900 px-4 py-3 rounded-xl flex items-center gap-4 justify-between mt-auto">
+              <p className="text-slate-300 text-xs">Price starts from </p>
+              <p className="text-accent/50 text-lg">RM5,000+</p>
+            </div>
+          </div>
+        </div>
+        <SecondaryCTA href="/packages">See Package Details</SecondaryCTA>
+      </section>
+
+      {/* FROM PLAN TO LAUNCH - two-column sticky left + vertical timeline */}
+      <section className="py-16 bg-olive max-h-[95%]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left: sticky title + copy */}
+            <div className="lg:col-span-6 max-h-fit">
+              <div className="lg:sticky lg:top-28">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-accent">
+                  From Plan to Launch
+                </h2>
+                <p className="text-lg text-gray-300 max-w-lg leading-relaxed mb-6">
+                  A focused, repeatable process that aligns goals, designs
+                  solutions, and ships measurable results — with minimal
+                  friction for business owners.
+                </p>
+                <p className="text-sm text-gray-400 mb-6">
+                  We break work into clear phases so scope, risk, and timelines
+                  are all visible from day one.
+                </p>
+                <div className="flex gap-3">
+                  <PrimaryCTA href="/planner">Plan My Website</PrimaryCTA>
+                  <SecondaryCTA
+                    href="https://calendar.app.google/SrBsskVewCfjWUv16"
+                    external
+                  >
+                    Start Discovery
+                  </SecondaryCTA>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: responsive vertical timeline */}
+            <div className="lg:col-span-6 h-auto">
+              <ol className="relative border-l border-olive-800 ml-4 lg:ml-8">
+                {/* Step 1 */}
+                <li className="mb-10 ml-10">
+                  <span className="absolute -left-3 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-olive-950 ring-4 ring-olive-800 mt-4">
+                    1
+                  </span>
+                  <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                    <div className="flex w-fit gap-2">
+                      <div className="text-slate-100 font-semibold">
+                        Discover
+                      </div>
+                    </div>
+                    <p className="mt-2 text-slate-400 text-sm">
+                      Align goals, audience, scope and success metrics in a
+                      short discovery session. We capture must-haves and
+                      nice-to-haves and produce a concise brief.
+                    </p>
+                  </div>
+                </li>
+                {/* Step 2 */}
+                <li className="mb-10 ml-10">
+                  <span className="absolute -left-3 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-olive-950 ring-4 ring-olive-800 mt-4">
+                    2
+                  </span>
+                  <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                    <div className="flex w-fit gap-2">
+                      <div className="text-slate-100 font-semibold">Design</div>
+                    </div>
+                    <p className="mt-2 text-slate-400 text-sm">
+                      We map information architecture, produce wireframes and
+                      high-fidelity screens, and validate interactions with a
+                      prototype so stakeholders can preview the flow.
+                    </p>
+                  </div>
+                </li>
+                {/* Step 3 */}
+                <li className="mb-10 ml-10">
+                  <span className="absolute -left-3 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-olive-950 ring-4 ring-olive-800 mt-4">
+                    3
+                  </span>
+                  <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                    <div className="flex w-fit gap-2">
+                      <div className="text-slate-100 font-semibold">Build</div>
+                    </div>
+                    <p className="mt-2 text-slate-400 text-sm">
+                      Implement components and pages, connect integrations, and
+                      run QA. We deliver incremental builds so you can review
+                      early and often.
+                    </p>
+                  </div>
+                </li>
+                {/* Step 4 */}
+                <li className="mb-10 ml-10">
+                  <span className="absolute -left-3 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-olive-950 ring-4 ring-olive-800 mt-4">
+                    4
+                  </span>
+                  <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                    <div className="flex w-fit gap-2">
+                      <div className="text-slate-100 font-semibold">Launch</div>
+                    </div>
+                    <p className="mt-2 text-slate-400 text-sm">
+                      Configure domain, analytics, tracking, and handover. We
+                      support the initial launch window and monitor health.
+                    </p>
+                  </div>
+                </li>
+                {/* Step 5 */}
+                <li className="mb-10 ml-10">
+                  <span className="absolute -left-3 flex items-center justify-center w-6 h-6 rounded-full bg-accent text-olive-950 ring-4 ring-olive-800 mt-4">
+                    5
+                  </span>
+                  <div className="group rounded-xl border bg-slate-950 border-slate-600 p-4 transition-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                    <div className="flex w-fit gap-2">
+                      <div className="text-slate-100 font-semibold">
+                        Support
+                      </div>
+                    </div>
+                    <p className="mt-2 text-slate-400 text-sm">
+                      Fixes and small enhancements for 30 days post-launch. We
+                      offer ongoing care plans for maintenance and growth.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PORTFOLIO PREVIEW SECTION - CONSIDERATION */}
+      <section className="w-full py-16 bg-olive-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Right Column - Portfolio Showcase (2/3 width) */}
+          <div className="lg:col-span-8">
+            {/* Portfolio Preview Component */}
+            {children}
+          </div>
+        </div>
+      </section>
+
+      {/* PACKAGES/FAQ SECTION - replaced with FAQs per request */}
+      <section id="packages" className="relative z-20 py-16 bg-olive">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-accent font-mono leading-tight">
+              FAQs
+            </h2>
           </div>
 
-          {/* Single CTA to Services Page */}
-          <div className="text-center">
-            <SecondaryCTA
-              href="/services"
-              className="text-lg px-10 py-4 w-full sm:w-auto"
+          <div className="max-w-4xl mx-auto space-y-4 text-left text-gray-300">
+            <details
+              className="bg-olive-950/30 border border-olive-800/40 rounded-lg p-4"
+              open={openFAQ === 0}
             >
-              Learn More About Our Services →
-            </SecondaryCTA>
+              <summary
+                className="cursor-pointer font-semibold text-white text-lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenFAQ(openFAQ === 0 ? null : 0);
+                }}
+              >
+                Do you work with clients outside Malaysia?
+              </summary>
+              <div className="mt-2">
+                <p>
+                  Yes. Remote delivery is standard. We handle multi-currency
+                  invoices and schedule across time zones.
+                </p>
+                <div className="mt-3">
+                  <PrimaryCTA
+                    href="https://calendar.app.google/SrBsskVewCfjWUv16"
+                    external
+                  >
+                    Schedule a discovery call
+                  </PrimaryCTA>
+                </div>
+              </div>
+            </details>
+
+            <details
+              className="bg-olive-950/30 border border-olive-800/40 rounded-lg p-4"
+              open={openFAQ === 1}
+            >
+              <summary
+                className="cursor-pointer font-semibold text-white text-lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenFAQ(openFAQ === 1 ? null : 1);
+                }}
+              >
+                How fast can we launch?
+              </summary>
+              <div className="mt-2">
+                <p>
+                  Landing Page 5 to 7 days. Professional Website 10 to 14 days.
+                  Custom timelines depend on scope.
+                </p>
+                <div className="mt-3 flex gap-3">
+                  <SecondaryCTA href="/planner?tier=landing">
+                    Estimate Landing
+                  </SecondaryCTA>
+                  <SecondaryCTA href="/planner?tier=business">
+                    Estimate Professional
+                  </SecondaryCTA>
+                </div>
+              </div>
+            </details>
+
+            <details
+              className="bg-olive-950/30 border border-olive-800/40 rounded-lg p-4"
+              open={openFAQ === 2}
+            >
+              <summary
+                className="cursor-pointer font-semibold text-white text-lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenFAQ(openFAQ === 2 ? null : 2);
+                }}
+              >
+                Do you write the copy?
+              </summary>
+              <div className="mt-2">
+                <p>
+                  Yes. We refine your draft and supply sections that convert.
+                </p>
+              </div>
+            </details>
+
+            <details
+              className="bg-olive-950/30 border border-olive-800/40 rounded-lg p-4"
+              open={openFAQ === 3}
+            >
+              <summary
+                className="cursor-pointer font-semibold text-white text-lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenFAQ(openFAQ === 3 ? null : 3);
+                }}
+              >
+                Can I update the site myself?
+              </summary>
+              <div className="mt-2">
+                <p>Yes. CMS is included for Professional Website and above.</p>
+                <div className="mt-3">
+                  <SecondaryCTA href="/packages">
+                    Learn about Professional Website
+                  </SecondaryCTA>
+                </div>
+              </div>
+            </details>
+
+            <details
+              className="bg-olive-950/30 border border-olive-800/40 rounded-lg p-4"
+              open={openFAQ === 4}
+            >
+              <summary
+                className="cursor-pointer font-semibold text-white text-lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenFAQ(openFAQ === 4 ? null : 4);
+                }}
+              >
+                What tools do you use?
+              </summary>
+              <div className="mt-2">
+                <p>
+                  Modern web stack with production-ready workflows. We integrate
+                  analytics, SEO, and key third-party services.
+                </p>
+              </div>
+            </details>
+
+            <details
+              className="bg-olive-950/30 border border-olive-800/40 rounded-lg p-4"
+              open={openFAQ === 5}
+            >
+              <summary
+                className="cursor-pointer font-semibold text-white text-lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenFAQ(openFAQ === 5 ? null : 5);
+                }}
+              >
+                What are the payment terms?
+              </summary>
+              <div className="mt-2">
+                <p>
+                  Fifty percent to start, fifty percent on launch. Bank transfer
+                  in Malaysia. Stripe or Wise for international payments.
+                </p>
+                <div className="mt-3">
+                  <PrimaryCTA href="/contact">Get a quote</PrimaryCTA>
+                </div>
+              </div>
+            </details>
           </div>
         </div>
       </section>

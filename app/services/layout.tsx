@@ -1,18 +1,35 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services - End-to-End Web Design & Development | Tukang Design",
+  title: "Web Design Packages in Malaysia | Tadal Studio",
   description:
-    "Complete web design and development services for Malaysian SMEs. From strategy and design to development and launch - we handle everything in one seamless process.",
+    "Clear scope and pricing for Malaysian SMEs. Start small, ship fast, and grow with add-ons or a care plan. One partner from brief to launch.",
   keywords:
-    "web design services malaysia, web development services, end-to-end design development, full-stack web services, malaysian web designers",
+    "web design packages malaysia, web development pricing, end-to-end design development, full-stack web services, malaysian web designers",
   openGraph: {
-    title: "Services - End-to-End Web Design & Development | Tukang Design",
+    title: "Web Design Packages in Malaysia | Tadal Studio",
     description:
-      "Complete web design and development services for Malaysian SMEs. From strategy and design to development and launch.",
-    url: "https://tukang.design/services",
+      "Clear scope and pricing for Malaysian SMEs. Start small, ship fast, and grow with add-ons or a care plan.",
+    url: "/services",
     type: "website",
-    images: ["https://tukang.design/tukang-design-social-share.jpg"],
+    images: [
+      {
+        url: "/tukang-design-social-share.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Tadal Studio – Web Design Packages in Malaysia",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Web Design Packages in Malaysia | Tadal Studio",
+    description:
+      "Clear scope and pricing for Malaysian SMEs. Start small, ship fast, and grow with add-ons or a care plan.",
+    images: ["/tukang-design-social-share.jpg"],
+  },
+  alternates: {
+    canonical: "/services",
   },
 };
 

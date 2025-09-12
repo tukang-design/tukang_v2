@@ -15,7 +15,7 @@ export const TIERS: Record<TierId, TierConfig> = {
     id: "landing",
     name: "Landing Page",
     basePrice: 1500,
-    basePriceRange: [1000, 2000],
+    basePriceRange: [1500, 3000],
     timeline: "Live in 7 days",
     baseFeatures: [
       "High‑engagement, responsive design",
@@ -28,7 +28,7 @@ export const TIERS: Record<TierId, TierConfig> = {
     id: "business",
     name: "Professional Business Website",
     basePrice: 3000,
-    basePriceRange: [2500, 5000],
+    basePriceRange: [3000, 5000],
     timeline: undefined,
     baseFeatures: [
       "Up to 5 pages (Home, About, Services, Contact, Blog)",

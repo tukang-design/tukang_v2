@@ -246,7 +246,7 @@ export default function LeadCaptureForm() {
             Schedule Discovery
           </a>
           <a
-            href="/services"
+            href="/packages"
             className="w-full text-center px-5 py-3 rounded-xl border border-accent/30 text-accent hover:border-accent/60 transition"
           >
             View Packages

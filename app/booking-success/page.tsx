@@ -47,8 +47,8 @@ function BookingSuccessContent() {
             Request Submitted Successfully!
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Thank you for your interest in working with Tukang Design!
-            We&apos;ve received your request and will get back to you soon.
+            Thank you for your interest in working with Tadal Studio! We&apos;ve
+            received your request and will get back to you soon.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ function BookingSuccessContent() {
               Return to Home
             </Link>
             <Link
-              href="/portfolio"
+              href="/work"
               className="px-6 py-3 bg-accent text-olive font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 text-center"
             >
               View Our Work

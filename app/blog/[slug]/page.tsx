@@ -88,12 +88,12 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Blog Post Not Found | Tukang Design",
+      title: "Blog Post Not Found | Tadal Studio",
     };
   }
 
   return {
-    title: `${post.title} | Tukang Design Blog`,
+    title: `${post.title} | Tadal Studio Blog`,
     description: post.excerpt,
     keywords: [
       "web design blog Malaysia",
