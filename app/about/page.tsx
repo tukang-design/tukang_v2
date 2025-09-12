@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About Tadal Studio | Full-Stack Design & Development in Malaysia",
+  title: "About TADAL STUDIO | Full-Stack Design & Development in Malaysia",
   description:
     "We build credible, conversion-ready websites with strategy, design, and code under one roof. Based in Malaysia, working worldwide.",
   openGraph: {
-    title: "About Tadal Studio | Full-Stack Design & Development in Malaysia",
+    title: "About TADAL STUDIO | Full-Stack Design & Development in Malaysia",
     description:
       "We build credible, conversion-ready websites with strategy, design, and code under one roof.",
     url: "/about",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Tadal Studio | Full-Stack Design & Development in Malaysia",
+    title: "About TADAL STUDIO | Full-Stack Design & Development in Malaysia",
     description:
       "We build credible, conversion-ready websites with strategy, design, and code under one roof.",
     images: ["/tukang-design-social-share.jpg"],

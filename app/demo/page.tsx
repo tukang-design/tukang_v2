@@ -2,7 +2,7 @@ import React from "react";
 import ClientDemo from "./ClientDemo";
 
 export const metadata = {
-  title: "Component Demo | Tadal Studio",
+  title: "Component Demo | TADAL STUDIO",
   description: "A consolidated showcase of site components for review.",
   openGraph: {
     images: ["https://tukang.design/tukang-design-social-share.jpg"],

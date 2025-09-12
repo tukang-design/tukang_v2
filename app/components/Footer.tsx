@@ -12,7 +12,7 @@ export default function Footer() {
             <div className="w-16 h-16 rounded-xl overflow-hidden flex items-center justify-center">
               <Image
                 src="/logo.svg"
-                alt="Tadal Studio Logo"
+                alt="TADAL STUDIO Logo"
                 width={32}
                 height={32}
                 className="w-full h-full object-contain"
@@ -36,7 +36,7 @@ export default function Footer() {
       <div className="bg-olive-dark/80 border-t border-accent/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-6 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <p className="text-gray-400 text-sm text-center">
-            © 2025 Tadal Studio Copyright (202503200783). All rights reserved.
+            © 2025 TADAL STUDIO Copyright (202503200783). All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link

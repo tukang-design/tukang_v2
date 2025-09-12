@@ -3,7 +3,7 @@ import Link from "next/link";
 import { tiers, matrix } from "@/lib/solutions-config";
 
 export const metadata = {
-  title: "Detailed Project Onboarding & Solutions | Tadal Studio",
+  title: "Detailed Project Onboarding & Solutions | TADAL STUDIO",
   description:
     "End-to-end automated client onboarding: service tiers, solutions matrix, and a 5-phase process to go from enquiry to project kick-off.",
   openGraph: {

@@ -5,12 +5,12 @@ import Image from "next/image";
 import { sanityReadClient } from "../../lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Web Design Insights | Tadal Studio",
+  title: "Web Design Insights | TADAL STUDIO",
   description:
     "Practical web design and business growth tips for Malaysian SMEs.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Web Design Insights | Tadal Studio",
+    title: "Web Design Insights | TADAL STUDIO",
     description:
       "Practical web design and business growth tips for Malaysian SMEs.",
     url: "/blog",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Design Insights | Tadal Studio",
+    title: "Web Design Insights | TADAL STUDIO",
     description:
       "Practical web design and business growth tips for Malaysian SMEs.",
     images: ["/tukang-design-social-share.jpg"],

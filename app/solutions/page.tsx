@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Solutions | Tadal Studio",
+  title: "Solutions | TADAL STUDIO",
   description:
     "Technologies we support, payment options, and common problems we solve for web projects.",
   openGraph: {

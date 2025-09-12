@@ -61,7 +61,7 @@ export function buildPlannerEmailSubject(opts: {
 }) {
   const { estimate, id } = opts;
   const pkg = estimate.pkg[0].toUpperCase() + estimate.pkg.slice(1);
-  return `Tadal Studio estimate ${id} • ${pkg} • ${formatMYR(estimate.total)}`;
+  return `TADAL STUDIO estimate ${id} • ${pkg} • ${formatMYR(estimate.total)}`;
 }
 
 export function buildPlannerPreheader(opts: { estimate: EstimateBreakdown }) {
@@ -167,7 +167,7 @@ export function buildPlannerEmailHTML(opts: {
 
     <div style="max-width:720px; margin:0 auto; background:${panel}; border:1px solid ${border}; border-radius:12px; overflow:hidden;">
       <div style="padding:20px 24px; border-bottom:1px solid ${border}; display:flex; align-items:center; justify-content:space-between;">
-        <div style="color:${accent}; font-family:${slabStack}; font-weight:800; font-size:18px; letter-spacing:.02em;" aria-label="Tadal Studio">TADAL STUDIO</div>
+        <div style="color:${accent}; font-family:${slabStack}; font-weight:800; font-size:18px; letter-spacing:.02em;" aria-label="TADAL STUDIO">TADAL STUDIO</div>
         <div style="font-size:12px; color:${sub}">Estimate ${escapeHtml(
     id
   )}</div>

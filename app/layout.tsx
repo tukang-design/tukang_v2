@@ -34,9 +34,9 @@ export const metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://tadalstudio.com"
   ),
-  title: "End-to-End Web Design & Development | Tadal Studio",
+  title: "End-to-End Web Design & Development | TADAL STUDIO",
   description:
-    "Tired of the handoff headache? Tadal Studio offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+    "Tired of the handoff headache? TADAL STUDIO offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
   keywords:
     "end-to-end design development, full-stack designer malaysia, web design shah alam, complete digital solutions, custom web development, full-stack development malaysia, design to development services",
   robots: "index, follow",
@@ -64,11 +64,11 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "End-to-End Web Design & Development | Tadal Studio",
+    title: "End-to-End Web Design & Development | TADAL STUDIO",
     description:
-      "Tired of the handoff headache? Tadal Studio offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+      "Tired of the handoff headache? TADAL STUDIO offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
     url: process.env.NEXT_PUBLIC_BASE_URL || "https://tadalstudio.com",
-    siteName: "Tadal Studio",
+    siteName: "TADAL STUDIO",
     images: [
       {
         url: `${
@@ -76,7 +76,7 @@ export const metadata = {
         }/tukang-design-social-share.jpg`,
         width: 1200,
         height: 630,
-        alt: "Tadal Studio - End-to-End Web Design & Development",
+        alt: "TADAL STUDIO - End-to-End Web Design & Development",
       },
     ],
     locale: "en_US",
@@ -84,9 +84,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "End-to-End Web Design & Development | Tadal Studio",
+    title: "End-to-End Web Design & Development | TADAL STUDIO",
     description:
-      "Tired of the handoff headache? Tadal Studio offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+      "Tired of the handoff headache? TADAL STUDIO offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
     images: [
       process.env.NEXT_PUBLIC_BASE_URL ||
         "https://tadalstudio.com/tukang-design-social-share.jpg",

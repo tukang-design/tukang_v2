@@ -47,7 +47,7 @@ function BookingSuccessContent() {
             Request Submitted Successfully!
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Thank you for your interest in working with Tadal Studio! We&apos;ve
+            Thank you for your interest in working with TADAL STUDIO! We&apos;ve
             received your request and will get back to you soon.
           </p>
         </div>

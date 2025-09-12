@@ -6,11 +6,11 @@ import PortfolioPreview from "./components/portfolio-preview";
 import HomePageClient from "./components/homepage-client";
 
 export const metadata: Metadata = {
-  title: "End-to-End Web Design & Development | Tadal Studio",
+  title: "End-to-End Web Design & Development | TADAL STUDIO",
   description:
     "Seamless, end-to-end web design and development for SMEs. Strategy, design, code, and launch handled by one expert team.",
   openGraph: {
-    title: "End-to-End Web Design & Development | Tadal Studio",
+    title: "End-to-End Web Design & Development | TADAL STUDIO",
     description: "Seamless, end-to-end web design and development for SMEs.",
     url: "/",
     type: "website",
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
         url: "/tukang-design-social-share.jpg",
         width: 1200,
         height: 630,
-        alt: "Tadal Studio – End-to-End Web Design & Development",
+        alt: "TADAL STUDIO – End-to-End Web Design & Development",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "End-to-End Web Design & Development | Tadal Studio",
+    title: "End-to-End Web Design & Development | TADAL STUDIO",
     description: "Seamless, end-to-end web design and development for SMEs.",
     images: ["/tukang-design-social-share.jpg"],
   },

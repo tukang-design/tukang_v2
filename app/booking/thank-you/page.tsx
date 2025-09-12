@@ -82,7 +82,7 @@ export default function ThankYouPage() {
 
               <div className="max-w-2xl mx-auto space-y-4 text-gray-300 leading-relaxed">
                 <p className="text-lg">
-                  Thank you for choosing Tadal Studio for your digital project
+                  Thank you for choosing TADAL STUDIO for your digital project
                   needs. We're excited to help bring your vision to life.
                 </p>
                 <p>

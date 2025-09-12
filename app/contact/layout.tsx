@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Tadal Studio | Plan and Get a Fixed Quote",
+  title: "Contact TADAL STUDIO | Plan and Get a Fixed Quote",
   description:
     "Tell us what you want to build. We reply with a plan and a fixed quote. Based in Shah Alam, Malaysia. Working worldwide.",
   openGraph: {
-    title: "Contact Tadal Studio | Plan and Get a Fixed Quote",
+    title: "Contact TADAL STUDIO | Plan and Get a Fixed Quote",
     description:
       "Tell us what you want to build. We reply with a plan and a fixed quote.",
     url: "/contact",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Tadal Studio | Plan and Get a Fixed Quote",
+    title: "Contact TADAL STUDIO | Plan and Get a Fixed Quote",
     description:
       "Tell us what you want to build. We reply with a plan and a fixed quote.",
     images: ["/tukang-design-social-share.jpg"],

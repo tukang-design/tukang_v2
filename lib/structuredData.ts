@@ -3,7 +3,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://tadalstudio.com";
 export const organizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Tadal Studio",
+  name: "TADAL STUDIO",
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
   sameAs: [
@@ -61,11 +61,11 @@ export function serviceSchemaForPackage(
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Tadal Studio — ${p.name}`,
+    name: `TADAL STUDIO — ${p.name}`,
     description: p.description,
     provider: {
       "@type": "Organization",
-      name: "Tadal Studio",
+      name: "TADAL STUDIO",
       url: BASE_URL,
     },
     serviceType: p.name,
@@ -148,7 +148,7 @@ export function createBusinessStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Tadal Studio - End-to-End Design & Development",
+    name: "TADAL STUDIO - End-to-End Design & Development",
     description:
       "End-to-end design & development services in Malaysia & Singapore. Full-stack design solutions, custom web development, and complete digital experiences.",
     url: "https://tukang.design",
@@ -190,7 +190,7 @@ export function createServiceStructuredData(serviceName: string) {
     description: `Professional ${serviceName.toLowerCase()} services in Malaysia & Singapore`,
     provider: {
       "@type": "Organization",
-      name: "Tadal Studio",
+      name: "TADAL STUDIO",
       url: "https://tukang.design",
     },
     areaServed: ["Malaysia", "Singapore"],
@@ -202,7 +202,7 @@ export function createWebsiteStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Tadal Studio",
+    name: "TADAL STUDIO",
     url: "https://tukang.design",
     potentialAction: {
       "@type": "SearchAction",

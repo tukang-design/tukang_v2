@@ -12,8 +12,8 @@ interface SEOProps {
 }
 
 export const SEO: React.FC<SEOProps> = ({
-  title = "Tadal Studio - End-to-End Design & Development | Full-stack Designer Malaysia",
-  description = "Tired of the handoff headache? Tadal Studio offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
+  title = "TADAL STUDIO - End-to-End Design & Development | Full-stack Designer Malaysia",
+  description = "Tired of the handoff headache? TADAL STUDIO offers a seamless, end-to-end web design and development service. Get a flawless website from a single expert.",
   keywords = "end-to-end design development, full-stack designer malaysia, web design shah alam, complete digital solutions, custom web development, full-stack development malaysia, design to development services",
   ogImage = "https://tukang.design/tukang-design-social-share.jpg",
   ogUrl,
@@ -31,7 +31,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta name="keywords" content={keywords} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="robots" content="index, follow" />
-      <meta name="author" content="Tadal Studio" />
+      <meta name="author" content="TADAL STUDIO" />
 
       {/* Canonical URL */}
       <link rel="canonical" href={defaultCanonical} />
@@ -42,7 +42,7 @@ export const SEO: React.FC<SEOProps> = ({
       <meta property="og:image" content={ogImage} />
       <meta property="og:url" content={defaultOgUrl} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Tadal Studio" />
+      <meta property="og:site_name" content="TADAL STUDIO" />
       <meta property="og:locale" content="en_US" />
 
       {/* Twitter Card Meta Tags */}
@@ -55,7 +55,7 @@ export const SEO: React.FC<SEOProps> = ({
       {/* Additional Meta Tags */}
       <meta name="theme-color" content="#000000" />
       <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="application-name" content="Tadal Studio" />
+      <meta name="application-name" content="TADAL STUDIO" />
 
       {/* Favicons */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />

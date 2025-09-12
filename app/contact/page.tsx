@@ -83,7 +83,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-6 sm:px-8">
           <div className="mb-10">
             <h1 className="text-4xl lg:text-6xl font-bold text-accent font-mono mb-4">
-              Contact Tadal Studio
+              Contact TADAL STUDIO
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
               Tell us what you want to build. We reply with a plan and a fixed
